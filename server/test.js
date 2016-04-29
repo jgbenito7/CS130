@@ -29,14 +29,38 @@ function createReport (req, res, next) {
 
 function createUser (req, res, next) {
   console.log(req.params.password);
-  connection.query("INSERT INTO Users (email, password, org_id) VALUES(" + mysql.escape(req.params.email)+ ", SHA2(" + mysql.escape(req.params.password) + ",256), " + mysql.escape(req.params.org_id) + ");", function(err, results){
-    if(err)
-      throw err;
-    res.send(200);
-    next();
-  });
+
+  var query = "SELECT id from Orgs WHERE password = SHA2(" + mysql.escape(req.body.orgPassword)+ ", 256);";
+  connection.query(query, function(err,results) {
+    if(results.length == 0) {
+      res.send(402); //402 is invalid org password
+      next();
+      return;
+    }
+      var org_id = results[0].id;
+
+
+      var query = "SELECT * FROM Users WHERE email = " + mysql.escape(req.body.email) + ";"
+      connection.query(query, function(err, results){
+          if(results.length > 0) {
+            res.send(401); //401 is user already exists
+            next();
+            return;
+          }
+          connection.query("INSERT INTO Users (email, password, org_id) VALUES(" + mysql.escape(req.body.email)+ ", SHA2(" + mysql.escape(req.body.password) + ",256), " + mysql.escape(org_id) + ");", function(err, results){
+          if(err)
+          throw err;
+          res.send(200);
+          next();
+          return;
+      });
+      });
+    });
+
 
 }
+
+
 
 function getReports (req, res, next){
   var query = "SELECT * FROM Reports";
@@ -48,13 +72,21 @@ function getReports (req, res, next){
   );
 }
 
-function test2(req, res, next) {
-  var obj = {};
-  obj["test"] = 1;
-  obj["test2"] = 2;
-  res.send(obj);
-  next();
+function authorizeUser (req, res, next) {
+  var query = "SELECT * FROM Users WHERE password = " + mysql.escape(req.body.password) + " AND email = " + mysql.escape(req.body.email) + ";";
+  connection.query(query,  function(err, results){
+    console.log(query);
+    if (err)
+      throw err;
+    else if (results.length < 1)
+      res.send({loggedIn:false});
+    else 
+      res.send({loggedIn:true});
+    next();
+});
+
 }
+
 
 var server = restify.createServer();
 server.use(function crossOrigin(req,res,next){
@@ -67,10 +99,10 @@ server.use(restify.bodyParser ({mapParams: false}));
 
 //server.get('/reports/create/:animal_type/:animal_notes', createReport);
 //server.get('/users/create/:email/:org_id/:password', createUser);
-server.put('/reports', createReport);
-server.put('/users', createUser);
+server.post('/reports', createReport);
+server.post('/users', createUser);
 server.get('/reports', getReports);
-server.get('/test2', test2);
+server.post('/users/authorize', authorizeUser)
 
 server.listen(8080, function() {
   console.log('%s listening at %s', server.name, server.url);
