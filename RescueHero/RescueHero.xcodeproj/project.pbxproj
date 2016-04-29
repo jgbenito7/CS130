@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1638206D1CD341B000A3FB29 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1638206C1CD341B000A3FB29 /* Reachability.swift */; };
+		1638206F1CD34D2400A3FB29 /* ReportTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1638206E1CD34D2400A3FB29 /* ReportTableCell.swift */; };
 		FC21A8151CCE0509007B1476 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21A8141CCE0509007B1476 /* LoginVC.swift */; };
 		FC21A8171CCE062A007B1476 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21A8161CCE062A007B1476 /* SignupVC.swift */; };
 		FC36CE9E1CCB41940079404C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC36CE9D1CCB41940079404C /* AppDelegate.swift */; };
-		FC36CEA01CCB41940079404C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC36CE9F1CCB41940079404C /* ViewController.swift */; };
+		FC36CEA01CCB41940079404C /* ReportTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC36CE9F1CCB41940079404C /* ReportTableController.swift */; };
 		FC36CEA31CCB41940079404C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC36CEA11CCB41940079404C /* Main.storyboard */; };
 		FC36CEA51CCB41940079404C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC36CEA41CCB41940079404C /* Assets.xcassets */; };
 		FC36CEA81CCB41940079404C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC36CEA61CCB41940079404C /* LaunchScreen.storyboard */; };
@@ -36,11 +38,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1638206C1CD341B000A3FB29 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		1638206E1CD34D2400A3FB29 /* ReportTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportTableCell.swift; sourceTree = "<group>"; };
 		FC21A8141CCE0509007B1476 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		FC21A8161CCE062A007B1476 /* SignupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		FC36CE9A1CCB41940079404C /* RescueHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RescueHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC36CE9D1CCB41940079404C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FC36CE9F1CCB41940079404C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FC36CE9F1CCB41940079404C /* ReportTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableController.swift; sourceTree = "<group>"; };
 		FC36CEA21CCB41940079404C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC36CEA41CCB41940079404C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC36CEA71CCB41940079404C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -102,13 +106,15 @@
 			isa = PBXGroup;
 			children = (
 				FC36CE9D1CCB41940079404C /* AppDelegate.swift */,
-				FC36CE9F1CCB41940079404C /* ViewController.swift */,
+				FC36CE9F1CCB41940079404C /* ReportTableController.swift */,
 				FC36CEA11CCB41940079404C /* Main.storyboard */,
 				FC36CEA41CCB41940079404C /* Assets.xcassets */,
 				FC36CEA61CCB41940079404C /* LaunchScreen.storyboard */,
 				FC36CEA91CCB41940079404C /* Info.plist */,
 				FC21A8141CCE0509007B1476 /* LoginVC.swift */,
 				FC21A8161CCE062A007B1476 /* SignupVC.swift */,
+				1638206C1CD341B000A3FB29 /* Reachability.swift */,
+				1638206E1CD34D2400A3FB29 /* ReportTableCell.swift */,
 			);
 			path = RescueHero;
 			sourceTree = "<group>";
@@ -199,6 +205,7 @@
 				TargetAttributes = {
 					FC36CE991CCB41940079404C = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 7Y7CE8RK7G;
 					};
 					FC36CEAD1CCB41940079404C = {
 						CreatedOnToolsVersion = 7.3;
@@ -263,8 +270,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC21A8171CCE062A007B1476 /* SignupVC.swift in Sources */,
-				FC36CEA01CCB41940079404C /* ViewController.swift in Sources */,
+				FC36CEA01CCB41940079404C /* ReportTableController.swift in Sources */,
+				1638206F1CD34D2400A3FB29 /* ReportTableCell.swift in Sources */,
 				FC36CE9E1CCB41940079404C /* AppDelegate.swift in Sources */,
+				1638206D1CD341B000A3FB29 /* Reachability.swift in Sources */,
 				FC21A8151CCE0509007B1476 /* LoginVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,10 +366,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos9.2;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -397,9 +407,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos9.2;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -410,6 +421,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RescueHero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Scheibe-LLC..RescueHero";
@@ -424,6 +436,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RescueHero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Scheibe-LLC..RescueHero";
