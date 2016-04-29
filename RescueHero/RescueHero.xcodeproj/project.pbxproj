@@ -1,0 +1,536 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1638206D1CD341B000A3FB29 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1638206C1CD341B000A3FB29 /* Reachability.swift */; };
+		1638206F1CD34D2400A3FB29 /* ReportTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1638206E1CD34D2400A3FB29 /* ReportTableCell.swift */; };
+		FC21A8151CCE0509007B1476 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21A8141CCE0509007B1476 /* LoginVC.swift */; };
+		FC21A8171CCE062A007B1476 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21A8161CCE062A007B1476 /* SignupVC.swift */; };
+		FC36CE9E1CCB41940079404C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC36CE9D1CCB41940079404C /* AppDelegate.swift */; };
+		FC36CEA01CCB41940079404C /* ReportTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC36CE9F1CCB41940079404C /* ReportTableController.swift */; };
+		FC36CEA31CCB41940079404C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC36CEA11CCB41940079404C /* Main.storyboard */; };
+		FC36CEA51CCB41940079404C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC36CEA41CCB41940079404C /* Assets.xcassets */; };
+		FC36CEA81CCB41940079404C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC36CEA61CCB41940079404C /* LaunchScreen.storyboard */; };
+		FC36CEB31CCB41940079404C /* RescueHeroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC36CEB21CCB41940079404C /* RescueHeroTests.swift */; };
+		FC36CEBE1CCB41940079404C /* RescueHeroUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC36CEBD1CCB41940079404C /* RescueHeroUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FC36CEAF1CCB41940079404C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC36CE921CCB41940079404C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FC36CE991CCB41940079404C;
+			remoteInfo = RescueHero;
+		};
+		FC36CEBA1CCB41940079404C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC36CE921CCB41940079404C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FC36CE991CCB41940079404C;
+			remoteInfo = RescueHero;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1638206C1CD341B000A3FB29 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		1638206E1CD34D2400A3FB29 /* ReportTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportTableCell.swift; sourceTree = "<group>"; };
+		FC21A8141CCE0509007B1476 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		FC21A8161CCE062A007B1476 /* SignupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
+		FC36CE9A1CCB41940079404C /* RescueHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RescueHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC36CE9D1CCB41940079404C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FC36CE9F1CCB41940079404C /* ReportTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableController.swift; sourceTree = "<group>"; };
+		FC36CEA21CCB41940079404C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FC36CEA41CCB41940079404C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FC36CEA71CCB41940079404C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FC36CEA91CCB41940079404C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC36CEAE1CCB41940079404C /* RescueHeroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RescueHeroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC36CEB21CCB41940079404C /* RescueHeroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RescueHeroTests.swift; sourceTree = "<group>"; };
+		FC36CEB41CCB41940079404C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC36CEB91CCB41940079404C /* RescueHeroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RescueHeroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC36CEBD1CCB41940079404C /* RescueHeroUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RescueHeroUITests.swift; sourceTree = "<group>"; };
+		FC36CEBF1CCB41940079404C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FC36CE971CCB41940079404C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC36CEAB1CCB41940079404C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC36CEB61CCB41940079404C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FC36CE911CCB41940079404C = {
+			isa = PBXGroup;
+			children = (
+				FC36CE9C1CCB41940079404C /* RescueHero */,
+				FC36CEB11CCB41940079404C /* RescueHeroTests */,
+				FC36CEBC1CCB41940079404C /* RescueHeroUITests */,
+				FC36CE9B1CCB41940079404C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FC36CE9B1CCB41940079404C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC36CE9A1CCB41940079404C /* RescueHero.app */,
+				FC36CEAE1CCB41940079404C /* RescueHeroTests.xctest */,
+				FC36CEB91CCB41940079404C /* RescueHeroUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC36CE9C1CCB41940079404C /* RescueHero */ = {
+			isa = PBXGroup;
+			children = (
+				FC36CE9D1CCB41940079404C /* AppDelegate.swift */,
+				FC36CE9F1CCB41940079404C /* ReportTableController.swift */,
+				FC36CEA11CCB41940079404C /* Main.storyboard */,
+				FC36CEA41CCB41940079404C /* Assets.xcassets */,
+				FC36CEA61CCB41940079404C /* LaunchScreen.storyboard */,
+				FC36CEA91CCB41940079404C /* Info.plist */,
+				FC21A8141CCE0509007B1476 /* LoginVC.swift */,
+				FC21A8161CCE062A007B1476 /* SignupVC.swift */,
+				1638206C1CD341B000A3FB29 /* Reachability.swift */,
+				1638206E1CD34D2400A3FB29 /* ReportTableCell.swift */,
+			);
+			path = RescueHero;
+			sourceTree = "<group>";
+		};
+		FC36CEB11CCB41940079404C /* RescueHeroTests */ = {
+			isa = PBXGroup;
+			children = (
+				FC36CEB21CCB41940079404C /* RescueHeroTests.swift */,
+				FC36CEB41CCB41940079404C /* Info.plist */,
+			);
+			path = RescueHeroTests;
+			sourceTree = "<group>";
+		};
+		FC36CEBC1CCB41940079404C /* RescueHeroUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FC36CEBD1CCB41940079404C /* RescueHeroUITests.swift */,
+				FC36CEBF1CCB41940079404C /* Info.plist */,
+			);
+			path = RescueHeroUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FC36CE991CCB41940079404C /* RescueHero */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC36CEC21CCB41940079404C /* Build configuration list for PBXNativeTarget "RescueHero" */;
+			buildPhases = (
+				FC36CE961CCB41940079404C /* Sources */,
+				FC36CE971CCB41940079404C /* Frameworks */,
+				FC36CE981CCB41940079404C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RescueHero;
+			productName = RescueHero;
+			productReference = FC36CE9A1CCB41940079404C /* RescueHero.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FC36CEAD1CCB41940079404C /* RescueHeroTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC36CEC51CCB41940079404C /* Build configuration list for PBXNativeTarget "RescueHeroTests" */;
+			buildPhases = (
+				FC36CEAA1CCB41940079404C /* Sources */,
+				FC36CEAB1CCB41940079404C /* Frameworks */,
+				FC36CEAC1CCB41940079404C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FC36CEB01CCB41940079404C /* PBXTargetDependency */,
+			);
+			name = RescueHeroTests;
+			productName = RescueHeroTests;
+			productReference = FC36CEAE1CCB41940079404C /* RescueHeroTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FC36CEB81CCB41940079404C /* RescueHeroUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC36CEC81CCB41940079404C /* Build configuration list for PBXNativeTarget "RescueHeroUITests" */;
+			buildPhases = (
+				FC36CEB51CCB41940079404C /* Sources */,
+				FC36CEB61CCB41940079404C /* Frameworks */,
+				FC36CEB71CCB41940079404C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FC36CEBB1CCB41940079404C /* PBXTargetDependency */,
+			);
+			name = RescueHeroUITests;
+			productName = RescueHeroUITests;
+			productReference = FC36CEB91CCB41940079404C /* RescueHeroUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FC36CE921CCB41940079404C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "David Scheibe";
+				TargetAttributes = {
+					FC36CE991CCB41940079404C = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 7Y7CE8RK7G;
+					};
+					FC36CEAD1CCB41940079404C = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = FC36CE991CCB41940079404C;
+					};
+					FC36CEB81CCB41940079404C = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = FC36CE991CCB41940079404C;
+					};
+				};
+			};
+			buildConfigurationList = FC36CE951CCB41940079404C /* Build configuration list for PBXProject "RescueHero" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FC36CE911CCB41940079404C;
+			productRefGroup = FC36CE9B1CCB41940079404C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FC36CE991CCB41940079404C /* RescueHero */,
+				FC36CEAD1CCB41940079404C /* RescueHeroTests */,
+				FC36CEB81CCB41940079404C /* RescueHeroUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FC36CE981CCB41940079404C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC36CEA81CCB41940079404C /* LaunchScreen.storyboard in Resources */,
+				FC36CEA51CCB41940079404C /* Assets.xcassets in Resources */,
+				FC36CEA31CCB41940079404C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC36CEAC1CCB41940079404C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC36CEB71CCB41940079404C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FC36CE961CCB41940079404C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC21A8171CCE062A007B1476 /* SignupVC.swift in Sources */,
+				FC36CEA01CCB41940079404C /* ReportTableController.swift in Sources */,
+				1638206F1CD34D2400A3FB29 /* ReportTableCell.swift in Sources */,
+				FC36CE9E1CCB41940079404C /* AppDelegate.swift in Sources */,
+				1638206D1CD341B000A3FB29 /* Reachability.swift in Sources */,
+				FC21A8151CCE0509007B1476 /* LoginVC.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC36CEAA1CCB41940079404C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC36CEB31CCB41940079404C /* RescueHeroTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC36CEB51CCB41940079404C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC36CEBE1CCB41940079404C /* RescueHeroUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FC36CEB01CCB41940079404C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FC36CE991CCB41940079404C /* RescueHero */;
+			targetProxy = FC36CEAF1CCB41940079404C /* PBXContainerItemProxy */;
+		};
+		FC36CEBB1CCB41940079404C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FC36CE991CCB41940079404C /* RescueHero */;
+			targetProxy = FC36CEBA1CCB41940079404C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FC36CEA11CCB41940079404C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC36CEA21CCB41940079404C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FC36CEA61CCB41940079404C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC36CEA71CCB41940079404C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FC36CEC01CCB41940079404C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos9.2;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FC36CEC11CCB41940079404C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos9.2;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FC36CEC31CCB41940079404C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = RescueHero/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Scheibe-LLC..RescueHero";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RescueHero-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FC36CEC41CCB41940079404C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = RescueHero/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Scheibe-LLC..RescueHero";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RescueHero-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		FC36CEC61CCB41940079404C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RescueHeroTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Scheibe-LLC..RescueHeroTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RescueHero.app/RescueHero";
+			};
+			name = Debug;
+		};
+		FC36CEC71CCB41940079404C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RescueHeroTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Scheibe-LLC..RescueHeroTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RescueHero.app/RescueHero";
+			};
+			name = Release;
+		};
+		FC36CEC91CCB41940079404C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = RescueHeroUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Scheibe-LLC..RescueHeroUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = RescueHero;
+			};
+			name = Debug;
+		};
+		FC36CECA1CCB41940079404C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = RescueHeroUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Scheibe-LLC..RescueHeroUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = RescueHero;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FC36CE951CCB41940079404C /* Build configuration list for PBXProject "RescueHero" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC36CEC01CCB41940079404C /* Debug */,
+				FC36CEC11CCB41940079404C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC36CEC21CCB41940079404C /* Build configuration list for PBXNativeTarget "RescueHero" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC36CEC31CCB41940079404C /* Debug */,
+				FC36CEC41CCB41940079404C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC36CEC51CCB41940079404C /* Build configuration list for PBXNativeTarget "RescueHeroTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC36CEC61CCB41940079404C /* Debug */,
+				FC36CEC71CCB41940079404C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC36CEC81CCB41940079404C /* Build configuration list for PBXNativeTarget "RescueHeroUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC36CEC91CCB41940079404C /* Debug */,
+				FC36CECA1CCB41940079404C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FC36CE921CCB41940079404C /* Project object */;
+}
