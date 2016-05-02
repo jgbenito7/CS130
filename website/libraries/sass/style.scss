@@ -10,6 +10,8 @@ $color5: #D1524E;
 $color6:white;
 $color7:rgb(100,100,100);
 
+$font: 'Arimo', sans-serif;
+
 .main-wrapper{
   width:80%;
   margin:auto;
@@ -29,6 +31,7 @@ $color7:rgb(100,100,100);
 
 body{
   background-color:$color1;
+  font-family: $font;
 }
 
 .header-text{
@@ -51,10 +54,48 @@ body{
 
 
 .main-body{
-  height:500px;
+  height:auto;
   padding:20px;
   margin-top: 20px;
 }
+
+///////////////////////////////////////////
+// Form Styling
+///////////////////////////////////////////
+.text{
+  color:$color1;
+  font-size:20px;
+}
+
+
+.form-input{
+  border-radius:5px;
+  border: 1px solid $color7;
+  padding:10px;
+  margin-top:10px;
+  width:300px;
+}
+
+.notes{
+  height:200px;
+}
+
+.upload-image, .submit{
+  width:300px;
+  padding:20px;
+  margin-top:10px;
+  background:$color5;
+  text-align: center;
+  color:white;
+  cursor:pointer;
+  font-size:20px;
+  border:none;
+}
+
+.submit{
+  background:$color2
+}
+
 
 .form-box{
   background:$color2;
@@ -118,13 +159,13 @@ body{
 }
 
 /* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .form-box{
     width:95%;
   }
 
-  .wrapper{
-    width:70%;
+  .main-wrapper{
+    width:100%;
   }
 
 }

@@ -4,11 +4,23 @@
       <div class='header-text'>Rescue Hero</div>
     </div>
     <div class='main-body'>
-      <h3>Description</h3>
+      <h3>Submit A Rescue Notification</h3>
       <hr>
-      <form novalidate>
-        <input type="text" ng-model="data.desc"><br><br>
-        <input type="submit" ng-click="getData(data)" value="Submit">
+      <form class="report-form" novalidate>
+        <div class='row'>
+          <div class='col-sm-6'>
+
+            <div class='text'>Animal Type:</div><input class='form-input' type="text" ng-model="dataObj.animal_type"><br><br>
+            <div class='text'>Animal Notes:</div><input class='form-input notes' type="text" ng-model="dataObj.animal_notes"><br><br>
+
+
+          </div>
+          <div class='col-sm-6'>
+            <div class='text'>Upload An Image:</div><input class='upload-image' type='file' custom-on-change="uploadFile">
+            <div class='text'>Get Location</div><div class='upload-image' ng-click="location()">Get Current Position</div>
+            <input class='submit' type="submit" ng-click="getData(dataObj)" value="Submit">
+          </div>
+        </div>
       </form>
     </div>
   </div>
