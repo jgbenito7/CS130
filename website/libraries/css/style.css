@@ -1,9 +1,10 @@
 /* ************************** */
 /* Color Pallete
 /* ************************** */
-.wrapper {
+.main-wrapper {
   width: 80%;
-  margin: auto; }
+  margin: auto;
+  position: relative; }
 
 /* Fix Some Bootsrap Shit */
 .row {
@@ -17,23 +18,25 @@
 body {
   background-color: #313538; }
 
-.title-bar {
-  position: fixed;
-  top: 0;
-  height: auto;
-  width: 100%;
-  background-color: #4B9E96;
-  padding: 18px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  z-index: 6; }
+.header-text {
+  text-align: center;
+  color: #313538;
+  font-size: 36px;
+  font-weight: bold; }
 
-h1 {
-  color: white;
-  margin-top: 0 !important;
-  margin-bottom: 0;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center; }
+.header, .main-body {
+  width: 100%;
+  background: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
+
+.header {
+  height: auto;
+  padding: 10px; }
+
+.main-body {
+  height: 500px;
+  padding: 20px;
+  margin-top: 20px; }
 
 .form-box {
   background: #4B9E96;

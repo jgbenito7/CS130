@@ -7,9 +7,13 @@ $color3: #378DD1;
 $color4: #AA847B;
 $color5: #D1524E;
 
-.wrapper{
+$color6:white;
+$color7:rgb(100,100,100);
+
+.main-wrapper{
   width:80%;
   margin:auto;
+  position:relative;
 }
 
 /* Fix Some Bootsrap Shit */
@@ -27,25 +31,29 @@ body{
   background-color:$color1;
 }
 
-.title-bar{
-  position:fixed;
-  top:0;
-  height:auto;
-  width:100%;
-  background-color:$color2;
-  padding:18px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  z-index:6;
+.header-text{
+  text-align: center;
+  color:$color1;
+  font-size: 36px;
+  font-weight: bold;
 }
 
-h1{
-  color:white;
-  margin-top:0 !important;
-  margin-bottom: 0;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+.header, .main-body{
+  width:100%;
+  background:$color6;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 
+.header{
+  height:auto;
+  padding:10px;
+}
+
+
+.main-body{
+  height:500px;
+  padding:20px;
+  margin-top: 20px;
 }
 
 .form-box{
