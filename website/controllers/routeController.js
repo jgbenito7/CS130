@@ -11,22 +11,27 @@ rescueApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/', {
-        templateUrl: 'views/test.html',
-        controller: 'testCtrl'
+        templateUrl: 'views/home.html',
+        controller: 'homeCtrl'
       });
   }]);
 
-rescueApp.controller('testCtrl', function($scope,$http) {
+rescueApp.controller('homeCtrl', function($scope,$http) {
         // create a message to display in our view
-        $scope.message = 'Everyone come and see how good I look!';
+        $scope.data = {};
 
-        var dataObj = {
+        $scope.getData = function(form){
+          $scope.data = angular.copy(form);
+          console.log($scope.data);
+        }
+
+        /*var dataObj = {
 				      animal_type : "Seal",
 				      animal_notes : "Testing, testing, 123.",
 		    };
   		  $http.post('http://54.186.47.42/reports', dataObj).success(function(data) {
 			       alert("Success");
-		    });
+		    });*/
 
 
       //  $scope.animals = Animals.query();
