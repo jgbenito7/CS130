@@ -27,7 +27,7 @@ function createReport (req, res, next) {
     "," + mysql.escape(req.body.long) +
     ","+mysql.escape(req.body.lat) + ");", function(err, results) {
       if(err) 
-        res.send(400);
+        throw err;
       res.send(200);
       next();
   });
