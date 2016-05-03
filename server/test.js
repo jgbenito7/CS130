@@ -24,8 +24,8 @@ function createReport (req, res, next) {
   connection.query("INSERT INTO Reports (type, notes, long, lat) VALUES("+
     mysql.escape(req.body.animal_type)+
     "," + mysql.escape(req.body.animal_notes) + 
-    "," + mysql.escape(req.body.long) +
-    ","+mysql.escape(req.body.lat) + ");", function(err, results) {
+    "," + mysql.escape(double(req.body.long)) +
+    ","+mysql.escape(double(req.body.lat)) + ");", function(err, results) {
       if(err) 
         throw err;
       res.send(200);
