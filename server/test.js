@@ -21,11 +21,11 @@ function test1(req, res, next) {
 // Insert animal into Reports table
 function createReport (req, res, next) {
   console.log(req);
-  connection.query("INSERT INTO Reports (type, notes, long, lat) VALUES("+
+  connection.query("INSERT INTO Reports (type, notes, longitude, latitude) VALUES("+
     mysql.escape(req.body.animal_type)+
     "," + mysql.escape(req.body.animal_notes) + 
-    "," + mysql.escape(parseFloat(req.body.long)) +
-    ","+mysql.escape(parseFloat(req.body.lat)) + ");", function(err, results) {
+    "," + mysql.escape(parseFloat(req.body.longitude)) +
+    ","+mysql.escape(parseFloat(req.body.latitude)) + ");", function(err, results) {
       if(err) 
         throw err;
       res.send(200);
