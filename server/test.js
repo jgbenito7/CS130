@@ -1,13 +1,16 @@
 var mysql      = require('mysql');
 var restify = require('restify');
 var sanitizer = require('sanitizer');
-var connection = mysql.createConnection({
+
+var connection  = mysql.createPool({
+  connectionLimit : 10,
   host  : 'localhost',
   user  : 'root',
   password  : 'root',
   database  : 'cs130',
   port  : 3306
 });
+
 
 function test1(req, res, next) {
   console.log(req.params.amount);
