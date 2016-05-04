@@ -6,9 +6,12 @@ $color2: #4B9E96;
 $color3: #378DD1;
 $color4: #AA847B;
 $color5: #D1524E;
-
 $color6:white;
 $color7:rgb(100,100,100);
+$color8: #dddddd;
+
+$background-img: url("../../assets/img/RescueHero-BG.png");
+$logo: url("../../assets/img/seal-icon.png");
 
 $font: 'Arimo', sans-serif;
 
@@ -30,26 +33,67 @@ $font: 'Arimo', sans-serif;
 }
 
 body{
-  background-color:$color1;
+  background-image: $background-img;
+  background-size:cover;
   font-family: $font;
 }
 
-.header-text{
-  text-align: center;
-  color:$color1;
+.header-text-bold, .header-text-light{
+  text-align: left;
+}
+
+.header-text-bold{
   font-size: 36px;
   font-weight: bold;
+  color:$color6;
+}
+
+.header-text-light{
+  font-size:15px;
+  font-weight:100;
+  color:$color8;
 }
 
 .header, .main-body{
   width:100%;
-  background:$color6;
+  background:$color1;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .header{
   height:auto;
   padding:10px;
+  padding-left:20px;padding-right: 20px;
+  position:static;
+  line-height: 1;
+}
+
+.header-image{
+  position:absolute;
+  top:5;
+  right:0;
+  width:50px;
+  height:50px;
+  background:$logo;
+  background-size:cover;
+}
+
+.header-wrap{
+  width:265px;
+  height:auto;
+  position:relative;
+}
+
+.title-bar{
+  width:100%;
+  height:auto;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  color:white;
+  padding:20px;
+  position:relative;
 }
 
 
@@ -57,6 +101,7 @@ body{
   height:auto;
   padding:20px;
   margin-top: 20px;
+  position:relative;
 }
 
 ///////////////////////////////////////////
@@ -94,6 +139,10 @@ body{
 
 .submit{
   background:$color2
+}
+
+.report-form{
+  margin-top:80px;
 }
 
 
