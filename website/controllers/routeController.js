@@ -24,24 +24,28 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
 
         $scope.getData = function(form){
           $scope.dataObj = angular.copy(form);
-          $scope.dataObj.latitude = $scope.latitude;
-          $scope.dataObj.longitude = $scope.longitude;
-          console.log($scope.dataObj);
+          if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(function(position){
+                $scope.latitude = position.coords.latitude;
+                $scope.longitude = position.coords.longitude;
+                $scope.dataObj.latitude = $scope.latitude;
+                $scope.dataObj.longitude = $scope.longitude;
 
-          /*$http.post('http://54.186.47.42/reports', $scope.dataObj).success(function(data) {
-               console.log("Success");
-          });*/
+                $http.post('http://54.186.47.42/reports', $scope.dataObj).success(function(data) {
+                     console.log($scope.dataObj);
+                });
+              });
+          } else {
+              $scope.message = "Geolocation is not supported by this browser.";
+          }
+
+
+
+
         }
 
         $scope.location = function(){
-              if (navigator.geolocation) {
-                  navigator.geolocation.getCurrentPosition(function(position){
-                    $scope.latitude = position.coords.latitude;
-                    $scope.longitude = position.coords.longitude;
-                  });
-              } else {
-                  $scope.message = "Geolocation is not supported by this browser.";
-              }
+
 
 
         }
