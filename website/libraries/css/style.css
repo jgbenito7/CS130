@@ -4,7 +4,8 @@
 .main-wrapper {
   width: 80%;
   margin: auto;
-  position: relative; }
+  position: relative;
+  margin-top: 85px; }
 
 /* Fix Some Bootsrap Shit */
 .row {
@@ -16,9 +17,30 @@
   padding-right: 0px; }
 
 body {
-  background-image: url("../../assets/img/RescueHero-BG.png");
-  background-size: cover;
-  font-family: "Arimo", sans-serif; }
+  background: #313538;
+  font-family: "Palanquin", sans-serif; }
+
+.header-outer {
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: auto;
+  z-index: 99; }
+
+.header-inner {
+  position: relative;
+  width: 80%;
+  margin: auto;
+  height: auto; }
+
+.header {
+  height: auto;
+  width: 100%;
+  background: #313538;
+  margin: auto; }
 
 .header-text-bold, .header-text-light {
   text-align: left; }
@@ -33,19 +55,6 @@ body {
   font-weight: 100;
   color: #dddddd; }
 
-.header, .main-body {
-  width: 100%;
-  background: #313538;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
-
-.header {
-  height: auto;
-  padding: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  position: static;
-  line-height: 1; }
-
 .header-image {
   position: absolute;
   top: 5;
@@ -58,63 +67,149 @@ body {
 .header-wrap {
   width: 265px;
   height: auto;
-  position: relative; }
+  position: relative;
+  line-height: 1; }
 
-.title-bar {
+.menu-icon {
+  position: absolute;
+  right: 30px;
+  top: 10px;
+  background-image: url("../../assets/img/menu.png");
+  background-size: cover;
+  width: 50px;
+  height: 50px; }
+
+.navbar {
+  border-radius: 0px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding: 15px; }
+
+.navbar-nav {
+  float: right; }
+
+.navbar-inverse .navbar-nav > .active > a {
+  background: none;
+  color: #f26d7d; }
+
+.title-text-wrap {
   width: 100%;
   height: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  text-align: center; }
+
+.title-text {
+  font-size: 55px;
+  font-weight: 100;
+  color: white; }
+
+hr.divider {
+  width: 200px;
   color: white;
-  padding: 20px;
-  position: relative; }
+  border-top: 3px solid white; }
 
 .main-body {
   height: auto;
   padding: 20px;
+  position: relative;
+  background: url("../../assets/img/RescueHero-BG.png");
+  background-size: cover; }
+
+.report-form {
   margin-top: 20px;
-  position: relative; }
+  width: 80%;
+  margin: auto;
+  padding: 50px;
+  padding-top: 0px; }
 
 .text {
-  color: #313538;
+  color: white;
   font-size: 20px; }
 
-.form-input {
-  border-radius: 5px;
-  border: 1px solid #646464;
-  padding: 10px;
-  margin-top: 10px;
-  width: 300px; }
+textarea:focus, input:focus {
+  outline: none; }
 
-.notes {
+::-webkit-input-placeholder {
+  color: #8d8d8d;
+  text-align: center;
+  font-size: 22px;
+  line-height: .8; }
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #8d8d8d;
+  text-align: center;
+  font-size: 15px; }
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #8d8d8d;
+  text-align: center;
+  font-size: 15px; }
+
+:-ms-input-placeholder {
+  color: #8d8d8d;
+  text-align: center;
+  font-size: 15px; }
+
+input[type=text]:focus, textarea:focus {
+  box-shadow: 0 0 5px #51cbee;
+  border: 3px solid #f26d7d; }
+
+.form-input-small, .form-input-large {
+  border-radius: 35px;
+  padding: 10px;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+  border: 3px solid #8d8d8d;
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out; }
+
+.form-input-small {
+  height: 65px; }
+
+.form-input-large {
   height: 200px; }
 
+.warning-wrap {
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  margin: auto; }
+
+.warning-text {
+  font-size: 35px;
+  font-weight: 100;
+  color: white;
+  text-align: center; }
+
 .upload-image, .submit {
-  width: 300px;
+  width: 100%;
   padding: 20px;
   margin-top: 10px;
-  background: #D1524E;
   text-align: center;
   color: white;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 40px;
+  font-weight: 800;
   border: none; }
 
-.submit {
-  background: #4B9E96; }
+.upload-image {
+  background: #f26d7d; }
 
-.report-form {
-  margin-top: 80px; }
+.submit {
+  background: #05d4a6; }
 
 .form-box {
-  background: #4B9E96;
+  background: #8d8d8d;
   margin: auto;
   margin-top: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-width: 2px;
-  border-color: #4B9E96;
+  border-color: #8d8d8d;
   border-style: solid; }
 
 .list-elem {
@@ -156,17 +251,32 @@ body {
 
   .wrapper {
     width: 100%; } }
+/* Medium devices (desktops, 992px and up) */
+/* Large devices (large desktops, 1200px and up) */
+@media (max-width: 512px) {
+  .title-text {
+    font-size: 30px !important; }
+
+  .warning-text {
+    font-size: 25px !important; } }
 /* Small devices (tablets, 768px and up) */
 @media (max-width: 768px) {
+  .title-text {
+    font-size: 45px; }
+
   .form-box {
     width: 95%; }
 
+  .report-form {
+    padding: 10px; } }
+@media (max-width: 992px) {
   .main-wrapper {
+    width: 100%; }
+
+  .header-inner {
+    width: 100%; }
+
+  .report-form {
     width: 100%; } }
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  .big-box {
-    height: 470px; } }
-/* Large devices (large desktops, 1200px and up) */
 
 /*# sourceMappingURL=style.css.map */
