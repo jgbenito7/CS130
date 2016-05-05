@@ -49,7 +49,7 @@ function createUser (req, res, next) {
 
 
 function getReports (req, res, next){
-  var query = "SELECT * FROM Reports";
+  var query = "SELECT *, UNIX_TIMESTAMP(time) FROM Reports";
   connection.query(query, function(err,rows) {
     if (err) throw err;
     var results = rows;
