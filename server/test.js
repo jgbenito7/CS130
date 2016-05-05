@@ -12,20 +12,6 @@ var connection  = mysql.createPool({
   port  : 3306
 });
 
-// Insert animal into Reports table
-function createReport (req, res, next) {
-  connection.query("INSERT INTO Reports (type, notes, longitude, latitude) VALUES("+
-    mysql.escape(req.body.animal_type)+
-    "," + mysql.escape(req.body.animal_notes) + 
-    "," + mysql.escape(parseFloat(req.body.longitude)) +
-    ","+mysql.escape(parseFloat(req.body.latitude)) + ");", function(err, results) {
-      if(err) 
-        throw err;
-      res.send(200);
-      next();
-  });
-
-}
 
 function createUser (req, res, next) {
   console.log(req.params.password);
@@ -63,7 +49,7 @@ function createUser (req, res, next) {
 
 
 function getReports (req, res, next){
-  var query = "SELECT * FROM Reports";
+  var query = "SELECT *, UNIX_TIMESTAMP(time) AS etime FROM Reports";
   connection.query(query, function(err,rows) {
     if (err) throw err;
     var results = rows;
@@ -102,7 +88,7 @@ function authorizeUser (req, res, next) {
 
 }
 
-function testFileUpload(req, res, next) {
+function createReport(req, res, next) {
   var filenames = [];
   var counter = 0;
   for(i in req.files) {
@@ -163,11 +149,10 @@ server.use(restify.bodyParser ({mapParams: false,
 
 //server.get('/reports/create/:animal_type/:animal_notes', createReport);
 //server.get('/users/create/:email/:org_id/:password', createUser);
-server.post('/reports', createReport);
 server.post('/users', createUser);
 server.get('/reports', getReports);
 server.post('/users/authorize', authorizeUser);
-server.post('/testfile', testFileUpload);
+server.post('/reports', createReport);
 server.get(/\/images\/?.*/, restify.serveStatic({
     directory: __dirname
 }));
