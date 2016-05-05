@@ -108,30 +108,25 @@ function testFileUpload(req, res, next) {
     ","+mysql.escape(parseFloat(req.body.latitude)) + ");", function(err, results) {
       if(err) 
         throw err;
+      var insertId = results.insertId; 
       if(filenames.length > 0) {
-        connection.query("SET @lastid = LAST_INSERT_ID();", function(err, results) {
-          if(err) {
-            console.log(err);
+        var queryString = "INSERT INTO filename (report_id, filename) VALUES ";
+        for(var i = 0; i < filenames.length; i++) {
+          queryString += " ("+insertId + ", '" + filenames[i] + "')";
+          if(i != filenames.length - 1) {
+            queryString += ", ";
+          } else {
+            queryString += ";"
+          }
+        }
+
+        console.log(queryString);
+
+        connection.query(queryString, function(err, results) {
+          if(err)
             throw err;
-          }
-          var queryString = "INSERT INTO filename (report_id, filename) VALUES ";
-          for(var i = 0; i < filenames.length; i++) {
-            queryString += " (@lastid, '" + filenames[i] + "')";
-            if(i != filenames.length - 1) {
-              queryString += ", ";
-            } else {
-              queryString += ";"
-            }
-          }
-
-          console.log(queryString);
-
-          connection.query(queryString, function(err, results) {
-            if(err)
-              throw err;
-            res.send(200);
-            next();
-          });
+          res.send(200);
+          next();
         });
     } else {
       res.send(200);
