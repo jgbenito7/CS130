@@ -116,8 +116,8 @@ function testFileUpload(req, res, next) {
           }
           var queryString = "INSERT INTO filename (report_id, filename) VALUES ";
           for(var i = 0; i < filenames.length; i++) {
-            queryString += " (@lastid, " + filesnames[i] + ")";
-            if(i != filesnames.length - 1) {
+            queryString += " (@lastid, " + filenames[i] + ")";
+            if(i != filenames.length - 1) {
               queryString += ", ";
             } else {
               queryString += ";"
