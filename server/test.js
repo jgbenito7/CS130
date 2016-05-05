@@ -129,12 +129,16 @@ function testFileUpload(req, res, next) {
           connection.query(queryString, function(err, results) {
             if(err)
               throw err;
+            res.send(200);
+            next();
           });
         });
+    } else {
+      res.send(200);
+      next();
     }
   });
-  res.send(200);
-  next();
+  
 }
 
 var server = restify.createServer();
