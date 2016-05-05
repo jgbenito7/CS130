@@ -8,6 +8,7 @@ $color4: #05d4a6;
 $color5: #024e52;
 $color6: #dddddd;
 $color7: #f26d7d;
+$color8: #a40e20;
 
 $background-img: url("../../assets/img/background-bubbles.png");
 $logo: url("../../assets/img/seal-icon.png");
@@ -35,6 +36,25 @@ $font: 'Cabin', sans-serif;
 body{
   background:$color3;
   font-family: $font;
+}
+
+.overlay{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:99;
+  background:rgba(50,50,50,.5);
+}
+
+.Absolute-Center {
+  width: 50%;
+  height: 50%;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
 }
 
 ///////////////////////////////////////////
@@ -144,6 +164,31 @@ body{
   color:$color1;
 }
 
+.error-wrap{
+  width:100%;
+  height:auto;
+  padding:20px;
+  background:$color8;
+  display:none;
+  border-radius:35px;
+}
+
+.error-text{
+  font-size:34px;
+  font-weight:100;
+  color:$color1;
+  line-height: 1;
+}
+
+.error-list{
+  margin-top:10px;
+}
+
+.error-list > li{
+  color:$color1;
+  font-size: 18px;
+}
+
 hr.divider{
   width:200px;
   color:$color1;
@@ -180,32 +225,32 @@ textarea:focus, input:focus{
   outline:none;
 }
 
-
-
-
 ::-webkit-input-placeholder {
   color: $color2;
    text-align: center;
-   font-size: 22px;
+   font-size: 18px;
    line-height: .8;
 }
 
 :-moz-placeholder { /* Firefox 18- */
   color: $color2;
    text-align: center;
-   font-size: 15px;
+   font-size: 18px;
+   line-height: .8;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
   color: $color2;
    text-align: center;
-   font-size: 15px;
+   font-size: 18px;
+   line-height: .8;
 }
 
 :-ms-input-placeholder {
   color: $color2;
    text-align: center;
-   font-size: 15px;
+   font-size: 18px;
+   line-height: .8;
 }
 
 input[type=text]:focus, textarea:focus {
@@ -250,24 +295,16 @@ input[type=text]:focus, textarea:focus {
   text-align: center;
 }
 
-.upload-image, .submit{
-  width:100%;
-  padding:20px;
-  margin-top:10px;
-  text-align: center;
-  color:white;
-  cursor:pointer;
-  font-size:40px;
-  font-weight:800;
-  border:none;
-}
-
-.upload-image{
-  background: $color7;
-}
-
 .submit{
   background:$color4;
+  font-size:40px;
+  font-weight:800;
+  padding:20px;
+  margin-top:10px;
+  color: white;
+  border:none;
+  width:100%;
+  //background: url("../../assets/loading.gif") no-repeat scroll 7px 7px;
 }
 
 .inputfile {
@@ -280,19 +317,31 @@ input[type=text]:focus, textarea:focus {
 }
 
 .inputfile + label {
-    font-size: 1.25em;
-    font-weight: 700;
+    font-size:40px;
+    font-weight:800;
+    padding:20px;
+    margin-top:10px;
     color: white;
-    background-color: black;
-    display: inline-block;
+    background-color: $color7;
+    display: block;
+    margin:auto;
+    cursor:pointer;
+    text-align: center;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
 }
+
 
 .inputfile:focus + label,
 .inputfile + label:hover {
-    background-color: red;
+    background-color: $color5;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
 }
-
-
 
 /* Media Queries */
 
@@ -314,19 +363,11 @@ input[type=text]:focus, textarea:focus {
 
 }
 
-
-
-
-
-
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {}
 
 /* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-
-
-}
+@media (min-width: 1200px) {}
 
 @media (max-width: 512px) {
   .title-text{
@@ -360,6 +401,4 @@ input[type=text]:focus, textarea:focus {
   .report-form{
     width:100%;
   }
-
-
 }
