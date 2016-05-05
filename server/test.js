@@ -110,8 +110,10 @@ function testFileUpload(req, res, next) {
         throw err;
       if(filenames.length > 0) {
         connection.query("SET @lastid = LAST_INSERT_ID();", function(err, results) {
-          if(err)
+          if(err) {
+            console.log(err);
             throw err;
+          }
           var queryString = "INSERT INTO filename (report_id, filename) VALUES ";
           for(var i = 0; i < filenames.length; i++) {
             queryString += " (@lastid, " + filesnames[i] + ")";
@@ -121,6 +123,8 @@ function testFileUpload(req, res, next) {
               queryString += ";"
             }
           }
+
+          console.log(queryString);
 
           connection.query(queryString, function(err, results) {
             if(err)
