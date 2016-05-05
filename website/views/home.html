@@ -37,7 +37,9 @@
       <form class="report-form" novalidate>
         <input class='form-input-small' type="text" ng-model="dataObj.animal_type" placeholder="Enter Animal Type">
         <input class='form-input-large' type="text" ng-model="dataObj.animal_notes" placeholder="Enter Notes About The Animal">
-        <input class='upload-image' value="Upload Image">
+        <!--<input class='upload-image' value="Upload Image">-->
+        <input type="file" name="file" id="file" class="inputfile" />
+        <label for="file">Choose a file</label>
         <div class='warning-wrap'>
           <div class='warning-text'>**Location is required for form submission to be valid.</div>
         </div>

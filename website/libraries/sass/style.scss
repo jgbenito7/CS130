@@ -9,10 +9,10 @@ $color5: #024e52;
 $color6: #dddddd;
 $color7: #f26d7d;
 
-$background-img: url("../../assets/img/RescueHero-BG.png");
+$background-img: url("../../assets/img/background-bubbles.png");
 $logo: url("../../assets/img/seal-icon.png");
 
-$font: 'Palanquin', sans-serif;
+$font: 'Cabin', sans-serif;
 
 .main-wrapper{
   width:80%;
@@ -156,6 +156,7 @@ hr.divider{
   position:relative;
   background:$background-img;
   background-size: cover;
+  background-position: center;
 }
 
 
@@ -269,49 +270,29 @@ input[type=text]:focus, textarea:focus {
   background:$color4;
 }
 
-
-
-
-.form-box{
-  background:$color2;
-  margin:auto;
-  margin-top:20px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-width:2px;
-  border-color: $color2;
-  border-style: solid;
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }
 
-.list-elem{
-  width:100%;
-  padding:10px;
-  color:white;
-  font-size: 22px;
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
 }
 
-.main-text{
-  padding:10px;
-  font-size:20px;
-  text-align: center;
-  color:white;
-  width:95% !important;
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
 }
 
-.animal-form{
-  padding:10px;
-  width:80%;
-}
 
-.animal-text{
-  color:white;
-  font-size:20px;
-}
-
-.circle-check{
-  color:white;
-  font-size:18px !important;
-  margin-top:8px;
-}
 
 /* Media Queries */
 

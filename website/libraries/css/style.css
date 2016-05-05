@@ -18,7 +18,7 @@
 
 body {
   background: #313538;
-  font-family: "Palanquin", sans-serif; }
+  font-family: "Cabin", sans-serif; }
 
 .header-outer {
   width: 100%;
@@ -111,8 +111,9 @@ hr.divider {
   height: auto;
   padding: 20px;
   position: relative;
-  background: url("../../assets/img/RescueHero-BG.png");
-  background-size: cover; }
+  background: url("../../assets/img/background-bubbles.png");
+  background-size: cover;
+  background-position: center; }
 
 .report-form {
   margin-top: 20px;
@@ -203,40 +204,24 @@ input[type=text]:focus, textarea:focus {
 .submit {
   background: #05d4a6; }
 
-.form-box {
-  background: #8d8d8d;
-  margin: auto;
-  margin-top: 20px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-width: 2px;
-  border-color: #8d8d8d;
-  border-style: solid; }
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1; }
 
-.list-elem {
-  width: 100%;
-  padding: 10px;
+.inputfile + label {
+  font-size: 1.25em;
+  font-weight: 700;
   color: white;
-  font-size: 22px; }
+  background-color: black;
+  display: inline-block; }
 
-.main-text {
-  padding: 10px;
-  font-size: 20px;
-  text-align: center;
-  color: white;
-  width: 95% !important; }
-
-.animal-form {
-  padding: 10px;
-  width: 80%; }
-
-.animal-text {
-  color: white;
-  font-size: 20px; }
-
-.circle-check {
-  color: white;
-  font-size: 18px !important;
-  margin-top: 8px; }
+.inputfile:focus + label,
+.inputfile + label:hover {
+  background-color: red; }
 
 /* Media Queries */
 @media (max-width: 768px) {
