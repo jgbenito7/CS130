@@ -6,7 +6,7 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
 
         $scope.getData = function(form){
           $scope.dataObj = angular.copy(form);
-
+          $(".overlay").show();
 
           if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition(function(position){
@@ -14,7 +14,7 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
                 $scope.longitude = position.coords.longitude;
                 $scope.dataObj.latitude = $scope.latitude;
                 $scope.dataObj.longitude = $scope.longitude;
-
+                $(".overlay").hide();
                 var missing = formValidate();
                 if(missing.length>0){
                   window.scrollTo(0,0);
@@ -35,7 +35,7 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
                   fd.append('animal_type',$scope.dataObj.animal_type);
                   fd.append('latitude',$scope.dataObj.latitude);
                   fd.append('longitude',$scope.dataObj.longitude);
-                  $http.post('http://54.186.47.42/testfile', fd,{
+                  $http.post('http://54.186.47.42/reports', fd,{
                     withCredentials: false,
                     headers: {
                       'Content-Type': undefined

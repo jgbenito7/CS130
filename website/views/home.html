@@ -10,7 +10,7 @@
               <span class="icon-bar"></span>
             </button>
             <div class='header-wrap'>
-              <div class='header-text-bold'>Rescue Hero</div>
+              <div class='header-text-bold'>Seal Saver</div>
               <div class='header-text-light'>Marine Mammal Report System</div>
               <div class='header-image'></div>
             </div>
@@ -45,7 +45,7 @@
 
       <form class="report-form" novalidate>
         <input class='form-input-small' type="text" ng-model="dataObj.animal_type" placeholder="Enter Animal Type">
-        <input class='form-input-large' type="text" ng-model="dataObj.animal_notes" placeholder="Enter Notes About The Animal">
+        <textarea class='form-input-large' type="text" ng-model="dataObj.animal_notes" placeholder="Enter Notes About The Animal"></textarea>
         <!--<input class='upload-image' value="Upload Image">-->
         <input type="file" name="file" id="file" class="inputfile" data-multiple-caption="{count} files selected" multiple file-model="myFile" />
         <label for="file" class='file-label'><span>Choose a file<span></label>
@@ -57,6 +57,10 @@
     </div>
   </div>
 </div>
-<!--<div class='overlay'>
-  <div class='Absolute-Center'>Center</div>
-</div>-->
+<div class='overlay'>
+  <div class='Absolute-Center'>
+    <!--<div class='loading'>Loading...-->
+      <div class='loading-gif'></div>
+    <!--</div>-->
+  </div>
+</div>

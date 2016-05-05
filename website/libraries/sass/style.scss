@@ -46,15 +46,34 @@ body{
   bottom:0;
   z-index:99;
   background:rgba(50,50,50,.5);
+  display:none;
 }
 
 .Absolute-Center {
-  width: 50%;
-  height: 50%;
-  overflow: auto;
+  width: 33%;
+  height: 27%;
   margin: auto;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.loading{
+  font-size: 20px;
+  color:$color1;
+  font-weight: 200;
+  position: absolute;
+  left:0;
+  top:0;
+
+}
+
+.loading-gif{
+  background: url("../../assets/loading.gif");
+  width:200px;
+  height:200px;
+  background-size:cover;
+  position:absolute;
+  right:0;
 }
 
 ///////////////////////////////////////////
@@ -226,28 +245,28 @@ textarea:focus, input:focus{
 }
 
 ::-webkit-input-placeholder {
-  color: $color2;
+  color: $color6;
    text-align: center;
    font-size: 18px;
    line-height: .8;
 }
 
 :-moz-placeholder { /* Firefox 18- */
-  color: $color2;
+  color: $color6;
    text-align: center;
    font-size: 18px;
    line-height: .8;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-  color: $color2;
+  color: $color6;
    text-align: center;
    font-size: 18px;
    line-height: .8;
 }
 
 :-ms-input-placeholder {
-  color: $color2;
+  color: $color6;
    text-align: center;
    font-size: 18px;
    line-height: .8;
@@ -256,12 +275,14 @@ textarea:focus, input:focus{
 input[type=text]:focus, textarea:focus {
   box-shadow: 0 0 5px rgba(81, 203, 238, 1);
   border: 3px solid $color7;
+  color:$color2;
+  font-size:18px;
 }
 
 
 .form-input-small, .form-input-large{
   border-radius:35px;
-  padding:10px;
+  padding:30px;
   width:100%;
   margin-top:20px;
   margin-bottom:20px;
@@ -273,12 +294,14 @@ input[type=text]:focus, textarea:focus {
   -o-transition: all 0.30s ease-in-out;
 }
 
+
 .form-input-small{
     height:65px;
 }
 
 .form-input-large{
     height:200px;
+    line-height: 30px;
 }
 
 .warning-wrap{
