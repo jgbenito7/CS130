@@ -66,7 +66,22 @@ function getReports (req, res, next){
   var query = "SELECT * FROM Reports";
   connection.query(query, function(err,rows) {
     if (err) throw err;
-    res.send(rows);
+    var results = rows;
+    for(var i = 0; i < results.length; i++) {
+      results[i].files = [];
+    }
+    var filesystem = "SELECT * FROM filename";
+    connection.query(filesystem, function(err, filerows) {
+      for(var i = 0; i < filerows.length; i++) {
+        for(var j = 0; j < results.length; j++) {
+          if(filerows[i].report_id == results[j].id) {
+            results[j].files.push(filerows[i].filename);
+          }
+        }
+      }
+      res.send(results);
+    });
+
     next();
     }
   );
