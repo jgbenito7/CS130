@@ -12,6 +12,10 @@ var connection  = mysql.createPool({
   port  : 3306
 });
 
+var ssl = {
+    key: fs.readFileSync('./certs/rescuehero.key', 'utf8'),
+    cert: fs.readFileSync('./certs/ssl.crt', 'utf8'),
+};
 
 function createUser (req, res, next) {
   console.log(req.params.password);
@@ -137,7 +141,7 @@ function createReport(req, res, next) {
   
 }
 
-var server = restify.createServer();
+var server = restify.createServer(ssl);
 server.use(function crossOrigin(req,res,next){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
