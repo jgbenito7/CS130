@@ -156,6 +156,11 @@ server.post('/reports', createReport);
 server.get(/\/images\/?.*/, restify.serveStatic({
     directory: __dirname
 }));
+server.get(/\/?.*/, restify.serveStatic({
+  directory: '../website',
+  default: 'index.html'
+}));
+
 server.listen(8080, function() {
   console.log('%s listening at %s', server.name, server.url);
 });
