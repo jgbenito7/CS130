@@ -165,6 +165,13 @@ server.get(/\/?.*/, restify.serveStatic({
   default: 'index.html'
 }));
 
-server.listen(8080, function() {
+server.listen(8001, function() {
   console.log('%s listening at %s', server.name, server.url);
 });
+
+// Redirect from http port 80 to https
+var http = require('http');
+http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(8080);
