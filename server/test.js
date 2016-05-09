@@ -12,6 +12,10 @@ var connection  = mysql.createPool({
   port  : 3306
 });
 
+var ssl = {
+    key: fs.readFileSync('./certs/rescuehero.key', 'utf8'),
+    cert: fs.readFileSync('./certs/ssl.crt', 'utf8'),
+};
 
 function createUser (req, res, next) {
   console.log(req.params.password);
@@ -137,7 +141,7 @@ function createReport(req, res, next) {
   
 }
 
-var server = restify.createServer();
+var server = restify.createServer(ssl);
 server.use(function crossOrigin(req,res,next){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -156,6 +160,18 @@ server.post('/reports', createReport);
 server.get(/\/images\/?.*/, restify.serveStatic({
     directory: __dirname
 }));
-server.listen(8080, function() {
+server.get(/\/?.*/, restify.serveStatic({
+  directory: '../website',
+  default: 'index.html'
+}));
+
+server.listen(8001, function() {
   console.log('%s listening at %s', server.name, server.url);
 });
+
+// Redirect from http port 80 to https
+var http = require('http');
+http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(8080);
