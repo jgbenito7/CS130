@@ -1,60 +1,29 @@
-<div id="main-container" class='container' style='padding:0px;'>
-  <div class='header-outer'>
-    <div class='container' style='padding:0px;'>
-      <div class='header-inner'>
-        <nav class="navbar navbar-inverse">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <div class='header-wrap'>
-              <div class='header-text-bold'>Rescue Hero</div>
-              <div class='header-text-light'>Marine Mammal Report System</div>
-              <div class='header-image'></div>
-            </div>
-          </div>
-          <div class='nav-right'>
-            <div class="collapse navbar-collapse" id="myNavbar">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="#/test">Submit Report</a></li>
-                <li><a href="#/test">Active Cases</a></li>
-                <li><a href="#/test">About Us</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
+<div class='main-wrapper'>
+  <div class='main-body'>
+    <div class='title-text-wrap'>
+      <div class='title-text'>Report Submission Form</div>
     </div>
-  </div>
-  <div class='main-wrapper'>
-    <div class='main-body'>
-      <div class='title-text-wrap'>
-        <div class='title-text'>Report Submission Form</div>
+    <hr class='divider'>
+    <div class='error-wrap'>
+      <div class='error-text'>
+        Please Add The Following Form Elements And Resubmit:
       </div>
-      <hr class='divider'>
-      <div class='error-wrap'>
-        <div class='error-text'>
-          Please Add The Following Form Elements And Resubmit:
-        </div>
-        <ul class='error-list'>
-        </ul>
-      </div>
+      <ul class='error-list'>
+      </ul>
+    </div>
 
 
-      <form class="report-form" novalidate>
-        <input class='form-input-small' type="text" ng-model="dataObj.animal_type" placeholder="Enter Animal Type">
-        <textarea class='form-input-large' type="text" ng-model="dataObj.animal_notes" placeholder="Enter Notes About The Animal"></textarea>
-        <!--<input class='upload-image' value="Upload Image">-->
-        <input type="file" name="file" id="file" class="inputfile" data-multiple-caption="{count} files selected" multiple file-model="myFile" />
-        <label for="file" class='file-label'><span>Choose a file<span></label>
-        <div class='warning-wrap'>
-          <div class='warning-text'>**Location is required for form submission to be valid.</div>
-        </div>
-        <input class='submit' type="submit" ng-click="getData(dataObj)" value="Submit">
-      </form>
-    </div>
+    <form class="report-form" novalidate>
+      <input class='form-input-small' type="text" ng-model="dataObj.animal_type" placeholder="Enter Animal Type">
+      <textarea class='form-input-large' type="text" ng-model="dataObj.animal_notes" placeholder="Enter Notes About The Animal"></textarea>
+      <!--<input class='upload-image' value="Upload Image">-->
+      <input type="file" name="file" id="file" class="inputfile" data-multiple-caption="{count} files selected" multiple file-model="myFile" />
+      <label for="file" class='file-label'><span>Choose a file<span></label>
+      <div class='warning-wrap'>
+        <div class='warning-text'>**Location is required for form submission to be valid.</div>
+      </div>
+      <input class='submit' type="submit" ng-click="getData(dataObj)" value="Submit">
+    </form>
   </div>
 </div>
 <div class='overlay'>

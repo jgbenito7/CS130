@@ -281,6 +281,8 @@ input[type=text]:focus, textarea:focus {
 
 
 .form-input-small, .form-input-large{
+  color:$color2;
+  font-size:18px;
   border-radius:35px;
   padding:30px;
   width:100%;
