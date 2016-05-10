@@ -5,13 +5,13 @@
 body {
   background: #0093d8;
   /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left top, #0093d8, #00e09e);
+  background: -webkit-linear-gradient(left top, #0c638c, #00e09e);
   /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(bottom right, #0093d8, #00e09e);
+  background: -o-linear-gradient(bottom right, #0c638c, #00e09e);
   /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(bottom right, #0093d8, #00e09e);
+  background: -moz-linear-gradient(bottom right, #0c638c, #00e09e);
   /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, #0093d8, #00e09e);
+  background: linear-gradient(to bottom right, #0c638c, #00e09e);
   /* Standard syntax (must be last) */
   background-size: cover;
   position: relative;
@@ -146,7 +146,7 @@ body {
 /* Body Elements
 ///////////////////////////////////////////////*/
 hr {
-  border-top: 2px solid rgba(120, 120, 120, 0.6);
+  border-top: 2px solid rgba(100, 80, 80, 0.2);
   margin-top: 10px;
   margin-bottom: 10px; }
 

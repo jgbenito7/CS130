@@ -6,6 +6,7 @@ $color5: #00e09e;
 $color6: #dddddd;
 $color7: #f26d7d;
 $color8: #a40e20;
+$color9: #0c638c;
 
 $logo: url("../../assets/img/seal-icon.png");
 
@@ -18,10 +19,10 @@ $font: 'Cabin', sans-serif;
 
 body {
     background: $color4; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(left top, $color4, $color5); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(bottom right, $color4, $color5); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(bottom right, $color4, $color5); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom right, $color4, $color5); /* Standard syntax (must be last) */
+    background: -webkit-linear-gradient(left top, $color9, $color5); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, $color9, $color5); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, $color9, $color5); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, $color9, $color5); /* Standard syntax (must be last) */
     background-size: cover;
     position: relative;
     font-family: $font;
@@ -184,7 +185,7 @@ body {
 ///////////////////////////////////////////////*/
 
 hr{
-  border-top: 2px solid rgba(120,120,120,.6);
+  border-top: 2px solid rgba(100,80,80,.2);
   margin-top:10px;
   margin-bottom: 10px;
 }

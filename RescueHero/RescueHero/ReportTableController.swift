@@ -44,7 +44,7 @@ class ReportTableController: UITableViewController {
             print("Can't connect")
         }  else {
             do {
-                let url = NSURL(string: "http://54.186.47.42/reports")
+                let url = NSURL(string: "https://www.rescuehero/reports")
                 let data = NSData(contentsOfURL: url!)
                 let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
                 readJSONObject(json as! [AnyObject])
@@ -104,7 +104,7 @@ class ReportTableController: UITableViewController {
         cell.cellType.text = obj["type"] as? String
         print(cell.cellType.text)
         cell.cellTime.text = obj["time"] as? String
-        var url = "http://54.186.47.42/images/"
+        var url = "https://www.rescuehero/images/"
         let imageURLs = obj["files"] as? [String]
         if (imageURLs?.count > 0){
             url.appendContentsOf(imageURLs![0])
