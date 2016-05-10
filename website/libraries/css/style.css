@@ -154,6 +154,39 @@ hr {
   margin-top: 20px;
   margin-bottom: 20px; }
 
+.about-image {
+  width: 110px;
+  height: 110px;
+  border: 3px solid white;
+  border-radius: 50%;
+  margin: auto;
+  background-size: cover; }
+
+.joey {
+  background-image: url("../../assets/joey.jpg"); }
+
+.chloe {
+  background-image: url("../../assets/chloe.jpg"); }
+
+.david {
+  background-image: url("../../assets/david.jpg"); }
+
+.jake {
+  background-image: url("../../assets/jake.jpg"); }
+
+.christian {
+  background-image: url("../../assets/christian.jpg"); }
+
+.pic-wrap {
+  width: 70%;
+  margin: auto; }
+
+.header-text {
+  font-size: 40px;
+  color: white;
+  font-weight: 200;
+  text-align: center; }
+
 /* Form Elements
 ///////////////////////////////////////////////*/
 .report-form {
@@ -284,7 +317,7 @@ input[type=text]:focus, textarea:focus {
 
   .nav-link > a {
     color: #dddddd;
-    font-size: 14px;
+    font-size: 13px;
     cursor: pointer; } }
 
 /*# sourceMappingURL=style.css.map */

@@ -20,8 +20,13 @@ $hr-color: rgba(100,80,80,.2);
 /* Global Style Definitions
 ///////////////////////////////////////////////*/
 $logo: url("../../assets/img/seal-icon.png");
-
 $font: 'Cabin', sans-serif;
+
+$joey: url("../../assets/joey.jpg");
+$chloe: url("../../assets/chloe.jpg");
+$jake: url("../../assets/jake.jpg");
+$christian: url("../../assets/christian.jpg");
+$david: url("../../assets/david.jpg");
 
 /////////////////////////////////////////////////
 /* Mixins
@@ -238,6 +243,33 @@ hr{
   margin-bottom:20px;
 }
 
+.about-image{
+  width:110px;
+  height:110px;
+  border:3px solid white;
+  border-radius: 50%;
+  margin:auto;
+  background-size:cover;
+}
+
+.joey{background-image: $joey;}
+.chloe{background-image: $chloe;}
+.david{background-image: $david;}
+.jake{background-image: $jake;}
+.christian{background-image: $christian;}
+
+.pic-wrap{
+  width:70%;
+  margin:auto;
+}
+
+.header-text{
+  font-size:40px;
+  color:white;
+  font-weight:200;
+  text-align: center;
+}
+
 /////////////////////////////////////////////////
 /* Form Elements
 ///////////////////////////////////////////////*/
@@ -358,7 +390,7 @@ input[type=text]:focus, textarea:focus {
   }
   .nav-link > a{
     color:$color6;
-    font-size: 14px;
+    font-size: 13px;
     cursor: pointer;
   }
 }

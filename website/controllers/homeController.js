@@ -1,4 +1,5 @@
 rescueApp.controller('homeCtrl', function($scope,$http) {
+
         // create a message to display in our view
         $scope.dataObj = {};
         $scope.latitude;
