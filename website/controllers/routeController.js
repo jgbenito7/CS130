@@ -11,13 +11,13 @@ rescueApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/', {
-        templateUrl: 'views/home2.html',
+        templateUrl: 'views/home.html',
         controller: 'homeCtrl'
       }).when('/map', {
         templateUrl: 'views/map.html',
         controller: 'mapCtrl'
       }).otherwise({
-        templateUrl: 'views/home2.html',
+        templateUrl: 'views/home.html',
         controller: 'homeCtrl'
       });
   }]);

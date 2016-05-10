@@ -7,30 +7,44 @@
 
     <!-- CSS Files-->
     <link href="libraries/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="libraries/css/style2.css" rel="stylesheet">
+    <link href="libraries/css/style.css" rel="stylesheet">
     <link href="libraries/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!--<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Palanquin:400,100,200,300,700,600,500' rel='stylesheet' type='text/css'>-->
     <link href='https://fonts.googleapis.com/css?family=Cabin:400,400italic,700' rel='stylesheet' type='text/css'>
-
-    <!-- Javascript Files -->
-    <script src="libraries/js/jquery-2.2.3.min.js"></script>
-    <script src="libraries/bootstrap/js/bootstrap.min.js"></script>
-    <script src="libraries/js/angular/angular.min.js"></script>
-    <script src="libraries/js/angular/angular-route.min.js"></script>
-    <script src="libraries/js/angular/angular-resource.min.js"></script>
-
-    <script src="controllers/mapStyles.js"></script>
-
-    <script src="controllers/routeController.js"></script>
-    <script src="controllers/homeController.js"></script>
-    <script src="controllers/mapController.js"></script>
-
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
-
   </head>
   <body>
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Thank You For Your Report!</h4>
+          </div>
+          <div class="modal-body">
+            <p>A notification has been sent to the appropriate notification regarding the animal.
+              You can check the status under the "Active Cases" page.
+              Please remember to follow these guidelines regarding the animal:</p>
+              <ul>
+                <li>
+                  Do not try to approach the animal.
+                </li>
+                <li>
+                  Do not crowd around the animal.
+                </li>
+                <li>
+                  Keep dogs and children away from the animal.
+                </li>
+              </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
     <div class="main-wrapper">
       <div class="header-wrap">
         <div class='header-text-bold'>Rescue Hero</div>
@@ -41,7 +55,7 @@
       <div class='nav-wrapper'>
         <div class='row'>
           <div class='col-xs-4'>
-            <div class='nav-link'>
+            <div class='nav-link active'>
               <a href="#/">Submit Report</a>
             </div>
           </div>
@@ -66,12 +80,35 @@
         &copy; Rescue Hero 2016
       </div>
     </div>
-    <div class='overlay'>
-      <div class='Absolute-Center'>
-        <!--<div class='loading'>Loading...-->
-          <div class='loading-gif'></div>
-        <!--</div>-->
-      </div>
-    </div>
   </body>
+
+  <!-- Javascript Files -->
+  <script src="libraries/js/jquery-2.2.3.min.js"></script>
+  <script src="libraries/bootstrap/js/bootstrap.min.js"></script>
+  <script src="libraries/js/angular/angular.min.js"></script>
+  <script src="libraries/js/angular/angular-route.min.js"></script>
+  <script src="libraries/js/angular/angular-resource.min.js"></script>
+
+  <script src="controllers/mapStyles.js"></script>
+
+  <script src="controllers/routeController.js"></script>
+  <script src="controllers/homeController.js"></script>
+  <script src="controllers/mapController.js"></script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3SuZ8KJR1KNrcGD0pYlyuHzRqHFgcfPQ"></script>
+
+
+
+
+  <script>
+    $(document).ready(function() {
+      $(".nav-link").click(function(){
+        $(".nav-link").removeClass("active");
+        $(this).addClass("active");
+      });
+    });
+  </script>
+
+
+
 </html>
