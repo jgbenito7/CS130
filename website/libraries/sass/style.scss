@@ -270,6 +270,57 @@ hr{
   text-align: center;
 }
 
+.mission-text{
+  font-size: 20px;
+  color:white;
+  text-align: center;
+  margin-top:30px;
+}
+
+.about-wrapper{
+  padding:15px;
+}
+
+.about-circle{
+  width:180px;
+  height:180px;
+  background:$color1;
+  color:$color9;
+  text-align: center;
+  vertical-align: middle;
+  font-size:40px;
+  border-radius: 50%;
+  margin:auto;
+  padding:20px;
+  padding-top:25px;
+}
+
+.statement-text{
+  color:white;
+  font-weight: bold;
+  font-size: 100px;
+  text-align: center;
+}
+
+.under-header-text{
+  font-size:12px;
+  color:$color6;
+  text-align: center;
+}
+
+.under-wrapper{
+  width:40%;
+  margin:auto;
+}
+
+.darker-text{
+  color:$color3;
+}
+
+.circle-wrapper{
+
+}
+
 /////////////////////////////////////////////////
 /* Form Elements
 ///////////////////////////////////////////////*/
