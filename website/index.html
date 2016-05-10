@@ -10,8 +10,44 @@
     <link href="libraries/css/style.css" rel="stylesheet">
     <link href="libraries/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Cabin:400,400italic,700' rel='stylesheet' type='text/css'>
+
+
+
   </head>
   <body>
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Thank You For Your Report!</h4>
+          </div>
+          <div class="modal-body">
+            <p>A notification has been sent to the appropriate notification regarding the animal.
+              You can check the status under the "Active Cases" page.
+              Please remember to follow these guidelines regarding the animal:</p>
+              <ul>
+                <li>
+                  Do not try to approach the animal.
+                </li>
+                <li>
+                  Do not crowd around the animal.
+                </li>
+                <li>
+                  Keep dogs and children away from the animal.
+                </li>
+              </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
     <div class="main-wrapper">
       <div class="header-wrap">
         <div class='header-text-bold'>Rescue Hero</div>
@@ -47,13 +83,6 @@
         &copy; Rescue Hero 2016
       </div>
     </div>
-    <div class='overlay'>
-      <div class='Absolute-Center'>
-        <!--<div class='loading'>Loading...-->
-          <div class='loading-gif'></div>
-        <!--</div>-->
-      </div>
-    </div>
   </body>
 
   <!-- Javascript Files -->
@@ -77,6 +106,7 @@
       });
     });
   </script>
+
 
 
 </html>

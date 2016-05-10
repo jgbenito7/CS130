@@ -88,38 +88,25 @@ body {
 
 }
 
-.overlay{
-  position:absolute;
-  @include tlrb();
-  z-index:99;
-  background:rgba(50,50,50,.5);
-  display:none;
-}
-
-.Absolute-Center {
-  width: 33%;
-  height: 27%;
-  margin: auto;
-  position: absolute;
-  @include tlrb();
-}
-
 .loading{
-  font-size: 20px;
+  padding:10px;
+}
+
+.loading-text{
+  font-size: 30px;
   color:$color1;
   font-weight: 200;
-  position: absolute;
+  position:absolute;
   left:0;
-  top:0;
 
 }
 
 .loading-gif{
-  background: url("../../assets/loading.gif");
-  width:200px;
-  height:200px;
-  background-size:cover;
-  position:absolute;
+  background: url("../../assets/loading_spinner.gif");
+  width:50px;
+  height:50px;
+  background-size:contain;
+  margin:auto;
   right:0;
 }
 .error-wrap{
@@ -145,6 +132,32 @@ body {
 .error-list > li{
   color:$color1;
   font-size: 18px;
+}
+/////////////////////////////////////////////////
+/* Modal Styling
+///////////////////////////////////////////////*/
+
+.modal-content{
+  background:$color3;
+  padding:10px;
+}
+
+.modal-header{
+}
+
+.modal-title{
+  font-size:30px;
+  color:white;
+}
+
+.modal-body > p, .modal-body > ul > li{
+  color:white;
+  font-size:15px;
+  font-weight:100;
+}
+
+.close{
+  color:white;
 }
 
 /////////////////////////////////////////////////
@@ -283,6 +296,8 @@ input[type=text]:focus, textarea:focus {
   border:none;
   width:100%;
   margin-bottom: 20px;
+  text-align: center;
+  cursor:pointer;
   @include box-shadow();
 }
 .warning-wrap{

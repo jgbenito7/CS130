@@ -5,8 +5,14 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
         $scope.longitude;
 
         $scope.getData = function(form){
+
+          //Change Submit Button Html
+          $(".submit").html("<div class='loading'><!--<div class='loading-text'>Loading...</div>--><div class='loading-gif'></div></div>");
+
+
+
           $scope.dataObj = angular.copy(form);
-          $(".overlay").show();
+          //$(".overlay").show();
 
           if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition(function(position){
@@ -14,7 +20,7 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
                 $scope.longitude = position.coords.longitude;
                 $scope.dataObj.latitude = $scope.latitude;
                 $scope.dataObj.longitude = $scope.longitude;
-                $(".overlay").hide();
+                //$(".overlay").hide();
                 var missing = formValidate();
 
                 if(missing.length>0){
@@ -25,6 +31,7 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
                     $('.error-list').append(listElem);
                   }
                   $('.error-wrap').show();
+                  $(".submit").html("Submit");
                 }
                 else{
 
@@ -48,13 +55,22 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
                     responseType: "arraybuffer"
                   }).success(function(data) {
                        console.log($scope.dataObj);
+                       $(".submit").html("Submit");
+                       $("#myModal").modal('show');
+
                   });
+
+
                 }
 
               });
           } else {
               $scope.message = "Geolocation is not supported by this browser.";
+              $(".submit").html("Submit");
           }
+
+
+
         }
 
         var inputs = document.querySelectorAll( '.inputfile' );
@@ -96,6 +112,10 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
 
           return missing;
         }
+
+        $('#myModal').on('hidden.bs.modal', function () {
+         location.reload();
+        });
 
 
 
