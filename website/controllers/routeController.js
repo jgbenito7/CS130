@@ -13,6 +13,9 @@ rescueApp.config(['$routeProvider',
       when('/', {
         templateUrl: 'views/home2.html',
         controller: 'homeCtrl'
+      }).when('/map', {
+        templateUrl: 'views/map.html',
+        controller: 'mapCtrl'
       }).otherwise({
         templateUrl: 'views/home2.html',
         controller: 'homeCtrl'
