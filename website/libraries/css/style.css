@@ -160,7 +160,18 @@ hr {
   border: 3px solid white;
   border-radius: 50%;
   margin: auto;
-  background-size: cover; }
+  background-size: cover;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out; }
+
+.about-image:hover {
+  border: 3px solid #f26d7d;
+  cursor: pointer; }
+
+.about-image.active {
+  border: 3px solid #f26d7d; }
 
 .joey {
   background-image: url("../../assets/joey.jpg"); }
@@ -226,6 +237,29 @@ hr {
 
 .darker-text {
   color: #313538; }
+
+.bio-panel {
+  display: none;
+  padding: 20px; }
+
+.bio-text-name, .bio-text {
+  text-align: left;
+  color: white; }
+
+.bio-text-name {
+  font-size: 24px;
+  margin-top: 10px; }
+
+.bio-text {
+  font-size: 20px; }
+
+hr.white-short {
+  border-bottom: 3px solid white;
+  width: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 0px;
+  border-top: none; }
 
 /* Form Elements
 ///////////////////////////////////////////////*/

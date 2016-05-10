@@ -1,5 +1,5 @@
 rescueApp.controller('homeCtrl', function($scope,$http) {
-
+        $(".report").addClass("active");
         // create a message to display in our view
         $scope.dataObj = {};
         $scope.latitude;
