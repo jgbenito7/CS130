@@ -5,7 +5,6 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
         $scope.longitude;
 
         $scope.getData = function(form){
-          console.log("Pressed");
           $scope.dataObj = angular.copy(form);
           $(".overlay").show();
 
@@ -59,12 +58,10 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
         }
 
         var inputs = document.querySelectorAll( '.inputfile' );
-        console.log(inputs);
         Array.prototype.forEach.call( inputs, function( input )
         {
 
           var label	 = input.nextElementSibling, labelVal = label.innerHTML;
-          console.log(label);
           input.addEventListener( 'change', function( e )
           {
             var fileName = '';
