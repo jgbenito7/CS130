@@ -353,3 +353,16 @@ input[type=text]:focus, textarea:focus {
   font-size:20px;
   margin-bottom:20px;
 }
+
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 568px) {
+  .main-wrapper{
+    width:100%;
+    padding:20px;
+  }
+  .nav-link > a{
+    color:$color6;
+    font-size: 12px;
+    cursor: pointer;
+  }
+}

@@ -285,4 +285,15 @@ input[type=text]:focus, textarea:focus {
   font-size: 20px;
   margin-bottom: 20px; }
 
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 568px) {
+  .main-wrapper {
+    width: 100%;
+    padding: 20px; }
+
+  .nav-link > a {
+    color: #dddddd;
+    font-size: 12px;
+    cursor: pointer; } }
+
 /*# sourceMappingURL=style2.css.map */
