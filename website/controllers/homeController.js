@@ -5,6 +5,7 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
         $scope.longitude;
 
         $scope.getData = function(form){
+          console.log("Pressed");
           $scope.dataObj = angular.copy(form);
           $(".overlay").show();
 
@@ -16,6 +17,7 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
                 $scope.dataObj.longitude = $scope.longitude;
                 $(".overlay").hide();
                 var missing = formValidate();
+
                 if(missing.length>0){
                   window.scrollTo(0,0);
                   for(var x=0; x<missing.length;x++)
@@ -35,7 +37,7 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
                   fd.append('animal_type',$scope.dataObj.animal_type);
                   fd.append('latitude',$scope.dataObj.latitude);
                   fd.append('longitude',$scope.dataObj.longitude);
-                  $http.post('http://54.186.47.42/reports', fd,{
+                  $http.post('https://www.rescuehero.org/reports', fd,{
                     withCredentials: false,
                     headers: {
                       'Content-Type': undefined
@@ -57,9 +59,12 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
         }
 
         var inputs = document.querySelectorAll( '.inputfile' );
+        console.log(inputs);
         Array.prototype.forEach.call( inputs, function( input )
         {
+
           var label	 = input.nextElementSibling, labelVal = label.innerHTML;
+          console.log(label);
           input.addEventListener( 'change', function( e )
           {
             var fileName = '';

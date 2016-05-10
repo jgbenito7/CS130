@@ -1,0 +1,68 @@
+<html ng-app="rescueApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rescue Hero</title>
+
+    <!-- CSS Files-->
+    <link href="libraries/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="libraries/css/style.css" rel="stylesheet">
+    <link href="libraries/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!--<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Palanquin:400,100,200,300,700,600,500' rel='stylesheet' type='text/css'>-->
+    <link href='https://fonts.googleapis.com/css?family=Cabin:400,400italic,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div id="main">
+      <div id="main-container" class='container' style='padding:0px;'>
+        <!--<div class='header-outer'>
+          <div class='container' style='padding:0px;'>
+            <div class='header-inner'>
+              <nav class="navbar navbar-inverse">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <div class='header-wrap'>
+                    <div class='header-text-bold'>Rescue Hero</div>
+                    <div class='header-text-light'>Marine Mammal Report System</div>
+                    <div class='header-image'></div>
+                  </div>
+                </div>
+                <div class='nav-right'>
+                  <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                      <li class="active"><a href="#/test">Submit Report</a></li>
+                      <li><a href="#/test">Active Cases</a></li>
+                      <li><a href="#/test">About Us</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>-->
+        <!-- Load View Here-->
+        <div ng-view>
+        </div>
+        <!------------------->
+      </div>
+    </div>
+  </body>
+
+  <!-- Javascript Files -->
+  <script src="libraries/js/jquery-2.2.3.min.js"></script>
+  <script src="libraries/bootstrap/js/bootstrap.min.js"></script>
+  <script src="libraries/js/angular/angular.min.js"></script>
+  <script src="libraries/js/angular/angular-route.min.js"></script>
+  <script src="libraries/js/angular/angular-resource.min.js"></script>
+
+  <script src="controllers/routeController.js"></script>
+  <script src="controllers/homeController.js"></script>
+
+
+</html>
