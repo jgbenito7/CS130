@@ -187,6 +187,14 @@ function createReport(req, res, next) {
   });
   
 }
+function rebootServer(req, res, next) {
+  const exec = require('child_process').exec;
+  const child = exec('git pull origin master; forever restartall;',
+    function(error, stdout, stderr) {
+      console.log('stdout: ${stdout}');
+      }
+  );
+}
 
 var server = restify.createServer(ssl);
 //var server = restify.createServer(); // Change back
@@ -204,6 +212,7 @@ server.use(restify.bodyParser ({mapParams: false,
 server.get('/getStatus/:reportId', getStatus);
 server.put('/updateStatus/:reportId/:status', updateStatus);
 server.post('/users', createUser);
+server.get('/reboot/rescuehero', rebootServer);
 server.get('/reports', getReports);
 server.post('/users/authorize', authorizeUser);
 server.post('/reports', createReport);
