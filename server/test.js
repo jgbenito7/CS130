@@ -12,6 +12,8 @@ var connection  = mysql.createPool({
   port  : 3306
 });
 
+
+//Change back!
 var ssl = {
     key: fs.readFileSync('./certs/rescuehero.key', 'utf8'),
     cert: fs.readFileSync('./certs/ssl.crt', 'utf8'),
@@ -77,6 +79,44 @@ function getReports (req, res, next){
   );
 }
 
+
+
+function getStatus(req,res,next)
+{
+  var query = "SELECT * FROM Status WHERE reportId = " + mysql.escape(req.params.reportId) +" AND mostRecent = 1;";
+  console.log(query);
+  connection.query(query, function(err, results){
+    if(err)
+      throw err;
+    else if(results.length < 1)
+      res.send(408); //no such report exists
+    else if(results.length > 1)
+      res.send(409); //Too many current statuses (should never happen)
+    res.send(results[0]);
+    next();
+  })
+}
+
+function updateStatus(req,res,next)
+{
+  //Change all current reports to be NOT the most recent
+  var query = "UPDATE Status SET mostRecent = 0 WHERE reportId = " + mysql.escape(req.params.reportId) + ";";
+  console.log(query);
+  connection.query(query, function(err, results){
+    if(err)
+      throw err;
+  })
+
+  var updateQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + mysql.escape(req.params.reportId) + ", " +  mysql.escape(req.params.status) + ", 1);";
+  connection.query(updateQuery, function(err, results){
+    if(err)
+      throw err;
+    res.send(200);
+    next();
+  })
+}
+
+
 function authorizeUser (req, res, next) {
   var query = "SELECT * FROM Users WHERE password = " + mysql.escape(req.body.password) + " AND email = " + mysql.escape(req.body.email) + ";";
   connection.query(query,  function(err, results){
@@ -137,6 +177,13 @@ function createReport(req, res, next) {
       res.send(200);
       next();
     }
+
+    var reportQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + insertId + ", \'Reported\', 1);";
+    console.log(reportQuery);
+    connection.query(reportQuery, function(err, results) {
+      if(err)
+        throw err;
+    }) 
   });
   
 }
@@ -150,6 +197,7 @@ function rebootServer(req, res, next) {
 }
 
 var server = restify.createServer(ssl);
+//var server = restify.createServer(); // Change back
 server.use(function crossOrigin(req,res,next){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -161,6 +209,8 @@ server.use(restify.bodyParser ({mapParams: false,
 
 //server.get('/reports/create/:animal_type/:animal_notes', createReport);
 //server.get('/users/create/:email/:org_id/:password', createUser);
+server.get('/getStatus/:reportId', getStatus);
+server.put('/updateStatus/:reportId/:status', updateStatus);
 server.post('/users', createUser);
 server.get('/reboot/rescuehero', rebootServer);
 server.get('/reports', getReports);
