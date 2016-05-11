@@ -55,7 +55,7 @@ function createUser (req, res, next) {
 
 
 function getReports (req, res, next){
-  var query = "SELECT *, UNIX_TIMESTAMP(time) AS etime FROM Reports";
+  var query = "SELECT *, UNIX_TIMESTAMP(time) AS rtime, UNIX_TIMESTAMP(updateTime) AS utime FROM Reports Left JOIN Status ON Reports.id = Status.reportId WHERE Status.mostRecent = 1";
   connection.query(query, function(err,rows) {
     if (err) throw err;
     var results = rows;
@@ -83,16 +83,15 @@ function getReports (req, res, next){
 
 function getStatus(req,res,next)
 {
-  var query = "SELECT * FROM Status WHERE reportId = " + mysql.escape(req.params.reportId) +" AND mostRecent = 1;";
+  var query = "SELECT *, UNIX_TIMESTAMP(updateTime) AS etime FROM Status WHERE reportId = " + mysql.escape(req.params.reportId) +" ;";
   console.log(query);
   connection.query(query, function(err, results){
     if(err)
       throw err;
     else if(results.length < 1)
       res.send(408); //no such report exists
-    else if(results.length > 1)
-      res.send(409); //Too many current statuses (should never happen)
-    res.send(results[0]);
+
+    res.send(results);
     next();
   })
 }

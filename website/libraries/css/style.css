@@ -54,7 +54,7 @@ body {
   width: 100%;
   height: auto;
   padding: 20px;
-  background: #a40e20;
+  background: #B93E16;
   display: none;
   border-radius: 5px; }
 
@@ -112,10 +112,10 @@ body {
 .header-image {
   position: absolute;
   top: 5;
-  right: 5;
+  right: 0;
   width: 60px;
   height: 60px;
-  background: url("../../assets/img/seal-icon.png");
+  background: url("../../assets/img/logos/rescuehero_logo.png");
   background-size: cover; }
 
 /* Navbar
@@ -254,7 +254,7 @@ hr {
   font-size: 20px; }
 
 hr.white-short {
-  border-bottom: 3px solid white;
+  border-bottom: 1px solid white;
   width: 30px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -320,7 +320,7 @@ input[type=text]:focus, textarea:focus {
   line-height: 30px; }
 
 .submit {
-  background: #00e09e;
+  background: #148c81;
   border-radius: 5px;
   font-size: 40px;
   font-weight: 800;
@@ -417,6 +417,16 @@ input[type=text]:focus, textarea:focus {
     margin-right: auto; }
 
   .bio-text {
-    text-align: center; } }
+    text-align: center; }
+
+  .header-image {
+    width: 45px;
+    height: 45px; }
+
+  .header-text-bold {
+    font-size: 38px; }
+
+  .header-wrap {
+    width: 265px; } }
 
 /*# sourceMappingURL=style.css.map */
