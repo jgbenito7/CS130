@@ -62,19 +62,20 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
                   }, function errorCallback(response) {
                     $(".submit").html("Submit");
                     alert("An error occurred...");
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
                   });
                 }
 
               });
+              alert("Location must be enabled");
+              $(".submit").html("Submit");
+
           } else {
               $scope.message = "Geolocation is not supported by this browser.";
               $(".submit").html("Submit");
           }
-        }else{
-          alert("Location must be enabled...");
-          $(".submit").html("Submit");
-
-        }
+        }
 
         var inputs = document.querySelectorAll( '.inputfile' );
         Array.prototype.forEach.call( inputs, function( input )
