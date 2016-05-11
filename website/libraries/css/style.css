@@ -392,6 +392,31 @@ input[type=text]:focus, textarea:focus {
   .nav-link > a {
     color: #dddddd;
     font-size: 13px;
-    cursor: pointer; } }
+    cursor: pointer; }
+
+  .about-circle {
+    width: 130px;
+    height: 130px;
+    font-size: 25px; }
+
+  .under-header-text {
+    font-size: 10px; }
+
+  .statement-text {
+    font-size: 80px; }
+
+  .about-image {
+    width: 80px;
+    height: 80px; }
+
+  .bio-text-name {
+    text-align: center; }
+
+  .white-short {
+    margin-left: auto !important;
+    margin-right: auto; }
+
+  .bio-text {
+    text-align: center; } }
 
 /*# sourceMappingURL=style.css.map */
