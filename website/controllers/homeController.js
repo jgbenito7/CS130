@@ -8,7 +8,7 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
         $scope.getData = function(form){
 
           //Change Submit Button Html
-          $(".submit").html("<div class='loading'><!--<div class='loading-text'>Loading...</div>--><div class='loading-gif'></div></div>");
+          $(".submit").html("<div class='loading'><div class='loading-gif'></div></div>");
 
 
 
@@ -54,14 +54,15 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
                       fd
                     },
                     responseType: "arraybuffer"
-                  }).success(function(data) {
-                       console.log($scope.dataObj);
-                       $(".submit").html("Submit");
-                       $("#myModal").modal('show');
+                  }).then(function successCallback(response) {
+                    //console.log($scope.dataObj);
+                    $("#myModal").modal('show');
+                    $(".submit").html("Submit");
 
+                  }, function errorCallback(response) {
+                    $(".submit").html("Submit");
+                    alert("An error occurred...");
                   });
-
-
                 }
 
               });
@@ -69,9 +70,6 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
               $scope.message = "Geolocation is not supported by this browser.";
               $(".submit").html("Submit");
           }
-
-
-
         }
 
         var inputs = document.querySelectorAll( '.inputfile' );
