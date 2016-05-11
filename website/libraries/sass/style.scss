@@ -19,7 +19,7 @@ $hr-color: rgba(100,80,80,.2);
 /////////////////////////////////////////////////
 /* Global Style Definitions
 ///////////////////////////////////////////////*/
-$logo: url("../../assets/img/seal-icon.png");
+$logo: url("../../assets/img/logos/rescuehero_logo.png");
 $font: 'Cabin', sans-serif;
 
 $joey: url("../../assets/joey.jpg");
@@ -193,7 +193,7 @@ body {
 .header-image{
   position:absolute;
   top:5;
-  right:5;
+  right:0;
   width:60px;
   height:60px;
   background:$logo;
