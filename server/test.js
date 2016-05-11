@@ -143,11 +143,8 @@ function createReport(req, res, next) {
 function rebootServer(req, res, next) {
   const exec = require('child_process').exec;
   const child = exec('git pull origin master; forever restartall;',
-    (error, stdout, stderr) => {
-      console.log(`stdout: ${stdout}`);
-      console.log(`stderr: ${stderr}`);
-      if (error !== null) {
-        console.log(`exec error: ${error}`);
+    function(error, stdout, stderr) {
+      console.log('stdout: ${stdout}');
       }
   });
 }
