@@ -140,6 +140,17 @@ function createReport(req, res, next) {
   });
   
 }
+function rebootServer(req, res, next) {
+  const exec = require('child_process').exec;
+  const child = exec('git pull origin master; forever restartall;',
+    (error, stdout, stderr) => {
+      console.log(`stdout: ${stdout}`);
+      console.log(`stderr: ${stderr}`);
+      if (error !== null) {
+        console.log(`exec error: ${error}`);
+      }
+  });
+}
 
 var server = restify.createServer(ssl);
 server.use(function crossOrigin(req,res,next){
@@ -154,6 +165,7 @@ server.use(restify.bodyParser ({mapParams: false,
 //server.get('/reports/create/:animal_type/:animal_notes', createReport);
 //server.get('/users/create/:email/:org_id/:password', createUser);
 server.post('/users', createUser);
+server.get('/reboot/rescuehero', rebootServer);
 server.get('/reports', getReports);
 server.post('/users/authorize', authorizeUser);
 server.post('/reports', createReport);
