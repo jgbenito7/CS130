@@ -112,10 +112,10 @@ body {
 .header-image {
   position: absolute;
   top: 5;
-  right: 5;
+  right: 0;
   width: 60px;
   height: 60px;
-  background: url("../../assets/img/seal-icon.png");
+  background: url("../../assets/img/logos/rescuehero_logo.png");
   background-size: cover; }
 
 /* Navbar
