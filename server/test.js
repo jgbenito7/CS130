@@ -146,7 +146,7 @@ function rebootServer(req, res, next) {
     function(error, stdout, stderr) {
       console.log('stdout: ${stdout}');
       }
-  });
+  );
 }
 
 var server = restify.createServer(ssl);
