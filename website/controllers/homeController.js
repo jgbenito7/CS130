@@ -70,7 +70,11 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
               $scope.message = "Geolocation is not supported by this browser.";
               $(".submit").html("Submit");
           }
-        }
+        }else{
+          alert("Location must be enabled...");
+          $(".submit").html("Submit");
+
+        }
 
         var inputs = document.querySelectorAll( '.inputfile' );
         Array.prototype.forEach.call( inputs, function( input )
