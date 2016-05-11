@@ -1,7 +1,10 @@
 var mysql      = require('mysql');
 var restify = require('restify');
 var sanitizer = require('sanitizer');
-var connection = mysql.createConnection({
+var fs = require('fs');
+
+var connection  = mysql.createPool({
+  connectionLimit : 10,
   host  : 'localhost',
   user  : 'root',
   password  : 'root',
@@ -9,23 +12,10 @@ var connection = mysql.createConnection({
   port  : 3306
 });
 
-function test1(req, res, next) {
-  console.log(req.params.amount);
-  res.send("Hello 1");
-  next();
-}
-
-// Insert animal into Reports table
-function createReport (req, res, next) {
-  console.log(req);
-  connection.query("INSERT INTO Reports (type, notes) VALUES("+mysql.escape(req.body.animal_type)+"," + mysql.escape(req.body.animal_notes) + ");", function(err, results) {
-      if(err) 
-        res.send(400);
-      res.send(200);
-      next();
-  });
-
-}
+var ssl = {
+    key: fs.readFileSync('./certs/rescuehero.key', 'utf8'),
+    cert: fs.readFileSync('./certs/ssl.crt', 'utf8'),
+};
 
 function createUser (req, res, next) {
   console.log(req.params.password);
@@ -63,10 +53,25 @@ function createUser (req, res, next) {
 
 
 function getReports (req, res, next){
-  var query = "SELECT * FROM Reports";
+  var query = "SELECT *, UNIX_TIMESTAMP(time) AS etime FROM Reports";
   connection.query(query, function(err,rows) {
     if (err) throw err;
-    res.send(rows);
+    var results = rows;
+    for(var i = 0; i < results.length; i++) {
+      results[i].files = [];
+    }
+    var filesystem = "SELECT * FROM filename";
+    connection.query(filesystem, function(err, filerows) {
+      for(var i = 0; i < filerows.length; i++) {
+        for(var j = 0; j < results.length; j++) {
+          if(filerows[i].report_id == results[j].id) {
+            results[j].files.push(filerows[i].filename);
+          }
+        }
+      }
+      res.send(results);
+    });
+
     next();
     }
   );
@@ -87,23 +92,86 @@ function authorizeUser (req, res, next) {
 
 }
 
+function createReport(req, res, next) {
+  var filenames = [];
+  var counter = 0;
+  for(i in req.files) {
+    var re = /(?:\.([^.]+))?$/;
+    var ext = re.exec(req.files[i].name);
+    if(ext == undefined)
+      continue; //no file extension should throw an alarm
+    var filename = (new Date).getTime() + counter + "." + ext[1];
+    counter++;
+    filenames.push(filename);
+    fs.createReadStream(req.files[i].path).pipe(fs.createWriteStream("images/" + filename));
+  }
+  console.log(filenames); //insert into 
+  connection.query("INSERT INTO Reports (type, notes, longitude, latitude) VALUES("+
+    mysql.escape(req.body.animal_type)+
+    "," + mysql.escape(req.body.animal_notes) + 
+    "," + mysql.escape(parseFloat(req.body.longitude)) +
+    ","+mysql.escape(parseFloat(req.body.latitude)) + ");", function(err, results) {
+      if(err) 
+        throw err;
+      var insertId = results.insertId; 
+      if(filenames.length > 0) {
+        var queryString = "INSERT INTO filename (report_id, filename) VALUES ";
+        for(var i = 0; i < filenames.length; i++) {
+          queryString += " ("+insertId + ", '" + filenames[i] + "')";
+          if(i != filenames.length - 1) {
+            queryString += ", ";
+          } else {
+            queryString += ";"
+          }
+        }
 
-var server = restify.createServer();
+        console.log(queryString);
+
+        connection.query(queryString, function(err, results) {
+          if(err)
+            throw err;
+          res.send(200);
+          next();
+        });
+    } else {
+      res.send(200);
+      next();
+    }
+  });
+  
+}
+
+var server = restify.createServer(ssl);
 server.use(function crossOrigin(req,res,next){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     return next();
   });
 
-server.use(restify.bodyParser ({mapParams: false}));
+server.use(restify.bodyParser ({mapParams: false,
+    multiples: true}));
 
 //server.get('/reports/create/:animal_type/:animal_notes', createReport);
 //server.get('/users/create/:email/:org_id/:password', createUser);
-server.post('/reports', createReport);
 server.post('/users', createUser);
 server.get('/reports', getReports);
-server.post('/users/authorize', authorizeUser)
+server.post('/users/authorize', authorizeUser);
+server.post('/reports', createReport);
+server.get(/\/images\/?.*/, restify.serveStatic({
+    directory: __dirname
+}));
+server.get(/\/?.*/, restify.serveStatic({
+  directory: '../website',
+  default: 'index.html'
+}));
 
-server.listen(8080, function() {
+server.listen(8001, function() {
   console.log('%s listening at %s', server.name, server.url);
 });
+
+// Redirect from http port 80 to https
+var http = require('http');
+http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(8080);

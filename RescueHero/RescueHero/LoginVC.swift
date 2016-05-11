@@ -24,6 +24,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var email_txt: UITextField!
     @IBOutlet weak var password_txt: UITextField!
     @IBAction func login_tapped(sender: UIButton) {
+        
     }
 
     /*
