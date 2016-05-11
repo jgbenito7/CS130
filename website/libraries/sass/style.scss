@@ -10,6 +10,13 @@ $color6: #dddddd;
 $color7: #f26d7d;
 $color8: #a40e20;
 $color9: #0c638c;
+$color10:#148c81;
+
+$cape1: #00c934;
+$cape2: #c0aa1a;
+$cape3: #d73c0a;
+
+$cape4: #B93E16;
 
 $inset-color: rgba(0,0,0,0.18);
 $box-shadow-color: rgba(0,0,0,0.75);
@@ -118,7 +125,7 @@ body {
   width:100%;
   height:auto;
   padding:20px;
-  background:$color8;
+  background:$cape4;
   display:none;
   border-radius:5px;
 }
@@ -351,7 +358,7 @@ hr{
 }
 
 hr.white-short{
-  border-bottom: 3px solid white;
+  border-bottom: 1px solid white;
   width:30px;
   margin-top:10px;
   margin-bottom:10px;
@@ -407,7 +414,7 @@ input[type=text]:focus, textarea:focus {
 }
 
 .submit{
-  background:$color5;
+  background:$color10;
   border-radius:5px;
   font-size:40px;
   font-weight:800;
@@ -507,5 +514,15 @@ input[type=text]:focus, textarea:focus {
   }
   .bio-text{
     text-align: center;
+  }
+  .header-image{
+    width:45px;
+    height:45px;
+  }
+  .header-text-bold{
+    font-size:38px;
+  }
+  .header-wrap{
+    width:265px;
   }
 }
