@@ -20,7 +20,7 @@ $cape4: #B93E16;
 
 $inset-color: rgba(0,0,0,0.18);
 $box-shadow-color: rgba(0,0,0,0.75);
-$form-color: rgba(100,100,100,.2);
+$form-color: rgba(100,100,100,.3);
 $hr-color: rgba(100,80,80,.2);
 
 /////////////////////////////////////////////////
@@ -115,8 +115,8 @@ body {
 
 .loading-gif{
   background: url("../../assets/loading_spinner.gif");
-  width:50px;
-  height:50px;
+  width:30px;
+  height:30px;
   background-size:contain;
   margin:auto;
   right:0;
@@ -399,8 +399,6 @@ input[type=text]:focus, textarea:focus {
   border-top: none;
   @include inset-shadow();
   outline:0;
-  margin-top: 20px;
-  margin-bottom:20px;
   padding:20px;
   background:$form-color;
   color:white;
@@ -413,19 +411,17 @@ input[type=text]:focus, textarea:focus {
     line-height: 30px;
 }
 
-.submit{
-  background:$color10;
+.submit, .location{
+  background:$form-color;
   border-radius:5px;
-  font-size:40px;
+  font-size:25px;
   font-weight:800;
-  padding:20px;
-  margin-top:10px;
+  padding:10px;
   color: white;
   border:none;
   width:100%;
-  margin-bottom: 20px;
   text-align: center;
-  cursor:pointer;
+  cursor:pointer !important;
   @include box-shadow();
 }
 .warning-wrap{
@@ -452,18 +448,53 @@ input[type=text]:focus, textarea:focus {
 }
 
 .inputfile + label {
-    font-size:40px;
+    font-size:25px;
     font-weight:800;
-    padding:20px;
-    margin-top:40px;
+    padding:10px;
     color: white;
-    background-color: $color7;
+    background-color: $form-color;
     display: block;
-    cursor:pointer;
+    cursor:pointer !important;
     text-align: center;
     border-radius:5px;
     @include transition(0.20s);
     @include box-shadow();
+}
+
+.button-waiting{
+  box-shadow: 0 0 5px $color5 !important;
+  border: 2px solid $color5 !important;
+}
+
+.dummy{
+}
+
+.circle{
+  width:40px;
+  height:40px;
+  margin:auto;
+  background: $form-color;
+  color:white;
+  padding:5px;
+  font-size:20px;
+  font-weight: 800;
+  border-radius: 50%;
+  border: 1px solid white;
+  text-align: center;
+}
+
+.done{
+  background:$color5 !important;
+  border:1px solid $color5 !important;
+}
+
+.padded{
+  padding:10px;
+}
+
+.form-section{
+  margin-top:40px;
+  margin-bottom:40px;
 }
 
 

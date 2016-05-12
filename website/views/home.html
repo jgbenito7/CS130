@@ -7,16 +7,53 @@
 </div>
 
 <form class="report-form" novalidate>
-  <input class='form-input-small' type="text" ng-model="dataObj.animal_type" placeholder="Enter Animal Type">
-  <textarea class='form-input-large' type="text" ng-model="dataObj.animal_notes" placeholder="Enter Notes About The Animal"></textarea>
-  <!--<input class='upload-image' value="Upload Image">-->
-  <hr class='margin-tb'>
-  <input type="file" name="file" id="file" class="inputfile" data-multiple-caption="{count} files selected" multiple file-model="myFile" />
-  <label for="file" class='file-label'><span>Choose a file<span></label>
-  <div class='warning-wrap'>
-    <div class='warning-text'>**Location is required for form submission to be valid.</div>
+  <div class='row form-section'>
+    <div class='col-xs-2 padded'>
+      <div class='circle one'>1.</div>
+    </div>
+    <div class='col-xs-10'>
+      <input type="file" name="file" id="file" class="inputfile" data-multiple-caption="{count} files selected" file-model="myFile" />
+      <label for="file" class='file-label one'><span>Take A Picture<span></label>
+    </div>
   </div>
-  <div class='submit' ng-click="getData(dataObj)" >
-    Submit
+  <hr>
+  <div class='row form-section'>
+    <div class='col-xs-2 padded'>
+      <div class='circle two'>2.</div>
+    </div>
+    <div class='col-xs-10'>
+      <input class='form-input-small two' type="text" ng-model="dataObj.animal_type" ng-change="input_one()" placeholder="Enter Animal Type" disabled>
+    </div>
+  </div>
+  <hr>
+  <div class='row form-section'>
+    <div class='col-xs-2 padded'>
+      <div class='circle three'>3.</div>
+    </div>
+    <div class='col-xs-10'>
+      <input class='form-input-small three' type="text" ng-model="dataObj.animal_notes" ng-change="input_two()" placeholder="Enter Notes About The Animal" disabled>
+    </div>
+  </div>
+  <hr>
+  <div class='row form-section'>
+    <div class='col-xs-2 padded'>
+      <div class='circle four'>4.</div>
+    </div>
+    <div class='col-xs-10'>
+      <div class='location four' ng-click="getLocation()" >
+        Send Us Your Location
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class='row form-section'>
+    <div class='col-xs-2 padded'>
+      <div class='circle five'>5.</div>
+    </div>
+    <div class='col-xs-10'>
+      <div class='submit five' ng-click="getData(dataObj)" >
+        Send Report
+      </div>
+    </div>
   </div>
 </form>
