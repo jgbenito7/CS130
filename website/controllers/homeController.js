@@ -1,5 +1,7 @@
 rescueApp.controller('homeCtrl', function($scope,$http) {
         $(".report").addClass("active");
+
+        $(".dummy").hide();
         // create a message to display in our view
         $scope.dataObj = {};
         $scope.latitude;
@@ -180,6 +182,10 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
 
           }
         };
+
+        $scope.reset = function(){
+          location.reload();
+        }
 });
 
 rescueApp.directive('fileModel', ['$parse', function ($parse) {
