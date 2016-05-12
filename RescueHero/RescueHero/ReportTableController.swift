@@ -22,12 +22,38 @@ class ReportTableController: UITableViewController {
         if(Reachability.isConnectedToNetwork()) {
             handleRefresh(self.refreshControl!)
         }
+        //self.navigationController?.navigationBar.barTintColor = UIColor(red: 21, green: 40, blue: 129, alpha: 1)
+        //self.navigationController?.navigationBar.translucent = false
+        //self.tableView.backgroundView = UIImageView(image: UIImage(named: "gradient-bg"))
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 50))
+        imageView.contentMode = .ScaleAspectFit
+        let image = UIImage(named: "RescueHeroLogo")
+        imageView.image = image
+        navigationItem.titleView = imageView
+        //self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        //self.navigationController?.navigationBar.shadowImage = UIImage()
+        //self.navigationController?.navigationBar.translucent = true
     }
     
     override func viewDidAppear(animated: Bool) {
         //self.performSegueWithIdentifier("goto_login", sender: self)
-        
-        
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 50))
+        imageView.contentMode = .ScaleAspectFit
+        let image = UIImage(named: "RescueHeroLogo")
+        imageView.image = image
+        navigationItem.titleView = imageView
+        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 50))
+        imageView.contentMode = .ScaleAspectFit
+        let image = UIImage(named: "RescueHeroLogo")
+        imageView.image = image
+        navigationItem.titleView = imageView
+        self.navigationController?.navigationBar.translucent = false
+        //self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -103,18 +129,25 @@ class ReportTableController: UITableViewController {
         cell.cellNotes.preferredMaxLayoutWidth = 300
         cell.cellType.text = obj["type"] as? String
         print(cell.cellType.text)
-        cell.cellTime.text = obj["time"] as? String
+        let utime = obj["utime"] as! NSNumber
+        let nsti_time = NSTimeInterval(utime.doubleValue)
+        let date = NSDate(timeIntervalSince1970: nsti_time)
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+        var dateString = dateFormatter.stringFromDate(date)
+        cell.cellTime.text = dateString
         var url = "https://www.rescuehero.org/images/"
         let imageURLs = obj["files"] as? [String]
-        if (imageURLs?.count > 0){
-            url.appendContentsOf(imageURLs![0])
+        /*if (imageURLs?.count > 0){
+            url.appendContentsOf(imageURLs![0])        var dateString
             let imageData = NSData(contentsOfURL: NSURL(string: url)!)
             cell.cellImage.image = UIImage(data: imageData!)
         }
         else
         {
+ */
             cell.cellImage.image = UIImage(named: "camera")
-        }
+        //}
         return cell
     }
     
