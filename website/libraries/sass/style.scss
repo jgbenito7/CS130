@@ -395,7 +395,7 @@ input[type=text]:focus, textarea:focus {
   height: 34px;
   width: 100%;
   border-radius: 3px;
-  border: 1px solid transparent;
+  border: none;
   border-top: none;
   @include inset-shadow();
   outline:0;
@@ -422,7 +422,7 @@ input[type=text]:focus, textarea:focus {
   width:100%;
   text-align: center;
   cursor:pointer !important;
-  @include box-shadow();
+  //@include box-shadow();
 }
 .warning-wrap{
   width:100%;

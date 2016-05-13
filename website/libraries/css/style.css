@@ -300,7 +300,7 @@ input[type=text]:focus, textarea:focus {
   height: 34px;
   width: 100%;
   border-radius: 3px;
-  border: 1px solid transparent;
+  border: none;
   border-top: none;
   -webkit-box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.18);
   -moz-box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.18);
@@ -327,10 +327,7 @@ input[type=text]:focus, textarea:focus {
   border: none;
   width: 100%;
   text-align: center;
-  cursor: pointer !important;
-  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.75); }
+  cursor: pointer !important; }
 
 .warning-wrap {
   width: 100%;
