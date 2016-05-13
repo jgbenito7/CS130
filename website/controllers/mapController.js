@@ -1,5 +1,13 @@
 rescueApp.controller('mapCtrl', function($scope,$http) {
 
+  var width = $("#googleMap").width();
+  $("#googleMap").height((width*.8));
+  //Update map size
+  $(window).resize(function(){
+    width = $("#googleMap").width();
+    $("#googleMap").height((width*.8));
+  });
+
   $http.get('https://www.rescuehero.org/reports').success(function(data) {
 
     console.log("Request made");
