@@ -1,0 +1,112 @@
+
+function createReport(req, res, next) {
+  var filenames = [];
+  var counter = 0;
+  for(i in req.files) {
+    var re = /(?:\.([^.]+))?$/;
+    var ext = re.exec(req.files[i].name);
+    if(ext == undefined)
+      continue; //no file extension should throw an alarm
+    var filename = (new Date).getTime() + counter + "." + ext[1];
+    counter++;
+    filenames.push(filename);
+    fs.createReadStream(req.files[i].path).pipe(fs.createWriteStream("images/" + filename));
+  }
+
+  //get city
+   geocoder.reverse({lat: req.body.latitude, lon:req.body.longitude})
+    .then(function(res) {
+        console.log(res[0].city);
+        city = res[0].city;
+        console.log(city);
+
+    
+      console.log(filenames); //insert into 
+      connection.query("INSERT INTO Reports (type, notes, longitude, latitude) VALUES("+
+        mysql.escape(req.body.animal_type)+
+        "," + mysql.escape(req.body.animal_notes) + 
+        "," + mysql.escape(parseFloat(req.body.longitude)) +
+        ","+mysql.escape(parseFloat(req.body.latitude)) + ");", function(err, results) {
+          if(err) 
+            throw err;
+          var insertId = results.insertId; 
+          if(filenames.length > 0) {
+            var queryString = "INSERT INTO filename (report_id, filename) VALUES ";
+            for(var i = 0; i < filenames.length; i++) {
+              queryString += " ("+insertId + ", '" + filenames[i] + "')";
+              if(i != filenames.length - 1) {
+                queryString += ", ";
+              } else {
+                queryString += ";"
+              }
+            }
+
+            console.log(queryString);
+
+            connection.query(queryString, function(err, results) {
+              if(err)
+                throw err;
+              res.send(200);
+              next();
+            });
+        } else {
+          results.send(200);
+          next();
+        }
+
+        var reportQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + insertId + ", \'Reported\', 1);";
+        console.log(reportQuery);
+        connection.query(reportQuery, function(err, results) {
+          if(err)
+            throw err;
+        }) 
+      })
+    })
+    .catch(function(err) {
+        console.log(err);
+    });
+  
+
+/*
+  console.log(filenames); //insert into 
+  connection.query("INSERT INTO Reports (type, notes, longitude, latitude) VALUES("+
+    mysql.escape(req.body.animal_type)+
+    "," + mysql.escape(req.body.animal_notes) + 
+    "," + mysql.escape(parseFloat(req.body.longitude)) +
+    ","+mysql.escape(parseFloat(req.body.latitude)) + ");", function(err, results) {
+      if(err) 
+        throw err;
+      var insertId = results.insertId; 
+      if(filenames.length > 0) {
+        var queryString = "INSERT INTO filename (report_id, filename) VALUES ";
+        for(var i = 0; i < filenames.length; i++) {
+          queryString += " ("+insertId + ", '" + filenames[i] + "')";
+          if(i != filenames.length - 1) {
+            queryString += ", ";
+          } else {
+            queryString += ";"
+          }
+        }
+
+        console.log(queryString);
+
+        connection.query(queryString, function(err, results) {
+          if(err)
+            throw err;
+          res.send(200);
+          next();
+        });
+    } else {
+      res.send(200);
+      next();
+    }
+
+    var reportQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + insertId + ", \'Reported\', 1);";
+    console.log(reportQuery);
+    connection.query(reportQuery, function(err, results) {
+      if(err)
+        throw err;
+    }) 
+  }); */
+  
+}

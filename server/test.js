@@ -2,6 +2,16 @@ var mysql      = require('mysql');
 var restify = require('restify');
 var sanitizer = require('sanitizer');
 var fs = require('fs');
+//var cities = require('cities');
+
+
+var geocoderProvider = 'google';
+var httpAdapter = 'http'; //Should be https maybe?
+var extra = {};
+var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra );
+
+
+
 
 var connection  = mysql.createPool({
   connectionLimit : 10,
@@ -144,48 +154,108 @@ function createReport(req, res, next) {
     filenames.push(filename);
     fs.createReadStream(req.files[i].path).pipe(fs.createWriteStream("images/" + filename));
   }
-  console.log(filenames); //insert into 
-  connection.query("INSERT INTO Reports (type, notes, longitude, latitude) VALUES("+
-    mysql.escape(req.body.animal_type)+
-    "," + mysql.escape(req.body.animal_notes) + 
-    "," + mysql.escape(parseFloat(req.body.longitude)) +
-    ","+mysql.escape(parseFloat(req.body.latitude)) + ");", function(err, results) {
-      if(err) 
-        throw err;
-      var insertId = results.insertId; 
-      if(filenames.length > 0) {
-        var queryString = "INSERT INTO filename (report_id, filename) VALUES ";
-        for(var i = 0; i < filenames.length; i++) {
-          queryString += " ("+insertId + ", '" + filenames[i] + "')";
-          if(i != filenames.length - 1) {
-            queryString += ", ";
-          } else {
-            queryString += ";"
-          }
-        }
 
-        console.log(queryString);
+  //get city
+   geocoder.reverse({lat: req.body.latitude, lon:req.body.longitude})
+    .then(function(res_city) {
+        //console.log(res_city[0].city);
+        city = res_city[0].city;
+        console.log(city);
 
-        connection.query(queryString, function(err, results) {
-          if(err)
+    
+      console.log(filenames); //insert into 
+      console.log("INSERT INTO Reports (type, notes, longitude, latitude, city) VALUES("+
+        mysql.escape(req.body.animal_type)+
+        "," + mysql.escape(req.body.animal_notes) + 
+        "," + mysql.escape(parseFloat(req.body.longitude)) +
+        ","+mysql.escape(parseFloat(req.body.latitude)) +
+        ", \"" + city + "\"  );");
+      connection.query("INSERT INTO Reports (type, notes, longitude, latitude, city) VALUES("+
+        mysql.escape(req.body.animal_type)+
+        "," + mysql.escape(req.body.animal_notes) + 
+        "," + mysql.escape(parseFloat(req.body.longitude)) +
+        ","+mysql.escape(parseFloat(req.body.latitude)) +
+        ", \"" + city + "\"  );", function(err, results) {
+          if(err) 
             throw err;
+          var insertId = results.insertId; 
+          if(filenames.length > 0) {
+            var queryString = "INSERT INTO filename (report_id, filename) VALUES ";
+            for(var i = 0; i < filenames.length; i++) {
+              queryString += " ("+insertId + ", '" + filenames[i] + "')";
+              if(i != filenames.length - 1) {
+                queryString += ", ";
+              } else {
+                queryString += ";"
+              }
+            }
+
+            console.log(queryString);
+
+            connection.query(queryString, function(err, results3) {
+              if(err){
+                throw err;
+              }
+              console.log("1.  am i here?");
+              res.send(200);
+              next();
+            });
+        } else {
+          console.log("2.  am i here?");
           res.send(200);
           next();
-        });
-    } else {
-      res.send(200);
-      next();
-    }
+        }
 
-    var reportQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + insertId + ", \'Reported\', 1);";
-    console.log(reportQuery);
-    connection.query(reportQuery, function(err, results) {
-      if(err)
-        throw err;
-    }) 
-  });
+        var reportQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + insertId + ", \'Reported\', 1);";
+        console.log(reportQuery);
+        connection.query(reportQuery, function(err, results) {
+          if(err)
+            throw err;
+        }) 
+      })
+    })
+    .catch(function(err) {
+        console.log(err);
+    });
   
 }
+
+function getCorrectOrg(req,res,next) {
+  var city = mysql.escape(req.params.city);
+
+  var query = "SELECT * FROM Orgs WHERE city = " + city + ";";
+
+  connection.query(query, function(err,results){
+    if(err)
+      throw err;
+    else if(results.length < 1)
+      res.send(411); //No registered organizations in that city
+
+    res.send(results);
+    next();
+  })
+
+}
+
+function getRescuers(req,res,next) {
+  var city = mysql.escape(req.params.city);
+  var query = "SELECT * FROM Users WHERE org_id = (SELECT id FROM Orgs WHERE city = " + city + ");";
+  console.log(query);
+  connection.query(query, function(err,results){
+    if(err)
+      throw err;
+    else if(results.length < 1)
+      res.send(411); //No registered organizations in that city
+
+    res.send(results);
+    next();
+  })
+
+}
+
+
+
+
 function rebootServer(req, res, next) {
   const exec = require('child_process').exec;
   const child = exec('git pull origin master; forever restartall;',
@@ -208,6 +278,8 @@ server.use(restify.bodyParser ({mapParams: false,
 
 //server.get('/reports/create/:animal_type/:animal_notes', createReport);
 //server.get('/users/create/:email/:org_id/:password', createUser);
+server.get('/getCorrectOrg/:city', getCorrectOrg);
+server.get('/getRescuers/:city', getRescuers);
 server.get('/getStatus/:reportId', getStatus);
 server.put('/updateStatus/:reportId/:status', updateStatus);
 server.post('/users', createUser);
