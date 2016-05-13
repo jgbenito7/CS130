@@ -256,6 +256,9 @@ function getRescuers(req,res,next) {
 
 
 
+
+
+
 function rebootServer(req, res, next) {
   const exec = require('child_process').exec;
   const child = exec('git pull origin master; forever restartall;',
