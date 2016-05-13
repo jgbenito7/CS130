@@ -24,10 +24,10 @@ var connection  = mysql.createPool({
 
 
 //Change back!
-var ssl = {
-    key: fs.readFileSync('./certs/rescuehero.key', 'utf8'),
-    cert: fs.readFileSync('./certs/ssl.crt', 'utf8'),
-};
+//var ssl = {
+//    key: fs.readFileSync('./certs/rescuehero.key', 'utf8'),
+//    cert: fs.readFileSync('./certs/ssl.crt', 'utf8'),
+//};
 
 function createUser (req, res, next) {
   console.log(req.params.password);
@@ -159,6 +159,7 @@ function createReport(req, res, next) {
    geocoder.reverse({lat: req.body.latitude, lon:req.body.longitude})
     .then(function(res_city) {
         //console.log(res_city[0].city);
+
         city = res_city[0].city;
         console.log(city);
 
@@ -216,6 +217,7 @@ function createReport(req, res, next) {
     })
     .catch(function(err) {
         console.log(err);
+        res.send(415); //Not a valid longitude and latitude
     });
   
 }
@@ -268,8 +270,8 @@ function rebootServer(req, res, next) {
   );
 }
 
-var server = restify.createServer(ssl);
-//var server = restify.createServer(); // Change back
+//var server = restify.createServer(ssl);
+var server = restify.createServer(); // Change back
 server.use(function crossOrigin(req,res,next){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
