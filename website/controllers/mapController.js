@@ -3,53 +3,80 @@ rescueApp.controller('mapCtrl', function($scope,$http) {
   $http.get('https://www.rescuehero.org/reports').success(function(data) {
 
     console.log("Request made");
+    console.log(data);
+
     function initialize() {
-      var map = {
-        center:new google.maps.LatLng(34.4707,-119.8311),
-        zoom:6,
+      var myLatLng = new google.maps.LatLng( 34.0635, -118.4455 );
+      var mapInfo = {
+        center:myLatLng,
+        zoom:13,
         mapTypeId:google.maps.MapTypeId.ROADMAP
       };
-      var map=new google.maps.Map(document.getElementById("googleMap"),map);
-
+      var map = new google.maps.Map( document.getElementById("googleMap"), mapInfo );
       map.set('styles', getMapStyles());
 
-      //var myLatLng = {lat: 34.4707, lng: -119.8311};
-      var myLatLng = new google.maps.LatLng(34.4707,-119.8311);
-
       var marker;
+
+      // set the markers
       for (var i=0; i<data.length; i++){
         var posObj = new google.maps.LatLng(parseFloat(data[i]["latitude"]),parseFloat(data[i]["longitude"]));
-        //console.log(posObj);
+        var iconImage = {
+          url: '/assets/img/logos/',
+          size: new google.maps.Size( 512, 512 ),
+          origin: new google.maps.Point( 0, 0 ),
+          anchor: new google.maps.Point( 0, 32 )
+        };
+
+        switch ( data[i].status ) {
+          case "Reported":
+          iconImage.url += "rescuehero_logo_mini.png";
+          break;
+          case "Rescued":
+          iconImage.url += "rescuehero_logo_radioactive_green_mini.png";
+          break;
+          case "OntheWay":
+          iconImage.url += "rescuehero_logo_pukegold_mini.png"
+          break;
+          default:
+          iconImage.url += "rescuehero_logo_pukegold_mini.png";
+        }
+
+        console.log(iconImage);
+
         marker = new google.maps.Marker({
           position: posObj,
           map: map,
-          title: 'Hello World!'
+          icon: iconImage,
+          title: data[i].type,
+          notes: data[i].notes,
+          id: data[i].id,
+          image: data[i].files[0]
+        });
+
+        marker.addListener('click', function() {
+          // add info at the bottom
+          //
+          var url = "url('https://www.rescuehero.org/images/" + this.image + "')";
+          $('.animal-image').css('background-image', url);
+          $('.type-content').html(this.title);
+          $(".notes-content").html(this.notes);
+          $('.map-panel').slideDown();
+          console.log(this.id);
+
         });
       }
     }
+
     initialize();
     //$scope.$apply();
   });
 
-  google.maps.event.addListener(marker, 'dblclick', function(event){
-      map = marker.getMap();
-
-      map.setCenter(overlay.getPosition()); // set map center to marker position
-      smoothZoom(map, 12, map.getZoom()); // call smoothZoom, parameters map, final zoomLevel, and starting zoom level
-  })
+});
 
 
-  // the smooth zoom function
-  function smoothZoom (map, max, cnt) {
-      if (cnt >= max) {
-              return;
-          }
-      else {
-          z = google.maps.event.addListener(map, 'zoom_changed', function(event){
-              google.maps.event.removeListener(z);
-              smoothZoom(map, max, cnt + 1);
-          });
-          setTimeout(function(){map.setZoom(cnt)}, 80); // 80ms is what I found to work well on my system -- it might not work well on all systems
-      }
-  }  
+
+var marker = new google.maps.Marker({
+  position: uluru,
+  map: map,
+  title: 'Uluru (Ayers Rock)'
 });
