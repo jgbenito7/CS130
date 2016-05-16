@@ -30,6 +30,7 @@ class ReportTableController: UITableViewController {
         let image = UIImage(named: "RescueHeroLogo")
         imageView.image = image
         navigationItem.titleView = imageView
+        self.tableView.backgroundColor = UIColor.init(red: 30/255, green: 30/255, blue: 30/255, alpha: 1)
         //self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         //self.navigationController?.navigationBar.shadowImage = UIImage()
         //self.navigationController?.navigationBar.translucent = true
@@ -123,6 +124,9 @@ class ReportTableController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ReportTableCell
         let obj = data[indexPath.row]
         print(obj)
+        cell.layer.cornerRadius = 10
+        cell.layer.borderColor = UIColor.init(red: 30/255, green: 30/255, blue: 30/255, alpha: 1).CGColor
+        cell.layer.borderWidth = 4
         cell.cellNotes.text = obj["notes"] as? String
         cell.cellNotes.numberOfLines = 2
         cell.cellNotes.lineBreakMode = NSLineBreakMode.ByWordWrapping
