@@ -1,3 +1,5 @@
+$exit: url("../../assets/exit.png");
+
 .map-panel {
   display:none;
   padding: 0px;
@@ -27,4 +29,15 @@
   font-size:18px;
   font-weight:normal;
   color:white;
+}
+
+.exit {
+  position:absolute;
+  top:5;
+  right:0;
+  
+  width:16px;
+  height:16px;
+  background:$exit;
+  background-size:cover;
 }
