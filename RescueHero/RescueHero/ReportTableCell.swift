@@ -12,8 +12,9 @@ import UIKit
 class ReportTableCell: UITableViewCell {
     
     @IBOutlet weak var cellNotes: UILabel!
-    
+    var cellImageURL: String
     required init?(coder aDecoder: NSCoder) {
+        cellImageURL = String("")
         super.init(coder: aDecoder)
     }
     
