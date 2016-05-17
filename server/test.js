@@ -2,15 +2,11 @@ var mysql      = require('mysql');
 var restify = require('restify');
 var sanitizer = require('sanitizer');
 var fs = require('fs');
-//var cities = require('cities');
-
 
 var geocoderProvider = 'google';
-var httpAdapter = 'http'; //Should be https maybe?
+var httpAdapter = 'http';
 var extra = {};
 var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra );
-
-
 
 
 var connection  = mysql.createPool({
@@ -22,15 +18,12 @@ var connection  = mysql.createPool({
   port  : 3306
 });
 
-
-//Change back!
 var ssl = {
     key: fs.readFileSync('./certs/rescuehero.key', 'utf8'),
     cert: fs.readFileSync('./certs/ssl.crt', 'utf8'),
 };
 
 function createUser (req, res, next) {
-  console.log(req.params.password);
 
   var query = "SELECT id from Orgs WHERE password = SHA2(" + mysql.escape(req.body.orgPassword)+ ", 256);";
   connection.query(query, function(err,results) {
@@ -42,14 +35,18 @@ function createUser (req, res, next) {
       var org_id = results[0].id;
 
 
-      var query = "SELECT * FROM Users WHERE email = " + mysql.escape(req.body.email) + ";"
+      var query = "SELECT * FROM Users WHERE email = " 
+          + mysql.escape(req.body.email) + ";";
       connection.query(query, function(err, results){
           if(results.length > 0) {
             res.send(401); //401 is user already exists
             next();
             return;
           }
-          connection.query("INSERT INTO Users (email, password, org_id) VALUES(" + mysql.escape(req.body.email)+ ", SHA2(" + mysql.escape(req.body.password) + ",256), " + mysql.escape(org_id) + ");", function(err, results){
+          connection.query("INSERT INTO Users (email, password, org_id) VALUES(" 
+            + mysql.escape(req.body.email)+ ", SHA2(" 
+            + mysql.escape(req.body.password) + ",256), " 
+            + mysql.escape(org_id) + ");", function(err, results){
           if(err)
           throw err;
           res.send(200);
@@ -94,7 +91,6 @@ function getReports (req, res, next){
 function getStatus(req,res,next)
 {
   var query = "SELECT *, UNIX_TIMESTAMP(updateTime) AS etime FROM Status WHERE reportId = " + mysql.escape(req.params.reportId) +" ;";
-  console.log(query);
   connection.query(query, function(err, results){
     if(err)
       throw err;
@@ -110,7 +106,6 @@ function updateStatus(req,res,next)
 {
   //Change all current reports to be NOT the most recent
   var query = "UPDATE Status SET mostRecent = 0 WHERE reportId = " + mysql.escape(req.params.reportId) + ";";
-  console.log(query);
   connection.query(query, function(err, results){
     if(err)
       throw err;
@@ -129,7 +124,6 @@ function updateStatus(req,res,next)
 function authorizeUser (req, res, next) {
   var query = "SELECT * FROM Users WHERE password = " + mysql.escape(req.body.password) + " AND email = " + mysql.escape(req.body.email) + ";";
   connection.query(query,  function(err, results){
-    console.log(query);
     if (err)
       throw err;
     else if (results.length < 1)
@@ -158,14 +152,9 @@ function createReport(req, res, next) {
   //get city
    geocoder.reverse({lat: req.body.latitude, lon:req.body.longitude})
     .then(function(res_city) {
-        //console.log(res_city[0].city);
 
         city = res_city[0].city;
-        console.log(city);
 
-    
-      console.log(filenames); //insert into 
-      console.log("INSERT INTO Reports (type, notes, longitude, latitude, city) VALUES("+
         mysql.escape(req.body.animal_type)+
         "," + mysql.escape(req.body.animal_notes) + 
         "," + mysql.escape(parseFloat(req.body.longitude)) +
@@ -191,24 +180,19 @@ function createReport(req, res, next) {
               }
             }
 
-            console.log(queryString);
-
             connection.query(queryString, function(err, results3) {
               if(err){
                 throw err;
               }
-              console.log("1.  am i here?");
               res.send(200);
               next();
             });
         } else {
-          console.log("2.  am i here?");
           res.send(200);
           next();
         }
 
         var reportQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + insertId + ", \'Reported\', 1);";
-        console.log(reportQuery);
         connection.query(reportQuery, function(err, results) {
           if(err)
             throw err;
@@ -216,7 +200,6 @@ function createReport(req, res, next) {
       })
     })
     .catch(function(err) {
-        console.log(err);
         res.send(415); //Not a valid longitude and latitude
     });
   
@@ -242,7 +225,6 @@ function getCorrectOrg(req,res,next) {
 function getRescuers(req,res,next) {
   var city = mysql.escape(req.params.city);
   var query = "SELECT * FROM Users WHERE org_id = (SELECT id FROM Orgs WHERE city = " + city + ");";
-  console.log(query);
   connection.query(query, function(err,results){
     if(err)
       throw err;
@@ -256,11 +238,6 @@ function getRescuers(req,res,next) {
 }
 
 
-
-
-
-
-
 function rebootServer(req, res, next) {
   const exec = require('child_process').exec;
   const child = exec('git pull origin master; forever restartall;',
@@ -271,7 +248,6 @@ function rebootServer(req, res, next) {
 }
 
 var server = restify.createServer(ssl);
-//var server = restify.createServer(); // Change back
 server.use(function crossOrigin(req,res,next){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -281,8 +257,6 @@ server.use(function crossOrigin(req,res,next){
 server.use(restify.bodyParser ({mapParams: false,
     multiples: true}));
 
-//server.get('/reports/create/:animal_type/:animal_notes', createReport);
-//server.get('/users/create/:email/:org_id/:password', createUser);
 server.get('/getCorrectOrg/:city', getCorrectOrg);
 server.get('/getRescuers/:city', getRescuers);
 server.get('/getStatus/:reportId', getStatus);
@@ -310,3 +284,5 @@ http.createServer(function (req, res) {
     res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
     res.end();
 }).listen(8080);
+
+
