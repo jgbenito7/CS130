@@ -371,6 +371,10 @@ input[type=text]:focus, textarea:focus {
   -moz-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.75); }
 
+.fileupload2, .fileupload3, .fileupload4 {
+  margin-top: 25px;
+  display: none; }
+
 .button-waiting {
   box-shadow: 0 0 5px #00e09e !important;
   border: 2px solid #00e09e !important; }
