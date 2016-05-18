@@ -466,6 +466,11 @@ input[type=text]:focus, textarea:focus {
     @include box-shadow();
 }
 
+.fileupload2,.fileupload3,.fileupload4{
+  margin-top:25px;
+  display:none;
+}
+
 .button-waiting{
   box-shadow: 0 0 5px $color5 !important;
   border: 2px solid $color5 !important;

@@ -7,14 +7,14 @@
 //
 
 import UIKit
-
+import Haneke
 class ReportTableController: UITableViewController {
     var data = [Dictionary<String,AnyObject>]()
     var cellTypePass: String!
     var cellTimePass: String!
     var cellNotesPass: String!
     var cellImagePass: UIImage!
-    
+    var cellImageURLPass: String!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -30,6 +30,9 @@ class ReportTableController: UITableViewController {
         let image = UIImage(named: "RescueHeroLogo")
         imageView.image = image
         navigationItem.titleView = imageView
+        self.tableView.backgroundColor = UIColor.init(red: 30/255, green: 30/255, blue: 30/255, alpha: 1)
+        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         //self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         //self.navigationController?.navigationBar.shadowImage = UIImage()
         //self.navigationController?.navigationBar.translucent = true
@@ -37,22 +40,9 @@ class ReportTableController: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         //self.performSegueWithIdentifier("goto_login", sender: self)
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 50))
-        imageView.contentMode = .ScaleAspectFit
-        let image = UIImage(named: "RescueHeroLogo")
-        imageView.image = image
-        navigationItem.titleView = imageView
-        self.navigationController?.navigationBar.translucent = false
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     override func viewWillAppear(animated: Bool) {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 50))
-        imageView.contentMode = .ScaleAspectFit
-        let image = UIImage(named: "RescueHeroLogo")
-        imageView.image = image
-        navigationItem.titleView = imageView
-        self.navigationController?.navigationBar.translucent = false
         //self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
@@ -105,17 +95,18 @@ class ReportTableController: UITableViewController {
         cellTimePass = currentCell.cellTime.text
         cellImagePass = currentCell.cellImage.image
         cellNotesPass = currentCell.cellNotes.text
+        cellImageURLPass = currentCell.cellImageURL
         performSegueWithIdentifier("segueToAnimal", sender: self)
         
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "segueToAnimal"){
-            var viewController = segue.destinationViewController as! AnimalVC
-            viewController._cellImage = cellImagePass
+            let viewController = segue.destinationViewController as! AnimalVC
             viewController._cellType = cellTypePass
             viewController._cellNotes = cellNotesPass
             viewController._cellTime = cellTimePass
+            viewController._cellURLImage = cellImageURLPass
         }
     }
     
@@ -123,6 +114,9 @@ class ReportTableController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ReportTableCell
         let obj = data[indexPath.row]
         print(obj)
+        cell.layer.cornerRadius = 10
+        cell.layer.borderColor = UIColor.init(red: 30/255, green: 30/255, blue: 30/255, alpha: 1).CGColor
+        cell.layer.borderWidth = 4
         cell.cellNotes.text = obj["notes"] as? String
         cell.cellNotes.numberOfLines = 2
         cell.cellNotes.lineBreakMode = NSLineBreakMode.ByWordWrapping
@@ -136,18 +130,19 @@ class ReportTableController: UITableViewController {
         dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
         var dateString = dateFormatter.stringFromDate(date)
         cell.cellTime.text = dateString
-        var url = "https://www.rescuehero.org/images/"
+        var url = "https://www.rescuehero.org/images/thumb/"
         let imageURLs = obj["files"] as? [String]
-        /*if (imageURLs?.count > 0){
-            url.appendContentsOf(imageURLs![0])        var dateString
-            let imageData = NSData(contentsOfURL: NSURL(string: url)!)
-            cell.cellImage.image = UIImage(data: imageData!)
+        if (imageURLs?.count > 0){
+            url.appendContentsOf(imageURLs![0])
+            cell.cellImage.hnk_setImageFromURL(NSURL(string: url)!)
+            var fulluri = "https://www.rescuehero.org/images/"
+            fulluri.appendContentsOf(imageURLs![0])
+            cell.cellImageURL = fulluri
         }
         else
         {
- */
             cell.cellImage.image = UIImage(named: "camera")
-        //}
+        }
         return cell
     }
     
