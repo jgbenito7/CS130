@@ -8,12 +8,13 @@
 
 import Foundation
 import UIKit
+import Haneke
 
 class AnimalVC: UIViewController {
     var _cellType: String!
     var _cellTime: String!
     var _cellNotes: String!
-    var _cellImage: UIImage!
+    var _cellURLImage: String!
     
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var image: UIImageView!
@@ -22,21 +23,13 @@ class AnimalVC: UIViewController {
     
     @IBOutlet weak var notes: UILabel!
     override func viewDidLoad() {
-        image.image = _cellImage
+        image.hnk_setImageFromURL(NSURL(string: _cellURLImage)!)
         type.text = _cellType
         notes.text = _cellNotes
         time.text = _cellTime
         notes.numberOfLines = 0
         notes.lineBreakMode = NSLineBreakMode.ByWordWrapping
         notes.preferredMaxLayoutWidth = 300
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 50))
-        imageView.contentMode = .ScaleAspectFit
-        let image_logo = UIImage(named: "RescueHeroLogo")
-        imageView.image = image_logo
-        navigationItem.titleView = imageView
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.translucent = true
     }
     
     @IBAction func backToTable(sender: AnyObject) {
@@ -45,7 +38,7 @@ class AnimalVC: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "backToTable"){
-            var viewController = segue.destinationViewController as! ReportTableController
+            var viewController = segue.destinationViewController as! UINavigationController
             
         }
     }

@@ -2,6 +2,8 @@ var mysql      = require('mysql');
 var restify = require('restify');
 var sanitizer = require('sanitizer');
 var fs = require('fs');
+var gm = require('gm').subClass({imageMagick: true});
+
 
 var geocoderProvider = 'google';
 var httpAdapter = 'http';
@@ -145,9 +147,14 @@ function createReport(req, res, next) {
       continue; //no file extension should throw an alarm
     var filename = (new Date).getTime() + counter + "." + ext[1];
     counter++;
-    filenames.push(filename);
+    console.log("writing file!");
+	filenames.push(filename);
     fs.createReadStream(req.files[i].path).pipe(fs.createWriteStream("images/" + filename));
-  }
+	console.log("Got here!");
+	var middle = gm(req.files[i].path).thumb(200, 200, "images/thumb/"+filename, 75, function(err){if(err) console.log(err)});
+	console.log("got hereish");
+	console.log("rant this code");  
+}
 
   //get city
    geocoder.reverse({lat: req.body.latitude, lon:req.body.longitude})
@@ -284,5 +291,4 @@ http.createServer(function (req, res) {
     res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
     res.end();
 }).listen(8080);
-
 

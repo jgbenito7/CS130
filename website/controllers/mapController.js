@@ -1,5 +1,13 @@
 rescueApp.controller('mapCtrl', function($scope,$http) {
 
+  var width = $("#googleMap").width();
+  $("#googleMap").height((width*.8));
+  //Update map size
+  $(window).resize(function(){
+    width = $("#googleMap").width();
+    $("#googleMap").height((width*.8));
+  });
+
   $http.get('https://www.rescuehero.org/reports').success(function(data) {
 
     console.log("Request made");
@@ -55,12 +63,14 @@ rescueApp.controller('mapCtrl', function($scope,$http) {
 
         marker.addListener('click', function() {
           // add info at the bottom
-          //
           var url = "url('https://www.rescuehero.org/images/" + this.image + "')";
           $('.animal-image').css('background-image', url);
           $('.type-content').html(this.title);
-          $(".notes-content").html(this.notes);
+          $('.notes-content').html(this.notes);
           $('.map-panel').slideDown();
+          $('html, body').animate({
+            scrollTop: $(".map-panel").offset().top
+          }, 1000);
           console.log(this.id);
 
         });
@@ -71,12 +81,12 @@ rescueApp.controller('mapCtrl', function($scope,$http) {
     //$scope.$apply();
   });
 
-});
+  $scope.exitMapPanel = function() {
+    // scroll back to top and close map panel
+    $('.map-panel').slideUp();
+    $('html, body').animate({
+      scrollTop: $("#googleMap").offset().top
+    }, 1000);
+  }
 
-
-
-var marker = new google.maps.Marker({
-  position: uluru,
-  map: map,
-  title: 'Uluru (Ayers Rock)'
 });

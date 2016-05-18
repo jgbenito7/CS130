@@ -8,6 +8,7 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
         $scope.longitude;
 
         $scope.step = 1;
+        $scope.fileStep = 1;
 
         //Initialize
         formStep($scope.step);
@@ -40,14 +41,31 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
             $(".submit").html("<div class='loading'><div class='loading-gif'></div></div>");
             $scope.dataObj = angular.copy(form);
 
-            var file = $('#file').get(0).files[0];
-            $scope.dataObj.file = file;
+            var file1 = $('#file1').get(0).files[0];
+            var file2 = $('#file2').get(0).files[0];
+            var file3 = $('#file3').get(0).files[0];
+            var file4 = $('#file4').get(0).files[0];
+
             var fd = new FormData();
-            fd.append('file', file);
+
+            if(file1){
+              fd.append('file1', file1);
+            }
+            if(file2){
+              fd.append('file2', file2);
+            }
+            if(file3){
+              fd.append('file3', file3);
+            }
+            if(file4){
+              fd.append('file4', file4);
+            }
+
             fd.append('animal_notes',$scope.dataObj.animal_notes);
             fd.append('animal_type',$scope.dataObj.animal_type);
             fd.append('latitude',$scope.dataObj.latitude);
             fd.append('longitude',$scope.dataObj.longitude);
+
             $http.post('https://www.rescuehero.org/reports', fd,{
               withCredentials: false,
               headers: {
@@ -71,47 +89,57 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
           }
         }
 
-        var inputs = document.querySelectorAll( '.inputfile' );
-        Array.prototype.forEach.call( inputs, function( input )
-        {
-
-          var label	 = input.nextElementSibling, labelVal = label.innerHTML;
-          input.addEventListener( 'change', function( e )
-          {
-            var fileName = '';
-            if( this.files && this.files.length > 1 )
-            fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-            else
-            fileName = e.target.value.split( '\\' ).pop();
-
-            if( fileName ){
-              label.querySelector( 'span' ).innerHTML = fileName;
-            }
-            else
-            label.innerHTML = labelVal;
-            $scope.dataObj.file_name = fileName;
-            $scope.step++;
-            formStep($scope.step);
-          });
+        var input1 = document.querySelectorAll( '#file1' );
+        var input2 = document.querySelectorAll( '#file2' );
+        var input3 = document.querySelectorAll( '#file3' );
+        var input4 = document.querySelectorAll( '#file4' );
+        input1[0].addEventListener( 'change', function( e ){
+          var label	 = input1[0].nextElementSibling, labelVal = label.innerHTML;
+          fileUploaded(label, e);
+        });
+        input2[0].addEventListener( 'change', function( e ){
+          var label	 = input2[0].nextElementSibling, labelVal = label.innerHTML;
+          fileUploaded(label, e);
+        });
+        input3[0].addEventListener( 'change', function( e ){
+          var label	 = input3[0].nextElementSibling, labelVal = label.innerHTML;
+          fileUploaded(label, e);
+        });
+        input4[0].addEventListener( 'change', function( e ){
+          var label	 = input4[0].nextElementSibling, labelVal = label.innerHTML;
+          fileUploaded(label, e);
         });
 
-        /*function formValidate(){
-          var missing = [];
-          if($scope.dataObj.animal_type == undefined){
-            missing.push("Animal Type");
+        function fileUploaded(label, e){
+          var fileName = '';
+          if( this.files && this.files.length > 1 )
+            fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+          else
+            fileName = e.target.value.split( '\\' ).pop();
+
+          if( fileName ){
+            label.querySelector( 'span' ).innerHTML = fileName;
           }
-          if($scope.dataObj.animal_notes == undefined){
-            missing.push("Animal Notes");
-          }
-          if($scope.dataObj.file_name == undefined){
-            missing.push("File");
-          }
-          if($scope.dataObj.latitude == undefined || $scope.longitude == undefined){
-            missing.push("Location");
+          else{
+            label.innerHTML = labelVal;
           }
 
-          return missing;
-        }*/
+          //Update the file inputs
+          $scope.fileStep++;
+          fileStep($scope.fileStep);
+
+          var elem = "#" + e.target.id.toString();
+          $(elem).siblings(".one").addClass("button-waiting");
+          $(elem).siblings(".one").addClass("done");
+          $(elem).siblings(".one").removeClass("button-waiting");
+
+
+          //Update the overall form
+          if($scope.fileStep==2){
+            $scope.step++;
+            formStep($scope.step);
+          }
+        }
 
         $('#myModal').on('hidden.bs.modal', function () {
          location.reload();
@@ -125,17 +153,12 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
           var five = $(".five");
           if(step==1){
             one.addClass("button-waiting");
-
           }else if(step==2){
             $(".two").addClass("button-waiting");
-
-            one.addClass("done");
-            one.removeClass("button-waiting");
-            one.css("font-size","30px");
             $(".circle.one").html("<i class='fa fa-check' aria-hidden='true'></i>");
-
+            $(".circle.one").addClass("done");
+            $(".circle.one").css("font-size","30px");
             $(".form-input-small.two").prop('disabled', false);
-
           }else if(step==3){
             $(".three").addClass("button-waiting");
             two.addClass("done");
@@ -164,6 +187,19 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
           }
         }
 
+        function fileStep(step){
+
+          if(step==1){
+
+          }else if(step==2){
+            $(".fileupload2").show();
+          }else if(step==3){
+            $(".fileupload3").show();
+          }else if(step==4){
+            $(".fileupload4").show();
+          }
+        }
+
 
         $scope.input_one = function(){
           if($scope.dataObj.animal_type != ""){
@@ -182,10 +218,6 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
 
           }
         };
-
-        $scope.reset = function(){
-          location.reload();
-        }
 });
 
 rescueApp.directive('fileModel', ['$parse', function ($parse) {

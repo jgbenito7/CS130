@@ -10,6 +10,10 @@
   margin-left: 0px !important;
   margin-right: 0px !important; }
 
+.col-xs-4 {
+  padding-left: 5px !important;
+  padding-right: 5px !important; }
+
 body {
   background: #0c638c;
   /* For browsers that do not support gradients */
@@ -300,7 +304,7 @@ input[type=text]:focus, textarea:focus {
   height: 34px;
   width: 100%;
   border-radius: 3px;
-  border: 1px solid transparent;
+  border: none;
   border-top: none;
   -webkit-box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.18);
   -moz-box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.18);
@@ -327,10 +331,7 @@ input[type=text]:focus, textarea:focus {
   border: none;
   width: 100%;
   text-align: center;
-  cursor: pointer !important;
-  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.75); }
+  cursor: pointer !important; }
 
 .warning-wrap {
   width: 100%;
@@ -369,6 +370,10 @@ input[type=text]:focus, textarea:focus {
   -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.75); }
+
+.fileupload2, .fileupload3, .fileupload4 {
+  margin-top: 25px;
+  display: none; }
 
 .button-waiting {
   box-shadow: 0 0 5px #00e09e !important;
@@ -414,7 +419,7 @@ input[type=text]:focus, textarea:focus {
 
   .nav-link > a {
     color: #dddddd;
-    font-size: 13px;
+    font-size: 14px;
     cursor: pointer; }
 
   .about-circle {

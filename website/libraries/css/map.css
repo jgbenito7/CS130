@@ -24,4 +24,13 @@
   font-weight: normal;
   color: white; }
 
+.exit {
+  position: absolute;
+  top: 5;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  background: url("../../assets/exit.png");
+  background-size: cover; }
+
 /*# sourceMappingURL=map.css.map */

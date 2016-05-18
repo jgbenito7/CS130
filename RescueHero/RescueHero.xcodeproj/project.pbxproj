@@ -7,13 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03BCBE8F1CE6B24400CC322A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BCBE8E1CE6B24400CC322A /* Constants.swift */; };
+		03BCBE931CE6B86600CC322A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03BCBE921CE6B86600CC322A /* MapKit.framework */; };
 		1638206D1CD341B000A3FB29 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1638206C1CD341B000A3FB29 /* Reachability.swift */; };
 		1638206F1CD34D2400A3FB29 /* ReportTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1638206E1CD34D2400A3FB29 /* ReportTableCell.swift */; };
+		16787CC21CEAA499009AF9E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16787CC01CEAA499009AF9E0 /* Main.storyboard */; };
+		16787CC41CEAB4C6009AF9E0 /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16787CB31CEA9F01009AF9E0 /* Haneke.framework */; };
+		16787CC51CEAB4C6009AF9E0 /* Haneke.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16787CB31CEA9F01009AF9E0 /* Haneke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC21A8151CCE0509007B1476 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21A8141CCE0509007B1476 /* LoginVC.swift */; };
 		FC21A8171CCE062A007B1476 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21A8161CCE062A007B1476 /* SignupVC.swift */; };
 		FC36CE9E1CCB41940079404C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC36CE9D1CCB41940079404C /* AppDelegate.swift */; };
 		FC36CEA01CCB41940079404C /* ReportTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC36CE9F1CCB41940079404C /* ReportTableController.swift */; };
-		FC36CEA31CCB41940079404C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC36CEA11CCB41940079404C /* Main.storyboard */; };
 		FC36CEA51CCB41940079404C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC36CEA41CCB41940079404C /* Assets.xcassets */; };
 		FC36CEA81CCB41940079404C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC36CEA61CCB41940079404C /* LaunchScreen.storyboard */; };
 		FC36CEB31CCB41940079404C /* RescueHeroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC36CEB21CCB41940079404C /* RescueHeroTests.swift */; };
@@ -23,6 +27,48 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		16787CB21CEA9F01009AF9E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16787CAB1CEA9F01009AF9E0 /* Haneke.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A095C9561980418C00CD0F4C;
+			remoteInfo = "Haneke-iOS";
+		};
+		16787CB41CEA9F01009AF9E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16787CAB1CEA9F01009AF9E0 /* Haneke.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6393C5F71C3B229200EB1FD8;
+			remoteInfo = "Haneke-tvOS";
+		};
+		16787CB61CEA9F01009AF9E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16787CAB1CEA9F01009AF9E0 /* Haneke.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A095C9611980418C00CD0F4C;
+			remoteInfo = HanekeTests;
+		};
+		16787CB81CEA9F01009AF9E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16787CAB1CEA9F01009AF9E0 /* Haneke.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A0026E9A19C9BFBC004DE0C6;
+			remoteInfo = HanekeDemo;
+		};
+		16787CBA1CEA9F69009AF9E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16787CAB1CEA9F01009AF9E0 /* Haneke.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A095C9551980418C00CD0F4C;
+			remoteInfo = "Haneke-iOS";
+		};
+		16787CC61CEAB4C6009AF9E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16787CAB1CEA9F01009AF9E0 /* Haneke.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A095C9551980418C00CD0F4C;
+			remoteInfo = "Haneke-iOS";
+		};
 		FC36CEAF1CCB41940079404C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FC36CE921CCB41940079404C /* Project object */;
@@ -39,15 +85,32 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		16787CC81CEAB4C6009AF9E0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				16787CC51CEAB4C6009AF9E0 /* Haneke.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		03BCBE8E1CE6B24400CC322A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		03BCBE921CE6B86600CC322A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		1638206C1CD341B000A3FB29 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		1638206E1CD34D2400A3FB29 /* ReportTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportTableCell.swift; sourceTree = "<group>"; };
+		16787CAB1CEA9F01009AF9E0 /* Haneke.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Haneke.xcodeproj; path = "HanekeSwift-master/Haneke.xcodeproj"; sourceTree = "<group>"; };
+		16787CC11CEAA499009AF9E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC21A8141CCE0509007B1476 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		FC21A8161CCE062A007B1476 /* SignupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		FC36CE9A1CCB41940079404C /* RescueHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RescueHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC36CE9D1CCB41940079404C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC36CE9F1CCB41940079404C /* ReportTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableController.swift; sourceTree = "<group>"; };
-		FC36CEA21CCB41940079404C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC36CEA41CCB41940079404C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC36CEA71CCB41940079404C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC36CEA91CCB41940079404C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,6 +129,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16787CC41CEAB4C6009AF9E0 /* Haneke.framework in Frameworks */,
+				03BCBE931CE6B86600CC322A /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,13 +151,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16787CAC1CEA9F01009AF9E0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				16787CB31CEA9F01009AF9E0 /* Haneke.framework */,
+				16787CB51CEA9F01009AF9E0 /* Haneke.framework */,
+				16787CB71CEA9F01009AF9E0 /* HanekeTests.xctest */,
+				16787CB91CEA9F01009AF9E0 /* HanekeDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		FC36CE911CCB41940079404C = {
 			isa = PBXGroup;
 			children = (
+				03BCBE921CE6B86600CC322A /* MapKit.framework */,
 				FC36CE9C1CCB41940079404C /* RescueHero */,
 				FC36CEB11CCB41940079404C /* RescueHeroTests */,
 				FC36CEBC1CCB41940079404C /* RescueHeroUITests */,
 				FC36CE9B1CCB41940079404C /* Products */,
+				16787CAB1CEA9F01009AF9E0 /* Haneke.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,16 +189,17 @@
 			children = (
 				FC36CE9D1CCB41940079404C /* AppDelegate.swift */,
 				FC36CE9F1CCB41940079404C /* ReportTableController.swift */,
-				FC36CEA11CCB41940079404C /* Main.storyboard */,
 				FC8A41561CDBF4CD003C71DA /* AnimalVC.swift */,
 				FC36CEA41CCB41940079404C /* Assets.xcassets */,
 				FC36CEA61CCB41940079404C /* LaunchScreen.storyboard */,
+				16787CC01CEAA499009AF9E0 /* Main.storyboard */,
 				FC36CEA91CCB41940079404C /* Info.plist */,
 				FC21A8141CCE0509007B1476 /* LoginVC.swift */,
 				FC21A8161CCE062A007B1476 /* SignupVC.swift */,
 				1638206C1CD341B000A3FB29 /* Reachability.swift */,
 				1638206E1CD34D2400A3FB29 /* ReportTableCell.swift */,
 				FC8A41581CDBF7EA003C71DA /* Animal.swift */,
+				03BCBE8E1CE6B24400CC322A /* Constants.swift */,
 			);
 			path = RescueHero;
 			sourceTree = "<group>";
@@ -153,10 +232,13 @@
 				FC36CE961CCB41940079404C /* Sources */,
 				FC36CE971CCB41940079404C /* Frameworks */,
 				FC36CE981CCB41940079404C /* Resources */,
+				16787CC81CEAB4C6009AF9E0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				16787CBB1CEA9F69009AF9E0 /* PBXTargetDependency */,
+				16787CC71CEAB4C6009AF9E0 /* PBXTargetDependency */,
 			);
 			name = RescueHero;
 			productName = RescueHero;
@@ -211,7 +293,12 @@
 				TargetAttributes = {
 					FC36CE991CCB41940079404C = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = R422J7SGF5;
+						DevelopmentTeam = 7Y7CE8RK7G;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					FC36CEAD1CCB41940079404C = {
 						CreatedOnToolsVersion = 7.3;
@@ -234,6 +321,12 @@
 			mainGroup = FC36CE911CCB41940079404C;
 			productRefGroup = FC36CE9B1CCB41940079404C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 16787CAC1CEA9F01009AF9E0 /* Products */;
+					ProjectRef = 16787CAB1CEA9F01009AF9E0 /* Haneke.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				FC36CE991CCB41940079404C /* RescueHero */,
@@ -243,14 +336,45 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		16787CB31CEA9F01009AF9E0 /* Haneke.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Haneke.framework;
+			remoteRef = 16787CB21CEA9F01009AF9E0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		16787CB51CEA9F01009AF9E0 /* Haneke.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Haneke.framework;
+			remoteRef = 16787CB41CEA9F01009AF9E0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		16787CB71CEA9F01009AF9E0 /* HanekeTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = HanekeTests.xctest;
+			remoteRef = 16787CB61CEA9F01009AF9E0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		16787CB91CEA9F01009AF9E0 /* HanekeDemo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = HanekeDemo.app;
+			remoteRef = 16787CB81CEA9F01009AF9E0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		FC36CE981CCB41940079404C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16787CC21CEAA499009AF9E0 /* Main.storyboard in Resources */,
 				FC36CEA81CCB41940079404C /* LaunchScreen.storyboard in Resources */,
 				FC36CEA51CCB41940079404C /* Assets.xcassets in Resources */,
-				FC36CEA31CCB41940079404C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +407,7 @@
 				FC8A41571CDBF4CD003C71DA /* AnimalVC.swift in Sources */,
 				1638206D1CD341B000A3FB29 /* Reachability.swift in Sources */,
 				FC21A8151CCE0509007B1476 /* LoginVC.swift in Sources */,
+				03BCBE8F1CE6B24400CC322A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +430,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		16787CBB1CEA9F69009AF9E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Haneke-iOS";
+			targetProxy = 16787CBA1CEA9F69009AF9E0 /* PBXContainerItemProxy */;
+		};
+		16787CC71CEAB4C6009AF9E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Haneke-iOS";
+			targetProxy = 16787CC61CEAB4C6009AF9E0 /* PBXContainerItemProxy */;
+		};
 		FC36CEB01CCB41940079404C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FC36CE991CCB41940079404C /* RescueHero */;
@@ -318,10 +453,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FC36CEA11CCB41940079404C /* Main.storyboard */ = {
+		16787CC01CEAA499009AF9E0 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				FC36CEA21CCB41940079404C /* Base */,
+				16787CC11CEAA499009AF9E0 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -431,6 +566,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = RescueHero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Joey-LLC..RescueHero";
@@ -448,6 +584,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = RescueHero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Joey-LLC..RescueHero";
