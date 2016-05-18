@@ -1,36 +1,48 @@
 rescueApp.controller('mapCtrl', function($scope,$http) {
 
-  var width = $("#googleMap").width();
-  $("#googleMap").height((width*.8));
-  //Update map size
-  $(window).resize(function(){
-    width = $("#googleMap").width();
-    $("#googleMap").height((width*.8));
-  });
-
   $http.get('https://www.rescuehero.org/reports').success(function(data) {
-
-    console.log("Request made");
-    console.log(data);
-
     function initialize() {
       var myLatLng = new google.maps.LatLng( 34.0635, -118.4455 );
       var mapInfo = {
         center:myLatLng,
         zoom:13,
-        mapTypeId:google.maps.MapTypeId.ROADMAP
+        mapTypeId:google.maps.MapTypeId.ROADMAP,
+        disableDefaultUI: true,
+        zoomControl: true
       };
       var map = new google.maps.Map( document.getElementById("googleMap"), mapInfo );
       map.set('styles', getMapStyles());
+      map.controls[google.maps.ControlPosition.TOP].push( document.getElementById('legend-wrapper') );
+
+      var youMarker;
+      var youPosition;
+      var youImage = {
+        url: 'assets/img/stick.png',
+        size: new google.maps.Size( 32, 32 ),
+        origin: new google.maps.Point( 0, 0 ),
+        anchor: new google.maps.Point( 16, 16 )
+      };
+
+      if ( navigator.geolocation ) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          youPosition = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          map.setCenter( youPosition );
+          youMarker = new google.maps.Marker({
+            position: youPosition,
+            map: map,
+            icon: youImage,
+          });
+        });
+      }
 
       var marker;
 
       // set the markers
-      for (var i=0; i<data.length; i++){
+      for ( var i = 0; i < data.length; i++ ) {
         var posObj = new google.maps.LatLng(parseFloat(data[i]["latitude"]),parseFloat(data[i]["longitude"]));
         var iconImage = {
           url: '/assets/img/logos/',
-          size: new google.maps.Size( 512, 512 ),
+          size: new google.maps.Size( 32, 32 ),
           origin: new google.maps.Point( 0, 0 ),
           anchor: new google.maps.Point( 0, 32 )
         };
@@ -43,13 +55,11 @@ rescueApp.controller('mapCtrl', function($scope,$http) {
           iconImage.url += "rescuehero_logo_radioactive_green_mini.png";
           break;
           case "OntheWay":
-          iconImage.url += "rescuehero_logo_pukegold_mini.png"
+          iconImage.url += "rescuehero_logo_pukegold_mini.png";
           break;
           default:
           iconImage.url += "rescuehero_logo_pukegold_mini.png";
         }
-
-        console.log(iconImage);
 
         marker = new google.maps.Marker({
           position: posObj,
@@ -58,7 +68,8 @@ rescueApp.controller('mapCtrl', function($scope,$http) {
           title: data[i].type,
           notes: data[i].notes,
           id: data[i].id,
-          image: data[i].files[0]
+          image: data[i].files[0],
+          status: data[i].status
         });
 
         marker.addListener('click', function() {
@@ -71,22 +82,47 @@ rescueApp.controller('mapCtrl', function($scope,$http) {
           $('html, body').animate({
             scrollTop: $(".map-panel").offset().top
           }, 1000);
-          console.log(this.id);
+
+          switch ( this.status ) {
+            case "Reported":
+            $('.status').css('background-color', '#d73c0a');
+            $('.status-content').html( "Active" );
+            break;
+            case "Rescued":
+            $('.status').css('background-color', '#00c934');
+            $('.status-content').html( this.status );
+            break;
+            case "OntheWay":
+            $('.status').css('background-color', '#c0aa1a');
+            $('.status-content').html( "Pending" );
+            break;
+            default:
+            $('.status').css('background-color', '#d73c0a');
+            $('.status-content').html( this.status );
+          }
 
         });
       }
     }
 
     initialize();
-    //$scope.$apply();
   });
 
+  // Map and Animal Image resizing and initialization
+  var mapWidth = $('#googleMap').width();
+  $('#googleMap').height( (mapWidth * 0.8) );
+  var animalImageWidth = $('.animal-image').width();
+
+  $(window).resize(function(){
+    mapWidth = $('#googleMap').width();
+    $('#googleMap').height( (mapWidth*.8) );
+  });
+
+  // scroll back to top and close map panel
   $scope.exitMapPanel = function() {
-    // scroll back to top and close map panel
     $('.map-panel').slideUp();
     $('html, body').animate({
       scrollTop: $("#googleMap").offset().top
     }, 1000);
-  }
-
+  };
 });
