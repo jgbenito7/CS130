@@ -26,7 +26,7 @@ var ssl = {
 };
 
 function createUser (req, res, next) {
-
+	console.log("password = " + req.body.orgPassword);
     var query = "SELECT id from Orgs WHERE password = SHA2(" + mysql.escape(req.body.orgPassword)+ ", 256);";
     connection.query(query, function(err,results) {
 	if(results.length == 0) {
@@ -160,23 +160,23 @@ function createReport(req, res, next) {
     geocoder.reverse({lat: req.body.latitude, lon:req.body.longitude})
 	.then(function(res_city) {
 
-            city = res_city[0].city;
-
-            mysql.escape(req.body.animal_type) +
-		"," + mysql.escape(req.body.animal_notes) + 
-		"," + mysql.escape(parseFloat(req.body.longitude)) +
-		"," + mysql.escape(parseFloat(req.body.latitude)) +
-		"," + mysql.escape(city);
-//		", \"" + city + "\"  );");
-	      
-	      connection.query("INSERT INTO Reports (type, notes, longitude, latitude, city) VALUES("+
+            var city = res_city[0].city;
+            
+			var query = "INSERT INTO Reports (type, notes, longitude, latitude, city) VALUES("+
 			       mysql.escape(req.body.animal_type)+
 			       "," + mysql.escape(req.body.animal_notes) + 
 			       "," + mysql.escape(parseFloat(req.body.longitude)) +
 			       "," + mysql.escape(parseFloat(req.body.latitude)) +
-			       "," + mysql.escape(city)/*", \"" + city + "\"  );"*/, function(err, results) {
-				   if(err) 
+			       "," + mysql.escape(city) + ");"
+			       //console.log(city);
+			       //console.log(query);
+			
+	      
+	      connection.query(query, function(err, results) {
+				   if(err){ 
+				   		console.log("error");
 				       throw err;
+				    }
 				   var insertId = results.insertId; 
 				   if(filenames.length > 0) {
 				       var queryString = "INSERT INTO filename (report_id, filename) VALUES ";
