@@ -3,6 +3,7 @@ var restify = require('restify');
 var sanitizer = require('sanitizer');
 var fs = require('fs');
 var gm = require('gm').subClass({imageMagick: true});
+var randomstring = require("randomstring");
 
 
 var geocoderProvider = 'google';
@@ -26,36 +27,41 @@ var ssl = {
 };
 
 function createUser (req, res, next) {
-	console.log("password = " + req.body.orgPassword);
-    var query = "SELECT id from Orgs WHERE password = SHA2(" + mysql.escape(req.body.orgPassword)+ ", 256);";
-    connection.query(query, function(err,results) {
-	if(results.length == 0) {
-	    res.send(402); //402 is invalid org password
-	    next();
-	    return;
-	}
-	var org_id = results[0].id;
+
+  var token = randomstring.generate(255);
+  var query = "SELECT id from Orgs WHERE password = SHA2(" + mysql.escape(req.body.orgPassword)+ ", 256);";
+  
+
+  connection.query(query, function(err,results) {
+    if(results.length == 0) {
+      res.send(402); //402 is invalid org password
+      next();
+      return;
+    }
+      var org_id = results[0].id;
 
 
-	var query = "SELECT * FROM Users WHERE email = " 
-            + mysql.escape(req.body.email) + ";";
-	connection.query(query, function(err, results){
-            if(results.length > 0) {
-		res.send(401); //401 is user already exists
-		next();
-		return;
-            }
-            connection.query("INSERT INTO Users (email, password, org_id) VALUES(" 
-			     + mysql.escape(req.body.email)+ ", SHA2(" 
-			     + mysql.escape(req.body.password) + ",256), " 
-			     + mysql.escape(org_id) + ");", function(err, results){
-				 if(err)
-				     throw err;
-				 res.send(200);
-				 next();
-				 return;
-			     });
-	});
+      var query = "SELECT * FROM Users WHERE email = " 
+          + mysql.escape(req.body.email) + ";";
+      connection.query(query, function(err, results){
+          if(results.length > 0) {
+            res.send(401); //401 is user already exists
+            next();
+            return;
+          }
+          var query2 = "INSERT INTO Users (email, password, org_id, token) VALUES(" 
+            + mysql.escape(req.body.email)+ ", SHA2(" 
+            + mysql.escape(req.body.password) + ",256), " 
+            + mysql.escape(org_id) +", \"" + token + "\");";
+          connection.query(query2, function(err, results){
+          if(err)
+          throw err;
+          res.send({"token":token});
+          next();
+          return;
+      });
+      });
+
     });
 
 
@@ -106,32 +112,54 @@ function getStatus(req,res,next)
 
 function updateStatus(req,res,next)
 {
-    //Change all current reports to be NOT the most recent
-    var query = "UPDATE Status SET mostRecent = 0 WHERE reportId = " + mysql.escape(req.params.reportId) + ";";
-    connection.query(query, function(err, results){
-	if(err)
-	    throw err;
-    })
+  console.log("in update status!");
+  var tokenCheckQuery = "SELECT * FROM Users WHERE token = " + mysql.escape(req.params.token) + ";";
+  connection.query(tokenCheckQuery, function(err1,results1){
+    if(err1)
+      throw err1;
+    if(results1.length >= 1){
+      //Change all current reports to be NOT the most recent
+      var query = "UPDATE Status SET mostRecent = 0 WHERE reportId = " + mysql.escape(req.params.reportId) + ";";
+      connection.query(query, function(err, results){
+      if(err)
+        throw err;
+      })
 
-    var updateQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + mysql.escape(req.params.reportId) + ", " +  mysql.escape(req.params.status) + ", 1);";
-    connection.query(updateQuery, function(err, results){
-	if(err)
-	    throw err;
-	res.send(200);
-	next();
-    })
+      var updateQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + mysql.escape(req.params.reportId) + ", " +  mysql.escape(req.params.status) + ", 1);";
+      connection.query(updateQuery, function(err, results){
+        if(err)
+          throw err;
+        res.send(200);
+      })
+
+    } //end valid token
+    else {
+
+      console.log("not a valid token");
+      res.send(413); //Invalid token
+    }
+	
+    }) //end tokenCheckQuery
+  next();
 }
 
 
 function authorizeUser (req, res, next) {
-    var query = "SELECT * FROM Users WHERE password = " + mysql.escape(req.body.password) + " AND email = " + mysql.escape(req.body.email) + ";";
+    var query = "SELECT * FROM Users WHERE password = SHA2(" + mysql.escape(req.body.password) + ", 256) AND email = " + mysql.escape(req.body.email) + ";";
     connection.query(query,  function(err, results){
 	if (err)
 	    throw err;
 	else if (results.length < 1)
-	    res.send({loggedIn:false});
-	else 
-	    res.send({loggedIn:true});
+	    res.send({"loggedIn":false});
+	else {
+    var newtoken = randomstring.generate(255);
+    var updateTokenQuery = "UPDATE Users SET token = \"" + newtoken + "\" WHERE email = " + mysql.escape(req.body.email) + ";";
+    connection.query(updateTokenQuery, function(err,reults){
+      if(err)
+        throw err;
+    })
+	  res.send({"loggedIn":true, "token":newtoken});
+  }
 	next();
     });
 
@@ -147,13 +175,10 @@ function createReport(req, res, next) {
 	    continue; //no file extension should throw an alarm
 	var filename = (new Date).getTime() + counter + "." + ext[1];
 	counter++;
-	console.log("writing file!");
 	filenames.push(filename);
 	fs.createReadStream(req.files[i].path).pipe(fs.createWriteStream("images/" + filename));
-	console.log("Got here!");
+
 	var middle = gm(req.files[i].path).thumb(200, 200, "images/thumb/"+filename, 75, function(err){if(err) console.log(err)});
-	console.log("got hereish");
-	console.log("rant this code");  
     }
 
     //get city
@@ -168,9 +193,7 @@ function createReport(req, res, next) {
 			       "," + mysql.escape(parseFloat(req.body.longitude)) +
 			       "," + mysql.escape(parseFloat(req.body.latitude)) +
 			       "," + mysql.escape(city) + ");"
-			       //console.log(city);
-			       //console.log(query);
-			
+
 	      
 	      connection.query(query, function(err, results) {
 				   if(err){ 
@@ -257,6 +280,7 @@ function rebootServer(req, res, next) {
 }
 
 var server = restify.createServer(ssl);
+//var server = restify.createServer();
 server.use(function crossOrigin(req,res,next){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -269,7 +293,7 @@ server.use(restify.bodyParser ({mapParams: false,
 server.get('/getCorrectOrg/:city', getCorrectOrg);
 server.get('/getRescuers/:city', getRescuers);
 server.get('/getStatus/:reportId', getStatus);
-server.put('/updateStatus/:reportId/:status', updateStatus);
+server.put('/updateStatus/:reportId/:status/:token', updateStatus);
 server.post('/users', createUser);
 server.get('/reboot/rescuehero', rebootServer);
 server.get('/reports', getReports);
