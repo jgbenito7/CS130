@@ -3,6 +3,7 @@ var restify = require('restify');
 var sanitizer = require('sanitizer');
 var fs = require('fs');
 var gm = require('gm').subClass({imageMagick: true});
+var randomstring = require("randomstring");
 
 
 var geocoderProvider = 'google';
@@ -20,13 +21,13 @@ var connection  = mysql.createPool({
   port  : 3306
 });
 
-var ssl = {
-    key: fs.readFileSync('./certs/rescuehero.key', 'utf8'),
-    cert: fs.readFileSync('./certs/ssl.crt', 'utf8'),
-};
+//var ssl = {
+//    key: fs.readFileSync('./certs/rescuehero.key', 'utf8'),
+//    cert: fs.readFileSync('./certs/ssl.crt', 'utf8'),
+//};
 
 function createUser (req, res, next) {
-
+  var token = randomstring.generate(255);
   var query = "SELECT id from Orgs WHERE password = SHA2(" + mysql.escape(req.body.orgPassword)+ ", 256);";
   connection.query(query, function(err,results) {
     if(results.length == 0) {
@@ -45,10 +46,11 @@ function createUser (req, res, next) {
             next();
             return;
           }
-          connection.query("INSERT INTO Users (email, password, org_id) VALUES(" 
+          var query2 = "INSERT INTO Users (email, password, org_id, token) VALUES(" 
             + mysql.escape(req.body.email)+ ", SHA2(" 
             + mysql.escape(req.body.password) + ",256), " 
-            + mysql.escape(org_id) + ");", function(err, results){
+            + mysql.escape(org_id) +", " + token + ");";
+          connection.query(query2, function(err, results){
           if(err)
           throw err;
           res.send(200);
@@ -254,7 +256,8 @@ function rebootServer(req, res, next) {
   );
 }
 
-var server = restify.createServer(ssl);
+//var server = restify.createServer(ssl);
+var server = restify.createServer();
 server.use(function crossOrigin(req,res,next){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
