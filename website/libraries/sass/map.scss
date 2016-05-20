@@ -1,5 +1,8 @@
 $exit: url("../../assets/exit.png");
 
+$color9: #0c638c;
+$font: 'Cabin', sans-serif;
+
 .map-panel {
   display:none;
   padding: 0px;
@@ -16,6 +19,17 @@ $exit: url("../../assets/exit.png");
   background-size:cover;
   margin:auto;
   border: 1px solid white;
+}
+
+.status {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.status-content {
+  padding: 5px;
+  color: white;
 }
 
 .animal-text{
@@ -35,9 +49,54 @@ $exit: url("../../assets/exit.png");
   position:absolute;
   top:5;
   right:0;
-  
+
   width:16px;
   height:16px;
   background:$exit;
   background-size:cover;
+
+  cursor: hand;
+}
+
+// Remove Google Copywrite info on map
+.gm-style-cc {
+  display:none;
+}
+
+#legend-wrapper {
+  position: absolute;
+  top: 5px;
+
+  width: 100%;
+  height: 40px;
+}
+
+.legend-box {
+  position: absolute;
+  top: 0px;
+
+  width: 100%;
+  height: 40px;
+  background-color: $color9;
+  border: solid 1px white;
+  opacity: .7;
+}
+
+.legend-entry {
+  text-align: center;
+  padding: 10px;
+}
+
+.legend-text {
+  color: white;
+  font: $font;
+  font-size: 12px;
+  font-weight: bold;
+  margin: auto;
+  vertical-align: middle;
+}
+
+.case-image {
+  width: 20px;
+  height: 20px;
 }

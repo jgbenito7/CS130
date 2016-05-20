@@ -14,6 +14,8 @@
 		16787CC21CEAA499009AF9E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16787CC01CEAA499009AF9E0 /* Main.storyboard */; };
 		16787CC41CEAB4C6009AF9E0 /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16787CB31CEA9F01009AF9E0 /* Haneke.framework */; };
 		16787CC51CEAB4C6009AF9E0 /* Haneke.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16787CB31CEA9F01009AF9E0 /* Haneke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		16C1C9A71CED3218001B6E88 /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C1C9911CED3047001B6E88 /* SwiftHTTP.framework */; };
+		16C1C9A81CED3218001B6E88 /* SwiftHTTP.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16C1C9911CED3047001B6E88 /* SwiftHTTP.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC21A8151CCE0509007B1476 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21A8141CCE0509007B1476 /* LoginVC.swift */; };
 		FC21A8171CCE062A007B1476 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21A8161CCE062A007B1476 /* SignupVC.swift */; };
 		FC36CE9E1CCB41940079404C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC36CE9D1CCB41940079404C /* AppDelegate.swift */; };
@@ -69,6 +71,62 @@
 			remoteGlobalIDString = A095C9551980418C00CD0F4C;
 			remoteInfo = "Haneke-iOS";
 		};
+		16C1C9901CED3047001B6E88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16C1C9861CED3047001B6E88 /* SwiftHTTP.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6BFD901619C8D8B500DD99B6;
+			remoteInfo = SwiftHTTP;
+		};
+		16C1C9921CED3047001B6E88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16C1C9861CED3047001B6E88 /* SwiftHTTP.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6BFD902119C8D8B500DD99B6;
+			remoteInfo = SwiftHTTPTests;
+		};
+		16C1C9941CED3047001B6E88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16C1C9861CED3047001B6E88 /* SwiftHTTP.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D958025919E6EEEB003C8218;
+			remoteInfo = SwiftHTTPOSX;
+		};
+		16C1C9961CED3047001B6E88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16C1C9861CED3047001B6E88 /* SwiftHTTP.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D958026319E6EEEB003C8218;
+			remoteInfo = SwiftHTTPOSXTests;
+		};
+		16C1C9981CED3047001B6E88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16C1C9861CED3047001B6E88 /* SwiftHTTP.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5C135EC11C4733CD00AA3A01;
+			remoteInfo = SwiftHTTPtvOS;
+		};
+		16C1C99A1CED3047001B6E88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16C1C9861CED3047001B6E88 /* SwiftHTTP.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5C135ECA1C4733CE00AA3A01;
+			remoteInfo = SwiftHTTPtvOSTests;
+		};
+		16C1C99C1CED3047001B6E88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16C1C9861CED3047001B6E88 /* SwiftHTTP.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5C135FA91C4737E200AA3A01;
+			remoteInfo = SwiftHTTPWatchOS;
+		};
+		16C1C9A91CED3218001B6E88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16C1C9861CED3047001B6E88 /* SwiftHTTP.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6BFD901519C8D8B500DD99B6;
+			remoteInfo = SwiftHTTP;
+		};
 		FC36CEAF1CCB41940079404C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FC36CE921CCB41940079404C /* Project object */;
@@ -92,6 +150,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				16C1C9A81CED3218001B6E88 /* SwiftHTTP.framework in Embed Frameworks */,
 				16787CC51CEAB4C6009AF9E0 /* Haneke.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -106,6 +165,7 @@
 		1638206E1CD34D2400A3FB29 /* ReportTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportTableCell.swift; sourceTree = "<group>"; };
 		16787CAB1CEA9F01009AF9E0 /* Haneke.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Haneke.xcodeproj; path = "HanekeSwift-master/Haneke.xcodeproj"; sourceTree = "<group>"; };
 		16787CC11CEAA499009AF9E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		16C1C9861CED3047001B6E88 /* SwiftHTTP.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftHTTP.xcodeproj; path = "SwiftHTTP-master/SwiftHTTP.xcodeproj"; sourceTree = "<group>"; };
 		FC21A8141CCE0509007B1476 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		FC21A8161CCE062A007B1476 /* SignupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		FC36CE9A1CCB41940079404C /* RescueHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RescueHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16C1C9A71CED3218001B6E88 /* SwiftHTTP.framework in Frameworks */,
 				16787CC41CEAB4C6009AF9E0 /* Haneke.framework in Frameworks */,
 				03BCBE931CE6B86600CC322A /* MapKit.framework in Frameworks */,
 			);
@@ -162,9 +223,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		16C1C9871CED3047001B6E88 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				16C1C9911CED3047001B6E88 /* SwiftHTTP.framework */,
+				16C1C9931CED3047001B6E88 /* SwiftHTTPTests.xctest */,
+				16C1C9951CED3047001B6E88 /* SwiftHTTP.framework */,
+				16C1C9971CED3047001B6E88 /* SwiftHTTPOSXTests.xctest */,
+				16C1C9991CED3047001B6E88 /* SwiftHTTP.framework */,
+				16C1C99B1CED3047001B6E88 /* SwiftHTTPtvOSTests.xctest */,
+				16C1C99D1CED3047001B6E88 /* SwiftHTTP.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		FC36CE911CCB41940079404C = {
 			isa = PBXGroup;
 			children = (
+				16C1C9861CED3047001B6E88 /* SwiftHTTP.xcodeproj */,
 				03BCBE921CE6B86600CC322A /* MapKit.framework */,
 				FC36CE9C1CCB41940079404C /* RescueHero */,
 				FC36CEB11CCB41940079404C /* RescueHeroTests */,
@@ -239,6 +315,7 @@
 			dependencies = (
 				16787CBB1CEA9F69009AF9E0 /* PBXTargetDependency */,
 				16787CC71CEAB4C6009AF9E0 /* PBXTargetDependency */,
+				16C1C9AA1CED3218001B6E88 /* PBXTargetDependency */,
 			);
 			name = RescueHero;
 			productName = RescueHero;
@@ -293,7 +370,7 @@
 				TargetAttributes = {
 					FC36CE991CCB41940079404C = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 7Y7CE8RK7G;
+						DevelopmentTeam = R422J7SGF5;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
 								enabled = 1;
@@ -325,6 +402,10 @@
 				{
 					ProductGroup = 16787CAC1CEA9F01009AF9E0 /* Products */;
 					ProjectRef = 16787CAB1CEA9F01009AF9E0 /* Haneke.xcodeproj */;
+				},
+				{
+					ProductGroup = 16C1C9871CED3047001B6E88 /* Products */;
+					ProjectRef = 16C1C9861CED3047001B6E88 /* SwiftHTTP.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -363,6 +444,55 @@
 			fileType = wrapper.application;
 			path = HanekeDemo.app;
 			remoteRef = 16787CB81CEA9F01009AF9E0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		16C1C9911CED3047001B6E88 /* SwiftHTTP.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftHTTP.framework;
+			remoteRef = 16C1C9901CED3047001B6E88 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		16C1C9931CED3047001B6E88 /* SwiftHTTPTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftHTTPTests.xctest;
+			remoteRef = 16C1C9921CED3047001B6E88 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		16C1C9951CED3047001B6E88 /* SwiftHTTP.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftHTTP.framework;
+			remoteRef = 16C1C9941CED3047001B6E88 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		16C1C9971CED3047001B6E88 /* SwiftHTTPOSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftHTTPOSXTests.xctest;
+			remoteRef = 16C1C9961CED3047001B6E88 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		16C1C9991CED3047001B6E88 /* SwiftHTTP.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftHTTP.framework;
+			remoteRef = 16C1C9981CED3047001B6E88 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		16C1C99B1CED3047001B6E88 /* SwiftHTTPtvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftHTTPtvOSTests.xctest;
+			remoteRef = 16C1C99A1CED3047001B6E88 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		16C1C99D1CED3047001B6E88 /* SwiftHTTP.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftHTTP.framework;
+			remoteRef = 16C1C99C1CED3047001B6E88 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -440,6 +570,11 @@
 			name = "Haneke-iOS";
 			targetProxy = 16787CC61CEAB4C6009AF9E0 /* PBXContainerItemProxy */;
 		};
+		16C1C9AA1CED3218001B6E88 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftHTTP;
+			targetProxy = 16C1C9A91CED3218001B6E88 /* PBXContainerItemProxy */;
+		};
 		FC36CEB01CCB41940079404C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FC36CE991CCB41940079404C /* RescueHero */;
@@ -512,7 +647,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos9.2;
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -552,7 +687,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos9.2;
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -568,8 +703,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = RescueHero/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Joey-LLC..RescueHero";
+				PRODUCT_BUNDLE_IDENTIFIER = Joey.RescueHero;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RescueHero-Bridging-Header.h";
@@ -586,8 +722,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = RescueHero/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Joey-LLC..RescueHero";
+				PRODUCT_BUNDLE_IDENTIFIER = Joey.RescueHero;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RescueHero-Bridging-Header.h";

@@ -8,6 +8,7 @@
 
 import UIKit
 import Haneke
+
 class ReportTableController: UITableViewController {
     var data = [Dictionary<String,AnyObject>]()
     var cellTypePass: String!
