@@ -30,6 +30,7 @@ function createUser (req, res, next) {
 
   var token = randomstring.generate(255);
   var query = "SELECT id from Orgs WHERE password = SHA2(" + mysql.escape(req.body.orgPassword)+ ", 256);";
+  //var query = "SELECT id from Orgs WHERE password = " + mysql.escape(req.body.orgPassword)+ ";";
   
 
   connection.query(query, function(err,results) {
@@ -145,7 +146,7 @@ function updateStatus(req,res,next)
 
 
 function authorizeUser (req, res, next) {
-    var query = "SELECT * FROM Users WHERE password = SHA2(" + mysql.escape(req.body.password) + ", 256) AND email = " + mysql.escape(req.body.email) + ";";
+    var query = "SELECT * FROM Users WHERE password = SHA2(" + mysql.escape(req.body.password) + ", 256) AND email = " + mysql.escape(req.body.email) + " AND token = " + mysql.escape(req.body.token) + ";";
     connection.query(query,  function(err, results){
 	if (err)
 	    throw err;
