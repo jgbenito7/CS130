@@ -4,12 +4,16 @@ var sanitizer = require('sanitizer');
 var fs = require('fs');
 var gm = require('gm').subClass({imageMagick: true});
 var randomstring = require("randomstring");
+var apn = require('apn');
 
 
 var geocoderProvider = 'google';
 var httpAdapter = 'http';
 var extra = {};
 var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra );
+
+var options = { };
+var apnConnection = new apn.Connection(options);
 
 
 var connection  = mysql.createPool({
@@ -146,7 +150,9 @@ function updateStatus(req,res,next)
 
 
 function authorizeUser (req, res, next) {
+
     var query = "SELECT * FROM Users WHERE password = SHA2(" + mysql.escape(req.body.password) + ", 256) AND email = " + mysql.escape(req.body.email) + " AND token = " + mysql.escape(req.body.token) + ";";
+
     connection.query(query,  function(err, results){
 	if (err)
 	    throw err;
