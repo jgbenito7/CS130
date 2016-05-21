@@ -16,6 +16,17 @@ class ReportTableController: UITableViewController {
     var cellNotesPass: String!
     var cellImagePass: UIImage!
     var cellImageURLPass: String!
+    
+    
+    
+    
+    @IBAction func logout_btn(sender: AnyObject) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey("token")
+        defaults.synchronize()
+        self.performSegueWithIdentifier("logout_segue", sender: self)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -31,7 +42,6 @@ class ReportTableController: UITableViewController {
         let image = UIImage(named: "RescueHeroLogo")
         imageView.image = image
         navigationItem.titleView = imageView
-        self.tableView.backgroundColor = UIColor.init(red: 30/255, green: 30/255, blue: 30/255, alpha: 1)
         self.navigationController?.navigationBar.translucent = false
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         //self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
@@ -52,9 +62,7 @@ class ReportTableController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func logOut(sender: UIButton) {
-        self.performSegueWithIdentifier("goto_login", sender: self)
-    }
+
     
     func handleRefresh(refreshControl: UIRefreshControl) {
         if !Reachability.isConnectedToNetwork() {
@@ -86,6 +94,7 @@ class ReportTableController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return data.count;
     }
     
@@ -115,9 +124,9 @@ class ReportTableController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ReportTableCell
         let obj = data[indexPath.row]
         print(obj)
-        cell.layer.cornerRadius = 10
-        cell.layer.borderColor = UIColor.init(red: 30/255, green: 30/255, blue: 30/255, alpha: 1).CGColor
-        cell.layer.borderWidth = 4
+//        cell.layer.cornerRadius = 10
+//        cell.layer.borderColor = UIColor.init(red: 30/255, green: 30/255, blue: 30/255, alpha: 1).CGColor
+//        cell.layer.borderWidth = 4
         cell.cellNotes.text = obj["notes"] as? String
         cell.cellNotes.numberOfLines = 2
         cell.cellNotes.lineBreakMode = NSLineBreakMode.ByWordWrapping
@@ -149,7 +158,7 @@ class ReportTableController: UITableViewController {
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        return false
     }
 
 }

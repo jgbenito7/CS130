@@ -15,7 +15,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let token = defaults.objectForKey("token")
+        print(token)
+        var vc: UIViewController
+        if(token != nil) {
+            vc = mainStoryboard.instantiateViewControllerWithIdentifier("ReportTable") as! UINavigationController
+        } else {
+            vc = mainStoryboard.instantiateViewControllerWithIdentifier("Login")
+        }
+        
+        
+        self.window?.rootViewController = vc
+        
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
     

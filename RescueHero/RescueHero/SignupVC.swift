@@ -16,21 +16,38 @@ class SignupVC: UIViewController {
     @IBOutlet weak var orgPassword_txt: UITextField!
     @IBOutlet weak var password_txt: UITextField!
     @IBOutlet weak var passconfirm_txt: UITextField!
+    @IBOutlet weak var signup_button: UIButton!
+    
+    var keyboardUp = false
+    func keyboardVisible(notif: NSNotification) {
+        print("keyboardVisible")
+        if(!keyboardUp) {
+            animateViewMoving(true, moveValue: 130)
+            keyboardUp = true
+        }
+    }
+    
+    func keyboardHidden(notif: NSNotification) {
+        print("keyboardHidden")
+        if(keyboardUp) {
+            animateViewMoving(false, moveValue: 130)
+            keyboardUp = false
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
-        email_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
-        email_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
-        orgPassword_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
-        orgPassword_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
-        password_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
-        password_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
-        passconfirm_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
-        passconfirm_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginVC.keyboardVisible(_:)), name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginVC.keyboardHidden(_:)), name: UIKeyboardDidHideNotification, object: nil)
+        
+        signup_button.layer.cornerRadius = 5;
+        
     }
 
     @IBAction func signup_tapped(sender: AnyObject) {
+        animateViewMoving(false, moveValue: 130)
         var signup_success = false
         if(password_txt.text == passconfirm_txt.text){
             let params = ["orgPassword": orgPassword_txt.text, "email": email_txt.text, "password": password_txt.text]
@@ -41,8 +58,30 @@ class SignupVC: UIViewController {
                         print("error: \(err.localizedDescription)")
                         return
                     }else{
-                        signup_success = true
                         print("Request succeeded")
+                        print(response.data)
+                        var error: NSError?
+                        let jsonData: NSData = response.data
+                        
+                        do {
+                            let jsonDict = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                            if((jsonDict["token"]) != nil){
+                                let token = jsonDict["token"]!
+                                
+                                let defaults = NSUserDefaults.standardUserDefaults()
+                                defaults.setValue(token, forKey: "token")
+                                defaults.synchronize()
+                                //Login Succeeded, Segue to table view
+                                 NSOperationQueue.mainQueue().addOperationWithBlock {
+                                    self.performSegueWithIdentifier("signup", sender: self)
+                                }
+                                
+                                
+                            }
+                        } catch _ {
+                            
+                        }
+
                     }
                 }
             } catch let error {
@@ -50,9 +89,6 @@ class SignupVC: UIViewController {
             }
         }else{
             print("Learn how to type, bitch.")
-        }
-        if (signup_success) {
-            performSegueWithIdentifier("signup", sender: self)
         }
     }
     
@@ -67,7 +103,7 @@ class SignupVC: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "signup"){
-            let viewController = segue.destinationViewController as! ReportTableController
+            let viewController = segue.destinationViewController as! UINavigationController
         }
         else if (segue.identifier == "signuptologin"){
             let viewController = segue.destinationViewController as! LoginVC
@@ -77,12 +113,12 @@ class SignupVC: UIViewController {
     
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        animateViewMoving(true, moveValue: 120)
+        animateViewMoving(true, moveValue: 130)
         textField.placeholder = nil;
         textField.tintColor = UIColor.init(red: 80/255, green: 80/255, blue: 80/255, alpha: 0.7)
     }
     func textFieldDidEndEditing(textField: UITextField) {
-        animateViewMoving(false, moveValue: 120)
+        animateViewMoving(false, moveValue: 130)
         if(textField.text == ""){
             if textField.tag == 1{
                 textField.placeholder = "Organization Password"
@@ -94,8 +130,6 @@ class SignupVC: UIViewController {
                 textField.placeholder = "Confirm Password"
             }
         }
-        
-
         
     }
     
