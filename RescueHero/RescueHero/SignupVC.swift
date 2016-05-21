@@ -42,6 +42,15 @@ class SignupVC: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginVC.keyboardVisible(_:)), name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginVC.keyboardHidden(_:)), name: UIKeyboardDidHideNotification, object: nil)
         
+        email_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
+        email_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
+        orgPassword_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
+        orgPassword_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
+        password_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
+        password_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
+        passconfirm_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
+        passconfirm_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
+        
         signup_button.layer.cornerRadius = 5;
         
     }
@@ -114,7 +123,9 @@ class SignupVC: UIViewController {
     
     func textFieldDidBeginEditing(textField: UITextField) {
         animateViewMoving(true, moveValue: 130)
-        textField.placeholder = nil;
+        if(textField.text == ""){
+            textField.placeholder = nil;
+        }
         textField.tintColor = UIColor.init(red: 80/255, green: 80/255, blue: 80/255, alpha: 0.7)
     }
     func textFieldDidEndEditing(textField: UITextField) {

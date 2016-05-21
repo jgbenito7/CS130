@@ -34,10 +34,10 @@ class LoginVC: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginVC.keyboardHidden(_:)), name: UIKeyboardDidHideNotification, object: nil)
         self.hideKeyboardWhenTappedAround()
 //        // Do any additional setup after loading the view.
-//        email_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
-//        email_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
-//        password_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
-//        password_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)        
+        email_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
+        email_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
+        password_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
+        password_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
         signin_button.layer.cornerRadius = 5;
     }
 
@@ -99,12 +99,12 @@ class LoginVC: UIViewController {
     
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        
-        textField.placeholder = nil;
+        if(textField.text == ""){
+            textField.placeholder = nil;
+        }
         textField.tintColor = UIColor.init(red: 80/255, green: 80/255, blue: 80/255, alpha: 0.7)
     }
     func textFieldDidEndEditing(textField: UITextField) {
-        
         if(textField.text == ""){
             if textField.tag == 1{
                 textField.placeholder = "Email"

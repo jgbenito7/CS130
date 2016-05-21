@@ -19,6 +19,10 @@ class ReportTableController: UITableViewController {
     
     
     
+    override func  preferredStatusBarStyle()-> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
     
     @IBAction func logout_btn(sender: AnyObject) {
         let defaults = NSUserDefaults.standardUserDefaults()
