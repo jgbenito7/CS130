@@ -83,6 +83,20 @@ class SignupVC: UIViewController {
     }
     func textFieldDidEndEditing(textField: UITextField) {
         animateViewMoving(false, moveValue: 120)
+        if(textField.text == ""){
+            if textField.tag == 1{
+                textField.placeholder = "Organization Password"
+            }else if textField.tag==2{
+                textField.placeholder = "Email"
+            }else if textField.tag==3{
+                textField.placeholder = "Password"
+            }else if textField.tag==4{
+                textField.placeholder = "Confirm Password"
+            }
+        }
+        
+
+        
     }
     
     func animateViewMoving (up:Bool, moveValue :CGFloat){
