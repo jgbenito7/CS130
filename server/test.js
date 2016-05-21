@@ -151,7 +151,7 @@ function updateStatus(req,res,next)
 
 function authorizeUser (req, res, next) {
 
-    var query = "SELECT * FROM Users WHERE password = SHA2(" + mysql.escape(req.body.password) + ", 256) AND email = " + mysql.escape(req.body.email) + " AND token = " + mysql.escape(req.body.token) + ";";
+    var query = "SELECT * FROM Users WHERE password = SHA2(" + mysql.escape(req.body.password) + ", 256) AND email = " + mysql.escape(req.body.email) + ";";
     console.log(query);
     connection.query(query,  function(err, results){
 	if (err)
