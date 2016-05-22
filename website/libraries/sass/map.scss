@@ -64,6 +64,8 @@ $font: 'Cabin', sans-serif;
 }
 
 #legend-wrapper {
+  display: none;
+
   position: absolute;
   top: 5px;
 
@@ -78,11 +80,11 @@ $font: 'Cabin', sans-serif;
   width: 100%;
   height: 40px;
   background-color: $color9;
-  border: solid 1px white;
   opacity: .7;
 }
 
 .legend-entry {
+  height: 100%;
   text-align: center;
   padding: 10px;
 }
@@ -99,4 +101,76 @@ $font: 'Cabin', sans-serif;
 .case-image {
   width: 20px;
   height: 20px;
+}
+
+/////////////////////////////////////////
+/* Media Queries */
+/////////////////////////////////////////
+
+@media screen
+and (min-width: 320px)
+and (max-width: 375px) {
+  .legend-box {
+    position: absolute;
+    top: 0px;
+
+    width: 100%;
+    height: 35px;
+    background-color: $color9;
+    opacity: .7;
+  }
+
+  .legend-entry {
+    height: 100%;
+    text-align: center;
+    padding: 5px;
+  }
+  .case-image {
+    display:block;
+    margin: auto;
+    width: 14px;
+    height: 14px;
+  }
+    .legend-text {
+      color: white;
+      font: $font;
+      font-size: 9px;
+      font-weight: bold;
+      margin: auto;
+      vertical-align: middle;
+    }
+}
+
+@media screen
+and (min-width: 375px)
+and (max-width: 568px) {
+  .legend-box {
+    position: absolute;
+    top: 0px;
+
+    width: 100%;
+    height: 40px;
+    background-color: $color9;
+    opacity: .7;
+  }
+
+  .legend-entry {
+    height: 100%;
+    text-align: center;
+    padding: 7px;
+  }
+  .case-image {
+    display:block;
+    margin: auto;
+    width: 16px;
+    height: 16px;
+  }
+    .legend-text {
+      color: white;
+      font: $font;
+      font-size: 10px;
+      font-weight: bold;
+      margin: auto;
+      vertical-align: middle;
+    }
 }

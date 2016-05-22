@@ -519,8 +519,63 @@ input[type=text]:focus, textarea:focus {
   margin-bottom:20px;
 }
 
-/* Small devices (tablets, 768px and up) */
-@media (max-width: 568px) {
+
+/////////////////////////////////////////////////
+/* Media Queries: Small devices */
+/////////////////////////////////////////////////
+
+@media screen
+and (min-width: 320px)
+and (max-width: 375px) {
+  .main-wrapper{
+    width:100%;
+    padding:20px;
+  }
+  .nav-link > a{
+    color:$color6;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .about-circle{
+    width:130px;
+    height:130px;
+    font-size:25px;
+  }
+  .under-header-text{
+    font-size:10px;
+  }
+  .statement-text{
+    font-size:80px;
+  }
+  .about-image{
+    width:80px;
+    height:80px;
+  }
+  .bio-text-name{
+    text-align: center;
+  }
+  .white-short{
+    margin-left:auto !important;
+    margin-right:auto;
+  }
+  .bio-text{
+    text-align: center;
+  }
+  .header-image{
+    width:45px;
+    height:45px;
+  }
+  .header-text-bold{
+    font-size:38px;
+  }
+  .header-wrap{
+    width:265px;
+  }
+}
+
+@media screen
+and (min-width: 375px)
+and (max-width: 568px) {
   .main-wrapper{
     width:100%;
     padding:20px;

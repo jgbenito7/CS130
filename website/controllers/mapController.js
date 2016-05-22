@@ -1,7 +1,7 @@
 rescueApp.controller('mapCtrl', function($scope,$http) {
 
   $http.get('https://www.rescuehero.org/reports').success(function(data) {
-    function initialize() {
+    function initialize( callback ) {
       var myLatLng = new google.maps.LatLng( 34.0635, -118.4455 );
       var mapInfo = {
         center:myLatLng,
@@ -100,12 +100,15 @@ rescueApp.controller('mapCtrl', function($scope,$http) {
             $('.status').css('background-color', '#d73c0a');
             $('.status-content').html( this.status );
           }
-
         });
       }
+
+      callback();
     }
 
-    initialize();
+    initialize(function() {
+      $('#legend-wrapper').show();
+    });
   });
 
   // Map and Animal Image resizing and initialization
