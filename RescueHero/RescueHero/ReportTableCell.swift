@@ -11,6 +11,10 @@ import UIKit
 
 class ReportTableCell: UITableViewCell {
     
+    @IBOutlet weak var table_cell: UIView!
+    
+    
+    
     @IBOutlet weak var cellNotes: UILabel!
     var cellImageURL: String
     required init?(coder aDecoder: NSCoder) {

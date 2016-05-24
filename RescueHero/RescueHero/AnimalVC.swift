@@ -26,10 +26,13 @@ class AnimalVC: UIViewController {
         image.hnk_setImageFromURL(NSURL(string: _cellURLImage)!)
         type.text = _cellType
         notes.text = _cellNotes
-        time.text = _cellTime
+        //time.text = _cellTime
         notes.numberOfLines = 0
         notes.lineBreakMode = NSLineBreakMode.ByWordWrapping
         notes.preferredMaxLayoutWidth = 300
+        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.alpha = 1
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
     }
     
     @IBAction func backToTable(sender: AnyObject) {
