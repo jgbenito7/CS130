@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0343EB3C1CF538D90022EC2D /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C1C9911CED3047001B6E88 /* SwiftHTTP.framework */; };
+		0343EB3D1CF538D90022EC2D /* SwiftHTTP.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16C1C9911CED3047001B6E88 /* SwiftHTTP.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		03BCBE8F1CE6B24400CC322A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BCBE8E1CE6B24400CC322A /* Constants.swift */; };
 		03BCBE931CE6B86600CC322A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03BCBE921CE6B86600CC322A /* MapKit.framework */; };
 		1638206D1CD341B000A3FB29 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1638206C1CD341B000A3FB29 /* Reachability.swift */; };
@@ -14,8 +16,6 @@
 		16787CC21CEAA499009AF9E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16787CC01CEAA499009AF9E0 /* Main.storyboard */; };
 		16787CC41CEAB4C6009AF9E0 /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16787CB31CEA9F01009AF9E0 /* Haneke.framework */; };
 		16787CC51CEAB4C6009AF9E0 /* Haneke.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16787CB31CEA9F01009AF9E0 /* Haneke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		16C1C9A71CED3218001B6E88 /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C1C9911CED3047001B6E88 /* SwiftHTTP.framework */; };
-		16C1C9A81CED3218001B6E88 /* SwiftHTTP.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16C1C9911CED3047001B6E88 /* SwiftHTTP.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC21A8151CCE0509007B1476 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21A8141CCE0509007B1476 /* LoginVC.swift */; };
 		FC21A8171CCE062A007B1476 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21A8161CCE062A007B1476 /* SignupVC.swift */; };
 		FC36CE9E1CCB41940079404C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC36CE9D1CCB41940079404C /* AppDelegate.swift */; };
@@ -29,6 +29,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0343EB3E1CF538D90022EC2D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16C1C9861CED3047001B6E88 /* SwiftHTTP.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6BFD901519C8D8B500DD99B6;
+			remoteInfo = SwiftHTTP;
+		};
 		16787CB21CEA9F01009AF9E0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 16787CAB1CEA9F01009AF9E0 /* Haneke.xcodeproj */;
@@ -120,13 +127,6 @@
 			remoteGlobalIDString = 5C135FA91C4737E200AA3A01;
 			remoteInfo = SwiftHTTPWatchOS;
 		};
-		16C1C9A91CED3218001B6E88 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 16C1C9861CED3047001B6E88 /* SwiftHTTP.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6BFD901519C8D8B500DD99B6;
-			remoteInfo = SwiftHTTP;
-		};
 		FC36CEAF1CCB41940079404C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FC36CE921CCB41940079404C /* Project object */;
@@ -150,7 +150,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				16C1C9A81CED3218001B6E88 /* SwiftHTTP.framework in Embed Frameworks */,
+				0343EB3D1CF538D90022EC2D /* SwiftHTTP.framework in Embed Frameworks */,
 				16787CC51CEAB4C6009AF9E0 /* Haneke.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -189,7 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16C1C9A71CED3218001B6E88 /* SwiftHTTP.framework in Frameworks */,
+				0343EB3C1CF538D90022EC2D /* SwiftHTTP.framework in Frameworks */,
 				16787CC41CEAB4C6009AF9E0 /* Haneke.framework in Frameworks */,
 				03BCBE931CE6B86600CC322A /* MapKit.framework in Frameworks */,
 			);
@@ -315,7 +315,7 @@
 			dependencies = (
 				16787CBB1CEA9F69009AF9E0 /* PBXTargetDependency */,
 				16787CC71CEAB4C6009AF9E0 /* PBXTargetDependency */,
-				16C1C9AA1CED3218001B6E88 /* PBXTargetDependency */,
+				0343EB3F1CF538D90022EC2D /* PBXTargetDependency */,
 			);
 			name = RescueHero;
 			productName = RescueHero;
@@ -563,6 +563,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0343EB3F1CF538D90022EC2D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftHTTP;
+			targetProxy = 0343EB3E1CF538D90022EC2D /* PBXContainerItemProxy */;
+		};
 		16787CBB1CEA9F69009AF9E0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Haneke-iOS";
@@ -572,11 +577,6 @@
 			isa = PBXTargetDependency;
 			name = "Haneke-iOS";
 			targetProxy = 16787CC61CEAB4C6009AF9E0 /* PBXContainerItemProxy */;
-		};
-		16C1C9AA1CED3218001B6E88 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftHTTP;
-			targetProxy = 16C1C9A91CED3218001B6E88 /* PBXContainerItemProxy */;
 		};
 		FC36CEB01CCB41940079404C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

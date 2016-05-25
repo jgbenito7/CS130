@@ -13,8 +13,8 @@ var extra = {};
 var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra );
 
 var apn_options = {
-     "cert": "./certs/apn_cert.pem",
-     "key":  "./certs/apn_private.pem",
+     "cert": "./certs/RescueHero_Cert.pem",
+     "key":  "./certs/RescueHero_PK.pem",
      "debug": true,
      "errorCallback": function(err){console.log(err);}
  };
