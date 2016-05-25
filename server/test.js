@@ -4,23 +4,34 @@ var sanitizer = require('sanitizer');
 var fs = require('fs');
 var gm = require('gm').subClass({imageMagick: true});
 var randomstring = require("randomstring");
-var apns = require('apns'), apn_options, apn_connection, apn_notification;
-
+var apn = require('apn');
 
 var geocoderProvider = 'google';
 var httpAdapter = 'http';
 var extra = {};
 var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra );
 
-var apn_options = {
-     "cert": "./certs/RescueHero_Cert.pem",
-     "key":  "./certs/RescueHero_PK.pem",
-     "debug": true,
-     "errorCallback": function(err){console.log(err);}
+ var apnError = function(err){
+     console.log("APN Error:", err);
+ }
+
+ var options = {
+     "cert": "cert.pem",
+     "key":  "key.pem",
+     "passphrase": null,
+     "gateway": "gateway.sandbox.push.apple.com",
+     "port": 2195,
+     "enhanced": true,
+     "cacheLength": 5
+   };
+ options.errorCallback = apnError;
+
+ var feedBackOptions = {
+     "batchFeedback": true,
+     "interval": 300
  };
 
- apn_connection = new apns.Connection(apn_options);
-
+ var apnConnection, feedback;
 
 var connection  = mysql.createPool({
     connectionLimit : 10,
@@ -35,6 +46,37 @@ var ssl = {
     key: fs.readFileSync('./certs/rescuehero.key', 'utf8'),
     cert: fs.readFileSync('./certs/ssl.crt', 'utf8'),
 };
+
+
+function init_apn(){
+  apnConnection = new apn.Connection(options);
+
+       feedback = new apn.Feedback(feedBackOptions);
+       feedback.on("feedback", function(devices) {
+           devices.forEach(function(item) {
+               //TODO Do something with item.device and item.time;
+           });
+       });
+}
+
+function send_apn(token, message, from){
+  var myDevice, note;
+
+        myDevice = new apn.Device(token);
+        note = new apn.Notification();
+
+        note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+        note.badge = 1;
+        note.sound = "ping.aiff";
+        note.alert = message;
+        note.payload = {'messageFrom': from};
+
+        if(apnConnection) {
+            apnConnection.pushNotification(note, myDevice);
+        }
+}
+
+send_apn("efb825511b287691cfc49213f93230fca4f19342f5a19e7c777156751fa74124","whats up yo","joey");
 
 function createUser (req, res, next) {
 
