@@ -4,7 +4,7 @@ var sanitizer = require('sanitizer');
 var fs = require('fs');
 var gm = require('gm').subClass({imageMagick: true});
 var randomstring = require("randomstring");
-var apn = require('apns'), apn_options, apn_connection, apn_notification;
+var apns = require('apns'), apn_options, apn_connection, apn_notification;
 
 
 var geocoderProvider = 'google';
