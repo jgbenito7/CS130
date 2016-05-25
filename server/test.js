@@ -34,34 +34,34 @@ var options = {
 
  var apnConnection, feedback;
 
- module.exports = {
-     init : function(){
-         apnConnection = new apn.Connection(options);
+ function initApn(){
+   apnConnection = new apn.Connection(options);
 
-         feedback = new apn.Feedback(feedBackOptions);
-         feedback.on("feedback", function(devices) {
-             devices.forEach(function(item) {
-                 //TODO Do something with item.device and item.time;
-             });
-         });
-     },
+   feedback = new apn.Feedback(feedBackOptions);
+   feedback.on("feedback", function(devices) {
+       devices.forEach(function(item) {
+           //TODO Do something with item.device and item.time;
+       });
+   });
+ }
 
-     send : function (params){
-         var myDevice, note;
+ initApn();
 
-         myDevice = new apn.Device(params.token);
-         note = new apn.Notification();
+ function sendApn(token, from, message){
+   var myDevice, note;
 
-         note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
-         note.badge = 1;
-         note.sound = "ping.aiff";
-         note.alert = params.message;
-         note.payload = {'messageFrom': params.from};
+   myDevice = new apn.Device(token);
+   note = new apn.Notification();
 
-         if(apnConnection) {
-             apnConnection.pushNotification(note, myDevice);
-         }
-     }
+   note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+   note.badge = 1;
+   note.sound = "ping.aiff";
+   note.alert = message;
+   note.payload = {'messageFrom': from};
+
+   if(apnConnection) {
+       apnConnection.pushNotification(note, myDevice);
+   }
  }
 
 
@@ -337,10 +337,7 @@ function rebootServer(req, res, next) {
 }
 
 function testApn(req,res,next){
-  pushNotifier = require("./pushNotifier");
-  pushNotifier.init();
-  //use valid device token to get it working
-  pushNotifier.process({token:'84122017ee473f40686c1e07b71c35cbfc3ab9d2cbecc97953a215b415a2d5eb', message:'Test message', from: 'sender'});
+  sendApn('84122017ee473f40686c1e07b71c35cbfc3ab9d2cbecc97953a215b415a2d5eb','sender','Testing');
   res.send(200);
   return next();
 
