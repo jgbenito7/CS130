@@ -317,7 +317,7 @@ function getRescuers(req,res,next) {
 }
 
 function registerDevice(req, res, next) {
-  var query = "SELECT * FROM Users WHERE token=" + mysql.escape(req.params.userToken);
+  var query = "SELECT * FROM Users WHERE token=" + mysql.escape(req.body.userToken);
   connection.query(query, function(err, results) {
     if(err)
       throw err;
@@ -325,8 +325,8 @@ function registerDevice(req, res, next) {
       res.send(411); //user token not found
       next();
     } else {
-      var apnQuery1 = "DELETE FROM Apn WHERE device_token=" + mysql.escape(req.params.apnToken)+";";
-      var apnQuery2 = "INSERT INTO Apn (device_token, user_token, user_org) VALUES (" + mysql.escape(req.params.apnToken) + ", " + mysql.escape(req.params.userToken) + ", " + mysql.escape(results[0].org_id) + ");";
+      var apnQuery1 = "DELETE FROM Apn WHERE device_token=" + mysql.escape(req.body.apnToken)+";";
+      var apnQuery2 = "INSERT INTO Apn (device_token, user_token, user_org) VALUES (" + mysql.escape(req.body.apnToken) + ", " + mysql.escape(req.body.userToken) + ", " + mysql.escape(results[0].org_id) + ");";
       connection.query(apnQuery1, function(err, results) {
         if(err)
           throw err;
@@ -381,7 +381,7 @@ server.post('/users', createUser);
 server.get('/reboot/rescuehero', rebootServer);
 server.get('/reports', getReports);
 server.post('/users/authorize', authorizeUser);
-server.post('/apn/:userToken/:apnToken', registerDevice);
+server.post('/apn', registerDevice);
 server.post('/reports', createReport);
 server.get('/testapn', testApn);
 server.get(/\/images\/?.*/, restify.serveStatic({
