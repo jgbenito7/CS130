@@ -331,7 +331,7 @@ function registerDevice(req, res, next) {
       res.send(411); //user token not found
       next();
     } else {
-      var apnQuery = "DELETE FROM Apn WHERE device_token=" + mysql.escape(req.params.userToken)+"; INSERT INTO Apn (device_token, user_token, user_org) VALUES (" + mysql.escape(req.params.apnToken) + ", " + mysql.escape(req.params.userToken) + ", " + mysql.escape(results[0].org_id) + ");";
+      var apnQuery = "DELETE FROM Apn WHERE device_token=" + mysql.escape(req.params.apnToken)+"; INSERT INTO Apn (device_token, user_token, user_org) VALUES (" + mysql.escape(req.params.apnToken) + ", " + mysql.escape(req.params.userToken) + ", " + mysql.escape(results[0].org_id) + ");";
       console.log(apnQuery);
       connection.query(apnQuery, function(err, results) {
         if(err)
