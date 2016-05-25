@@ -121,7 +121,7 @@ function createUser (req, res, next) {
 
 
 function getReports (req, res, next){
-    var query = "SELECT *, Reports.id as rid, UNIX_TIMESTAMP(time) AS rtime, UNIX_TIMESTAMP(updateTime) AS utime FROM Reports Left JOIN Status ON Reports.id = Status.reportId WHERE Status.mostRecent = 1";
+    var query = "SELECT *, Reports.id as rid, UNIX_TIMESTAMP(time) AS rtime, UNIX_TIMESTAMP(updateTime) AS utime FROM Reports Left JOIN Status ON Reports.id = Status.reportId WHERE Status.mostRecent = 1 ORDER BY rtime DESC";
     connection.query(query, function(err,rows) {
 	if (err) throw err;
 	var results = rows;
@@ -259,12 +259,12 @@ function createReport(req, res, next) {
 					   }
 				       }
 
-				       connection.query(queryString, function(err, results3) {
-					   if(err){
-					       throw err;
-					   }
-					   res.send(200);
-					   next();
+				       connection.query(queryString, function(err, results) {
+        				   if(err){
+        				       throw err;
+        				   }
+        				   res.send(200);
+        				   next();
 				       });
 				   } else {
 				       res.send(200);
@@ -276,7 +276,15 @@ function createReport(req, res, next) {
 				       if(err)
 					   throw err;
 				   })
-			       })
+
+           var apnQuery = "SELECT Apn.device_token FROM Apn JOIN Orgs ON Orgs.id=Apn.user_org WHERE Orgs.city=" + mysql.escape(city);
+			       connection.query(apnQuery, function(err, results) {
+              if(err) throw err;
+              for(i = 0; i < results.length; i++) {
+                send_apn(results[i].device_token, "Animal reported", "Rescue Hero");
+              }
+             })
+             })
 	     })
     .catch(function(err) {
         res.send(415); //Not a valid longitude and latitude
