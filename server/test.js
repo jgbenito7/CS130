@@ -15,13 +15,11 @@ var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra );
 var apn_options = {
      "cert": "./certs/apn_cert.cer",
      "key":  "./certs/apn_private.pem",
-     "debug": true
+     "debug": true,
+     "errorCallback": function(err){console.log(err);}
  };
 
  apn_connection = new apns.Connection(apn_options);
-
-
-
 
 
 var connection  = mysql.createPool({
