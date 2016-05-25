@@ -39,7 +39,8 @@ var connection  = mysql.createPool({
     user  : 'root',
     password  : 'root',
     database  : 'cs130',
-    port  : 3306
+    port  : 3306,
+    multipleStatements: true
 });
 
 var ssl = {
