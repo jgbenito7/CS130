@@ -294,7 +294,7 @@ function rebootServer(req, res, next) {
 
 function testApn(req,res,next){
   apn_notification = new apns.Notification();
-  apn_notification.device = new apns.Device("3a9fb42ed9edd7aa2e573a30e843bb18760d326fb53d7e82dd5755dcc82e68b9");
+  apn_notification.device = new apns.Device("efb825511b287691cfc49213f93230fca4f19342f5a19e7c777156751fa74124");
   apn_notification.alert = "Hello World !";
 
   apn_connection.sendNotification(apn_notification);
