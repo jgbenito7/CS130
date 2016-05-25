@@ -164,19 +164,19 @@ function getStatus(req,res,next)
 function updateStatus(req,res,next)
 {
   console.log("in update status!");
-  var tokenCheckQuery = "SELECT * FROM Users WHERE token = " + mysql.escape(req.params.token) + ";";
+  var tokenCheckQuery = "SELECT * FROM Users WHERE token = " + mysql.escape(req.body.token) + ";";
   connection.query(tokenCheckQuery, function(err1,results1){
     if(err1)
       throw err1;
     if(results1.length >= 1){
       //Change all current reports to be NOT the most recent
-      var query = "UPDATE Status SET mostRecent = 0 WHERE reportId = " + mysql.escape(req.params.reportId) + ";";
+      var query = "UPDATE Status SET mostRecent = 0 WHERE reportId = " + mysql.escape(req.body.reportId) + ";";
       connection.query(query, function(err, results){
       if(err)
         throw err;
       })
 
-      var updateQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + mysql.escape(req.params.reportId) + ", " +  mysql.escape(req.params.status) + ", 1);";
+      var updateQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + mysql.escape(req.body.reportId) + ", " +  mysql.escape(req.body.status) + ", 1);";
       connection.query(updateQuery, function(err, results){
         if(err)
           throw err;
@@ -385,7 +385,7 @@ server.use(restify.bodyParser ({mapParams: false,
 server.get('/getCorrectOrg/:city', getCorrectOrg);
 server.get('/getRescuers/:city', getRescuers);
 server.get('/getStatus/:reportId', getStatus);
-server.put('/updateStatus/:reportId/:status/:token', updateStatus);
+server.put('/status', updateStatus);
 server.post('/users', createUser);
 server.get('/reboot/rescuehero', rebootServer);
 server.get('/reports', getReports);
