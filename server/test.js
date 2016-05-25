@@ -341,6 +341,9 @@ function testApn(req,res,next){
   pushNotifier.init();
   //use valid device token to get it working
   pushNotifier.process({token:'84122017ee473f40686c1e07b71c35cbfc3ab9d2cbecc97953a215b415a2d5eb', message:'Test message', from: 'sender'});
+  res.send(200);
+  return next();
+
 }
 
 
