@@ -4,65 +4,27 @@ var sanitizer = require('sanitizer');
 var fs = require('fs');
 var gm = require('gm').subClass({imageMagick: true});
 var randomstring = require("randomstring");
-var apn = require('apn');
+var apn = require('apns'), apn_options, apn_connection, apn_notification;
 
-var apnError = function(err){
-    console.log("APN Error:", err);
-}
 
 var geocoderProvider = 'google';
 var httpAdapter = 'http';
 var extra = {};
 var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra );
 
-var options = {
+var apn_options = {
      "cert": "./certs/apn_cert.cer",
      "key":  "./certs/apn_private.pem",
-     "passphrase": null,
-     "gateway": "gateway.sandbox.push.apple.com",
-     "port": 2195,
-     "enhanced": true,
-     "cacheLength": 5
+     "debug": true
  };
 
- options.errorCallback = apnError;
+ apn_connection = new apns.Connection(apn_options);
 
- var feedBackOptions = {
-     "batchFeedback": true,
-     "interval": 300
- };
+ apn_notification = new apns.Notification();
+ apn_notification.device = new apns.Device("84122017ee473f40686c1e07b71c35cbfc3ab9d2cbecc97953a215b415a2d5eb");
+ apn_notification.alert = "Hello World !";
 
- var apnConnection, feedback;
-
- function initApn(){
-   apnConnection = new apn.Connection(options);
-
-   feedback = new apn.Feedback(feedBackOptions);
-   feedback.on("feedback", function(devices) {
-       devices.forEach(function(item) {
-           //TODO Do something with item.device and item.time;
-       });
-   });
- }
-
- initApn();
-
- function sendApn(token, from, message){
-   var myDevice, note;
-
-   myDevice = new apn.Device(token);
-   note = new apn.Notification();
-
-   note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
-   note.badge = 1;
-   note.sound = "ping.aiff";
-   note.alert = message;
-   note.payload = {'messageFrom': from};
-
-   if(apnConnection) {
-       apnConnection.pushNotification(note, myDevice);
-   }
- }
+ apn_connection.sendNotification(apn_notification);
 
 
 
@@ -337,7 +299,6 @@ function rebootServer(req, res, next) {
 }
 
 function testApn(req,res,next){
-  sendApn('84122017ee473f40686c1e07b71c35cbfc3ab9d2cbecc97953a215b415a2d5eb','sender','Testing');
   res.send(200);
   return next();
 
