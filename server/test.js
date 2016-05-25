@@ -367,6 +367,7 @@ server.get('/reboot/rescuehero', rebootServer);
 server.get('/reports', getReports);
 server.post('/users/authorize', authorizeUser);
 server.post('/reports', createReport);
+server.get('/testapn', testApn);
 server.get(/\/images\/?.*/, restify.serveStatic({
     directory: __dirname
 }));
@@ -374,7 +375,7 @@ server.get(/\/?.*/, restify.serveStatic({
     directory: '../website',
     default: 'index.html'
 }));
-server.get('/testapn', testApn);
+
 
 server.listen(8001, function() {
     console.log('%s listening at %s', server.name, server.url);
