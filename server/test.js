@@ -47,8 +47,6 @@ var ssl = {
     cert: fs.readFileSync('./certs/ssl.crt', 'utf8'),
 };
 
-
-function init_apn(){
   apnConnection = new apn.Connection(options);
 
        feedback = new apn.Feedback(feedBackOptions);
@@ -57,7 +55,7 @@ function init_apn(){
                //TODO Do something with item.device and item.time;
            });
        });
-}
+
 
 function send_apn(token, message, from){
   var myDevice, note;
