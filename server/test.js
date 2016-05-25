@@ -281,6 +281,7 @@ function createReport(req, res, next) {
 			       connection.query(apnQuery, function(err, results) {
               if(err) throw err;
               for(i = 0; i < results.length; i++) {
+                console.log("sending " + results[i].device_token);
                 send_apn(results[i].device_token, "Animal reported", "Rescue Hero");
               }
              })
