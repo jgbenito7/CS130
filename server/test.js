@@ -205,13 +205,7 @@ function authorizeUser (req, res, next) {
 	else if (results.length < 1)
 	    res.send({"loggedIn":false});
 	else {
-    var newtoken = randomstring.generate(255);
-    var updateTokenQuery = "UPDATE Users SET token = \"" + newtoken + "\" WHERE email = " + mysql.escape(req.body.email) + ";";
-    connection.query(updateTokenQuery, function(err,reults){
-      if(err)
-        throw err;
-    })
-	  res.send({"loggedIn":true, "token":newtoken});
+	  res.send({"loggedIn":true, "token":results[0].token});
   }
 	next();
     });
