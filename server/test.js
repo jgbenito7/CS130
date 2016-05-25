@@ -333,7 +333,6 @@ function registerDevice(req, res, next) {
     } else {
       var apnQuery1 = "DELETE FROM Apn WHERE device_token=" + mysql.escape(req.params.apnToken)+";";
       var apnQuery2 = "INSERT INTO Apn (device_token, user_token, user_org) VALUES (" + mysql.escape(req.params.apnToken) + ", " + mysql.escape(req.params.userToken) + ", " + mysql.escape(results[0].org_id) + ");";
-      console.log(apnQuery);
       connection.query(apnQuery1, function(err, results) {
         if(err)
           throw err;
