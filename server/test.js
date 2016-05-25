@@ -121,7 +121,7 @@ function createUser (req, res, next) {
 
 
 function getReports (req, res, next){
-    var query = "SELECT *, Reports.id as rid, UNIX_TIMESTAMP(time) AS rtime, UNIX_TIMESTAMP(updateTime) AS utime FROM Reports Left JOIN Status ON Reports.id = Status.reportId WHERE Status.mostRecent = 1 ORDER BY rtime DESC";
+    var query = "SELECT *, Reports.id as rid, UNIX_TIMESTAMP(time) AS rtime, UNIX_TIMESTAMP(updateTime) AS utime FROM Reports Left JOIN Status ON Reports.id = Status.reportId WHERE Status.mostRecent = 1 ORDER BY utime DESC";
     connection.query(query, function(err,rows) {
 	if (err) throw err;
 	var results = rows;
