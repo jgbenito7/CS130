@@ -174,14 +174,15 @@ function updateStatus(req,res,next)
       connection.query(query, function(err, results){
       if(err)
         throw err;
+        var updateQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + mysql.escape(req.body.reportId) + ", " +  mysql.escape(req.body.status) + ", 1);";
+        connection.query(updateQuery, function(err, results){
+          if(err)
+            throw err;
+          res.send(200);
+        })
       })
 
-      var updateQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + mysql.escape(req.body.reportId) + ", " +  mysql.escape(req.body.status) + ", 1);";
-      connection.query(updateQuery, function(err, results){
-        if(err)
-          throw err;
-        res.send(200);
-      })
+      
 
     } //end valid token
     else {
