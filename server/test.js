@@ -20,11 +20,7 @@ var apn_options = {
 
  apn_connection = new apns.Connection(apn_options);
 
- apn_notification = new apns.Notification();
- apn_notification.device = new apns.Device("84122017ee473f40686c1e07b71c35cbfc3ab9d2cbecc97953a215b415a2d5eb");
- apn_notification.alert = "Hello World !";
 
- apn_connection.sendNotification(apn_notification);
 
 
 
@@ -299,6 +295,11 @@ function rebootServer(req, res, next) {
 }
 
 function testApn(req,res,next){
+  apn_notification = new apns.Notification();
+  apn_notification.device = new apns.Device("84122017ee473f40686c1e07b71c35cbfc3ab9d2cbecc97953a215b415a2d5eb");
+  apn_notification.alert = "Hello World !";
+
+  apn_connection.sendNotification(apn_notification);
   res.send(200);
   return next();
 
