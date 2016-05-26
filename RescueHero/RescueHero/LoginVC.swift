@@ -12,6 +12,9 @@ import Foundation
 
 class LoginVC: UIViewController {
     
+    
+    let application: UIApplication = UIApplication.sharedApplication()
+    
     var keyboardUp = false
     func keyboardVisible(notif: NSNotification) {
         print("keyboardVisible")
@@ -39,6 +42,10 @@ class LoginVC: UIViewController {
         password_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
         password_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
         signin_button.layer.cornerRadius = 5;
+        
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,7 +63,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var email_txt: UITextField!
     @IBOutlet weak var password_txt: UITextField!
     @IBAction func login_tapped(sender: UIButton) {
-        var signup_success = false
+
             let params = ["email": email_txt.text, "password": password_txt.text]
             do {
                 let opt = try HTTP.POST("https://rescuehero.org/users/authorize", parameters: params)
@@ -65,8 +72,8 @@ class LoginVC: UIViewController {
                         print("error: \(err.localizedDescription)")
                         return
                     }else{
-                        print(response.data)
-                        var error: NSError?
+                        //print(response.data)
+
                         let jsonData: NSData = response.data
                         
                         do {
@@ -78,6 +85,25 @@ class LoginVC: UIViewController {
                                 let defaults = NSUserDefaults.standardUserDefaults()
                                 defaults.setValue(token, forKey: "token")
                                 defaults.synchronize()
+                                
+                                if((defaults.valueForKey("apn_token")) != nil){
+                                    //Save the apn token
+                                    let params = ["userToken": token, "apnToken": defaults.valueForKey("apn_token")]
+                                    let req = try HTTP.POST("https://rescuehero.org/apn", parameters: params)
+                                    req.start { response in
+                                        if let err = response.error{
+                                            print("error: \(err.localizedDescription)")
+                                            return
+                                        }else{
+                                            print(response.data)
+                                            
+                                        }
+                                    }
+                                    
+                                }
+                                
+ 
+                                
                                 //Login Succeeded, Segue to table view
                                 NSOperationQueue.mainQueue().addOperationWithBlock {
                                     self.performSegueWithIdentifier("signinwithtoken", sender: self)
@@ -135,5 +161,7 @@ class LoginVC: UIViewController {
             }
         
     }
+    
+
 
 }

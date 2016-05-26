@@ -103,7 +103,7 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qco-Za-hMm">
                                         <rect key="frame" x="40" y="407" width="270" height="40"/>
-                                        <color key="backgroundColor" red="0.81403386780104714" green="0.41966720733595897" blue="0.43371021237154211" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.2305951862" green="0.23107810570000001" blue="0.24842522910000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="BK6-Ze-hhY"/>
                                             <constraint firstAttribute="width" constant="270" id="oUl-Pu-R7G"/>
@@ -113,20 +113,26 @@
                                         <state key="normal" title="Get Directions">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="getDirections:" destination="h8h-mx-f2F" eventType="touchUpInside" id="mVT-Po-kWz"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efy-96-FFB">
-                                        <rect key="frame" x="40" y="457" width="270" height="40"/>
-                                        <color key="backgroundColor" red="0.0" green="0.75619682591623039" blue="0.38824506655733804" alpha="1" colorSpace="calibratedRGB"/>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mhE-Iy-hgK">
+                                        <rect key="frame" x="42" y="457" width="266" height="41"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="cu2-1X-TVr"/>
-                                            <constraint firstAttribute="width" constant="270" id="iag-FY-IjM"/>
+                                            <constraint firstAttribute="width" constant="266" id="UeD-bw-56c"/>
+                                            <constraint firstAttribute="height" constant="40" id="kwj-hB-FpO"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
-                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="Respond">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
+                                        <segments>
+                                            <segment title="Active"/>
+                                            <segment title="On The Way"/>
+                                            <segment title="Rescued"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="segmentChange:" destination="h8h-mx-f2F" eventType="valueChanged" id="WlU-tv-ooP"/>
+                                        </connections>
+                                    </segmentedControl>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="5mI-oU-k5z" firstAttribute="centerX" secondItem="51V-WI-u1m" secondAttribute="centerX" id="srf-GH-t93"/>
@@ -148,6 +154,8 @@
                     <connections>
                         <outlet property="image" destination="5mI-oU-k5z" id="OiU-HC-MkL"/>
                         <outlet property="notes" destination="Xrt-FP-idq" id="3K0-1X-Iby"/>
+                        <outlet property="seg_select" destination="mhE-Iy-hgK" id="8bU-vW-Mr5"/>
+                        <outlet property="time" destination="UX5-g0-XJt" id="cOD-ua-URY"/>
                         <outlet property="type" destination="ccu-PM-Ouu" id="clE-QG-IiK"/>
                     </connections>
                 </viewController>
@@ -177,10 +185,10 @@
                                             <rect key="frame" x="8" y="8" width="584" height="90"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cellType" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qDt-CF-i9K">
-                                                    <rect key="frame" x="86" y="8" width="192" height="22"/>
+                                                    <rect key="frame" x="86" y="8" width="140" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21.5" id="8Zi-2w-6vk"/>
-                                                        <constraint firstAttribute="width" constant="192" id="tjo-rl-mFY"/>
+                                                        <constraint firstAttribute="width" constant="140" id="tjo-rl-mFY"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
@@ -201,10 +209,22 @@
                                                         <constraint firstAttribute="width" constant="70" id="TrE-6C-6bN"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cellNotes " lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1NX-Ql-tp9">
-                                                    <rect key="frame" x="86" y="34" width="300" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cellStatus" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tZV-LE-Koz">
+                                                    <rect key="frame" x="492" y="56" width="84" height="22"/>
+                                                    <color key="backgroundColor" red="1" green="0.2131014514" blue="0.2631149465" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="300" id="Ubd-9D-P94"/>
+                                                        <constraint firstAttribute="width" constant="84" id="5lg-qi-l2t"/>
+                                                        <constraint firstAttribute="height" constant="22" id="xQt-Kb-UCm"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cellNotes " lineBreakMode="wordWrap" numberOfLines="3" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1NX-Ql-tp9">
+                                                    <rect key="frame" x="86" y="28" width="160" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="QDh-Eq-U0h"/>
+                                                        <constraint firstAttribute="width" constant="160" id="Ubd-9D-P94"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 </label>
@@ -214,12 +234,14 @@
                                             <constraints>
                                                 <constraint firstItem="qDt-CF-i9K" firstAttribute="firstBaseline" secondItem="3vD-bU-xWY" secondAttribute="firstBaseline" id="3DC-tT-TEq"/>
                                                 <constraint firstItem="qDt-CF-i9K" firstAttribute="leading" secondItem="1NX-Ql-tp9" secondAttribute="leading" id="4BH-7x-BgO"/>
+                                                <constraint firstAttribute="bottom" secondItem="1NX-Ql-tp9" secondAttribute="bottom" constant="12" id="6lx-Zq-rbx"/>
                                                 <constraint firstItem="XeN-b6-Rvb" firstAttribute="leading" secondItem="3WM-pd-3sa" secondAttribute="leadingMargin" id="HuM-Bu-tMa"/>
-                                                <constraint firstItem="1NX-Ql-tp9" firstAttribute="centerY" secondItem="XeN-b6-Rvb" secondAttribute="centerY" id="NHa-Q7-hWd"/>
                                                 <constraint firstItem="3vD-bU-xWY" firstAttribute="top" secondItem="XeN-b6-Rvb" secondAttribute="top" id="OoA-8R-Yll"/>
                                                 <constraint firstItem="1NX-Ql-tp9" firstAttribute="leading" secondItem="XeN-b6-Rvb" secondAttribute="trailing" constant="8" symbolic="YES" id="PI6-8b-1Xo"/>
                                                 <constraint firstItem="3vD-bU-xWY" firstAttribute="trailing" secondItem="3WM-pd-3sa" secondAttribute="trailingMargin" id="XFi-oG-0Hq"/>
                                                 <constraint firstItem="XeN-b6-Rvb" firstAttribute="top" secondItem="3WM-pd-3sa" secondAttribute="topMargin" id="dfV-Rp-RgF"/>
+                                                <constraint firstItem="tZV-LE-Koz" firstAttribute="trailing" secondItem="3vD-bU-xWY" secondAttribute="trailing" id="oCj-b0-XtX"/>
+                                                <constraint firstItem="tZV-LE-Koz" firstAttribute="bottom" secondItem="XeN-b6-Rvb" secondAttribute="bottom" id="wm7-R2-jJp"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -235,6 +257,7 @@
                                 <connections>
                                     <outlet property="cellImage" destination="XeN-b6-Rvb" id="ASM-fk-gw3"/>
                                     <outlet property="cellNotes" destination="1NX-Ql-tp9" id="8qV-Pc-lqm"/>
+                                    <outlet property="cellStatus" destination="tZV-LE-Koz" id="ZWm-sB-5rb"/>
                                     <outlet property="cellTime" destination="3vD-bU-xWY" id="e6T-ub-FaX"/>
                                     <outlet property="cellType" destination="qDt-CF-i9K" id="wGb-l4-KBo"/>
                                     <outlet property="table_cell" destination="3WM-pd-3sa" id="n1k-fV-5X0"/>
@@ -620,4 +643,5 @@
         <segue reference="Bav-bg-bP2"/>
         <segue reference="seI-ke-eVm"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

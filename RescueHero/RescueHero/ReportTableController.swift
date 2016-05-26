@@ -16,7 +16,10 @@ class ReportTableController: UITableViewController {
     var cellNotesPass: String!
     var cellImagePass: UIImage!
     var cellImageURLPass: String!
-    
+    var cellStatusPass: String!
+    var cellIdPass: Int?
+    var cellLatPass: Double?
+    var cellLongPass: Double?
     
     
     override func  preferredStatusBarStyle()-> UIStatusBarStyle {
@@ -35,9 +38,7 @@ class ReportTableController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.refreshControl?.addTarget(self, action: "handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
-        if(Reachability.isConnectedToNetwork()) {
-            handleRefresh(self.refreshControl!)
-        }
+
         //self.navigationController?.navigationBar.barTintColor = UIColor(red: 21, green: 40, blue: 129, alpha: 1)
         //self.navigationController?.navigationBar.translucent = false
         //self.tableView.backgroundView = UIImageView(image: UIImage(named: "gradient-bg"))
@@ -46,6 +47,8 @@ class ReportTableController: UITableViewController {
         let image = UIImage(named: "RescueHeroLogo")
         imageView.image = image
         navigationItem.titleView = imageView
+        
+        
         //self.navigationController?.navigationBar.translucent = false
         //self.navigationController?.setNavigationBarHidden(false, animated: true)
         //self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
@@ -63,6 +66,9 @@ class ReportTableController: UITableViewController {
         //self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 21/255, green: 140/255, blue: 128/255, alpha: 1)
         self.navigationController?.navigationBar.alpha = 1;
+        if(Reachability.isConnectedToNetwork()) {
+            handleRefresh(self.refreshControl!)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -91,7 +97,7 @@ class ReportTableController: UITableViewController {
     }
     
     func readJSONObject(object: [AnyObject]) {
-        print(object)
+        //print(object)
         data = object as! [Dictionary<String,AnyObject>];
     }
     
@@ -114,6 +120,10 @@ class ReportTableController: UITableViewController {
         cellImagePass = currentCell.cellImage.image
         cellNotesPass = currentCell.cellNotes.text
         cellImageURLPass = currentCell.cellImageURL
+        cellStatusPass = currentCell.cellStatus.text
+        cellIdPass = currentCell.reportID
+        cellLatPass = currentCell.cellLat
+        cellLongPass = currentCell.cellLong
         performSegueWithIdentifier("segueToAnimal", sender: self)
         
     }
@@ -125,33 +135,60 @@ class ReportTableController: UITableViewController {
             viewController._cellNotes = cellNotesPass
             viewController._cellTime = cellTimePass
             viewController._cellURLImage = cellImageURLPass
+            viewController._cellStatus = cellStatusPass
+            viewController._cellId = cellIdPass
+            viewController._cellLat = cellLatPass
+            viewController._cellLong = cellLongPass
         }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ReportTableCell
         let obj = data[indexPath.row]
-        print(obj)
-//        cell.layer.cornerRadius = 10
-//        cell.layer.borderColor = UIColor.init(red: 30/255, green: 30/255, blue: 30/255, alpha: 1).CGColor
-//        cell.layer.borderWidth = 4
         cell.cellNotes.text = obj["notes"] as? String
-        cell.cellNotes.numberOfLines = 2
+        cell.cellNotes.numberOfLines = 3
         cell.cellNotes.lineBreakMode = NSLineBreakMode.ByWordWrapping
         cell.cellNotes.preferredMaxLayoutWidth = 300
         cell.cellType.text = obj["type"] as? String
-        print(cell.cellType.text)
+        cell.reportID = obj["reportId"] as? Int
+        cell.cellLat = obj["latitude"] as? Double
+        cell.cellLong = obj["longitude"] as? Double
+        //print(obj["latitude"])
+        //print(cell.cellLong)
+        
+        //print(cell.reportID)
+        
+        cell.cellStatus.layer.masksToBounds = true
+        cell.cellStatus.layer.cornerRadius = 5;
+
+        cell.table_cell.layer.shadowColor = UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 0.6).CGColor
+        cell.table_cell.layer.shadowOpacity = 1
+        cell.table_cell.layer.shadowOffset = CGSizeZero
+        cell.table_cell.layer.shadowRadius = 1
+        
+        //cell.table_cell.layer.shouldRasterize = true
+        
+        //print(obj["lati"])
+        
+        if(obj["status"] as? String == "Active"){
+            cell.cellStatus.text = "Active"
+            cell.cellStatus.backgroundColor = UIColor(red: 215/255, green: 60/255, blue: 10/255, alpha: 1)
+        }else if(obj["status"] as? String == "OnTheWay"){
+            cell.cellStatus.text = "On The Way"
+            cell.cellStatus.backgroundColor = UIColor(red: 232/255, green: 205/255, blue: 31/255, alpha: 1)
+        }else if(obj["status"] as? String == "Rescued"){
+            cell.cellStatus.text = "Rescued"
+            cell.cellStatus.backgroundColor = UIColor(red: 0/255, green: 201/255, blue: 52/255, alpha: 1)
+        }
+        
         let utime = obj["utime"] as! NSNumber
         let nsti_time = NSTimeInterval(utime.doubleValue)
         let date = NSDate(timeIntervalSince1970: nsti_time)
         
         var dateString = timeAgoSinceDate(date, numericDates: true)
         
-        //var dateFormatter = NSDateFormatter()
-        //dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
-        
-        
-        //var dateString = dateFormatter.stringFromDate(date)
+
+
         cell.cellTime.text = dateString
         var url = "https://www.rescuehero.org/images/thumb/"
         let imageURLs = obj["files"] as? [String]

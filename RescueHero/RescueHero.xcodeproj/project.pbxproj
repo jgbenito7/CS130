@@ -25,7 +25,6 @@
 		FC36CEB31CCB41940079404C /* RescueHeroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC36CEB21CCB41940079404C /* RescueHeroTests.swift */; };
 		FC36CEBE1CCB41940079404C /* RescueHeroUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC36CEBD1CCB41940079404C /* RescueHeroUITests.swift */; };
 		FC8A41571CDBF4CD003C71DA /* AnimalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8A41561CDBF4CD003C71DA /* AnimalVC.swift */; };
-		FC8A41591CDBF7EA003C71DA /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8A41581CDBF7EA003C71DA /* Animal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -181,7 +180,6 @@
 		FC36CEBD1CCB41940079404C /* RescueHeroUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RescueHeroUITests.swift; sourceTree = "<group>"; };
 		FC36CEBF1CCB41940079404C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC8A41561CDBF4CD003C71DA /* AnimalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimalVC.swift; sourceTree = "<group>"; };
-		FC8A41581CDBF7EA003C71DA /* Animal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,7 +272,6 @@
 				FC21A8161CCE062A007B1476 /* SignupVC.swift */,
 				1638206C1CD341B000A3FB29 /* Reachability.swift */,
 				1638206E1CD34D2400A3FB29 /* ReportTableCell.swift */,
-				FC8A41581CDBF7EA003C71DA /* Animal.swift */,
 				03BCBE8E1CE6B24400CC322A /* Constants.swift */,
 			);
 			path = RescueHero;
@@ -533,7 +530,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC21A8171CCE062A007B1476 /* SignupVC.swift in Sources */,
-				FC8A41591CDBF7EA003C71DA /* Animal.swift in Sources */,
 				FC36CEA01CCB41940079404C /* ReportTableController.swift in Sources */,
 				1638206F1CD34D2400A3FB29 /* ReportTableCell.swift in Sources */,
 				FC36CE9E1CCB41940079404C /* AppDelegate.swift in Sources */,

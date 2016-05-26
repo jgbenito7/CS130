@@ -56,7 +56,7 @@ class SignupVC: UIViewController {
     }
 
     @IBAction func signup_tapped(sender: AnyObject) {
-        animateViewMoving(false, moveValue: 130)
+        //animateViewMoving(false, moveValue: 130)
         var signup_success = false
         if(password_txt.text == passconfirm_txt.text){
             let params = ["orgPassword": orgPassword_txt.text, "email": email_txt.text, "password": password_txt.text]
@@ -122,14 +122,14 @@ class SignupVC: UIViewController {
     
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        animateViewMoving(true, moveValue: 130)
+        //animateViewMoving(true, moveValue: 130)
         if(textField.text == ""){
             textField.placeholder = nil;
         }
         textField.tintColor = UIColor.init(red: 80/255, green: 80/255, blue: 80/255, alpha: 0.7)
     }
     func textFieldDidEndEditing(textField: UITextField) {
-        animateViewMoving(false, moveValue: 130)
+        //animateViewMoving(false, moveValue: 130)
         if(textField.text == ""){
             if textField.tag == 1{
                 textField.placeholder = "Organization Password"
