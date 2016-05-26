@@ -275,7 +275,7 @@ function createReport(req, res, next) {
 				       next();
 				   }
 
-				   var reportQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + insertId + ", \'Reported\', 1);";
+				   var reportQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + insertId + ", \'Active\', 1);";
 				   connection.query(reportQuery, function(err, results) {
 				       if(err)
 					   throw err;
