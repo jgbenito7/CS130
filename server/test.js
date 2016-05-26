@@ -77,7 +77,7 @@ function send_apn(token, message, from){
 send_apn("efb825511b287691cfc49213f93230fca4f19342f5a19e7c777156751fa74124","whats up yo","joey");
 
 function createUser (req, res, next) {
-    if(!validateInputs(req.body.orgPassword) || !validateInputs(req.body.email) || !validateInputs(req.body.password)){ 
+    if(!validateInputs(req.body.orgPassword) || !validateInputs(req.body.email) || !validateInputs(req.body.password)){
         res.send(414); //Invalid inputs
         next();
         return;
@@ -91,7 +91,7 @@ function createUser (req, res, next) {
 
   var token = randomstring.generate(255);
   var query = "SELECT id from Orgs WHERE password = SHA2(" + mysql.escape(req.body.orgPassword)+ ", 256);";
-  
+
 
   connection.query(query, function(err,results) {
     if(results.length == 0) {
@@ -220,7 +220,7 @@ function updateStatus(req,res,next)
         })
       })
 
-      
+
 
     } //end valid token
     else {
@@ -299,12 +299,16 @@ function createReport(req, res, next) {
 
             var city = res_city[0].city;
 
+
+
 			var query = "INSERT INTO Reports (type, notes, longitude, latitude, city) VALUES("+
 			       mysql.escape(req.body.animal_type)+
 			       "," + mysql.escape(req.body.animal_notes) +
 			       "," + mysql.escape(parseFloat(req.body.longitude)) +
 			       "," + mysql.escape(parseFloat(req.body.latitude)) +
 			       "," + mysql.escape(city) + ");"
+
+console.log(query);
 
 
 	      connection.query(query, function(err, results) {
@@ -324,6 +328,8 @@ function createReport(req, res, next) {
 					   }
 				       }
 
+               console.log(queryString);
+
 				       connection.query(queryString, function(err, results) {
         				   if(err){
         				       throw err;
@@ -337,16 +343,18 @@ function createReport(req, res, next) {
 				   }
 
 				   var reportQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + insertId + ", \'Active\', 1);";
+           console.log(reportQuery);
 				   connection.query(reportQuery, function(err, results) {
 				       if(err)
 					   throw err;
 				   })
 
            var apnQuery = "SELECT Apn.device_token FROM Apn JOIN Orgs ON Orgs.id=Apn.user_org WHERE Orgs.city=" + mysql.escape(city);
+           console.log(apnQuery);
 			       connection.query(apnQuery, function(err, results) {
               if(err) throw err;
               for(i = 0; i < results.length; i++) {
-                console.log("sending " + results[i].device_token);
+                //console.log("sending " + results[i].device_token);
                 send_apn(results[i].device_token, "Animal reported", "Rescue Hero");
               }
              })
