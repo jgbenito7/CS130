@@ -390,7 +390,7 @@ function getRescuers(req,res,next) {
     }
 
     var city = mysql.escape(req.params.city);
-    var query = "SELECT * FROM Users WHERE org_id = (SELECT id FROM Orgs WHERE city = " + city + ");";
+    var query = "SELECT * FROM Users JOIN Orgs ON Orgs.id = Users.org_id WHERE Orgs.city = " + city + ";";
     connection.query(query, function(err,results){
 	if(err)
 	    throw err;
