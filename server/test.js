@@ -347,18 +347,20 @@ console.log(query);
 				   connection.query(reportQuery, function(err, results) {
 				       if(err)
 					   throw err;
-				   })
+				   });
 
            var apnQuery = "SELECT Apn.device_token FROM Apn JOIN Orgs ON Orgs.id=Apn.user_org WHERE Orgs.city=" + mysql.escape(city);
            console.log(apnQuery);
 			       connection.query(apnQuery, function(err, results) {
               if(err) throw err;
               for(i = 0; i < results.length; i++) {
-                //console.log("sending " + results[i].device_token);
+                console.log("sending " + results[i].device_token);
                 send_apn(results[i].device_token, "Animal reported", "Rescue Hero");
               }
-             })
-             })
+              res.send(200);
+              next();
+            });
+          });
 	     })
     .catch(function(err) {
         res.send(415); //Not a valid longitude and latitude
