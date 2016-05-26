@@ -77,11 +77,21 @@ function send_apn(token, message, from){
 send_apn("efb825511b287691cfc49213f93230fca4f19342f5a19e7c777156751fa74124","whats up yo","joey");
 
 function createUser (req, res, next) {
+    if(!validateInputs(req.body.orgPassword) || !validateInputs(req.body.email) || !validateInputs(req.body.password)){ 
+        res.send(414); //Invalid inputs
+        next();
+        return;
+    }
+    if (!validateEmail(req.body.email))
+    {
+         res.send(415); //Invalid email
+        next();
+        return;
+    }
 
   var token = randomstring.generate(255);
   var query = "SELECT id from Orgs WHERE password = SHA2(" + mysql.escape(req.body.orgPassword)+ ", 256);";
-  //var query = "SELECT id from Orgs WHERE password = " + mysql.escape(req.body.orgPassword)+ ";";
-
+  
 
   connection.query(query, function(err,results) {
     if(results.length == 0) {
@@ -118,6 +128,20 @@ function createUser (req, res, next) {
 
 }
 
+function validateInputs(value)
+{
+    if(value == undefined || value == null){
+        return false;
+    }
+    else return true;
+}
+
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
 
 
 function getReports (req, res, next){
@@ -149,6 +173,11 @@ function getReports (req, res, next){
 
 function getStatus(req,res,next)
 {
+    if(!validateInputs(req.params.reportId)){
+        res.send(414); //Invalid inputs
+        next();
+        return;
+    }
     var query = "SELECT *, UNIX_TIMESTAMP(updateTime) AS etime FROM Status WHERE reportId = " + mysql.escape(req.params.reportId) +" ;";
     connection.query(query, function(err, results){
 	if(err)
@@ -163,6 +192,12 @@ function getStatus(req,res,next)
 
 function updateStatus(req,res,next)
 {
+    if(!validateInputs(req.body.token) || !validateInputs(req.body.reportId) || !validateInputs(req.body.status)){
+        res.send(414); //Invalid inputs
+        next();
+        return;
+    }
+
   console.log("in update status!");
   var tokenCheckQuery = "SELECT * FROM Users WHERE token = " + mysql.escape(req.body.token) + ";";
   console.log(tokenCheckQuery);
@@ -200,6 +235,18 @@ function updateStatus(req,res,next)
 
 
 function authorizeUser (req, res, next) {
+  if(!validateInputs(req.body.password) || !validateInputs(req.body.email)){
+        res.send(414); //Invalid inputs
+        next();
+        return;
+    }
+
+    if (!validateEmail(req.body.email))
+    {
+        res.send(415); //Invalid email
+        next();
+        return;
+    }
 
     var query = "SELECT * FROM Users WHERE password = SHA2(" + mysql.escape(req.body.password) + ", 256) AND email = " + mysql.escape(req.body.email) + ";";
     console.log(query);
@@ -217,6 +264,20 @@ function authorizeUser (req, res, next) {
 }
 
 function createReport(req, res, next) {
+    if(!validateInputs(req.body.longitude) || !validateInputs(req.body.latitude)){
+        res.send(414); //Invalid inputs
+        next();
+        return;
+    }
+    if(req.body.animal_type == null ||req.body.animal_type == undefined)
+    {
+      req.body.animal_type = "";
+    }
+    if(req.body.animal_notes == null ||req.body.animal_notes == undefined)
+    {
+      req.body.animal_notes = "";
+    }
+
     var filenames = [];
     var counter = 0;
     for(i in req.files) {
@@ -298,7 +359,14 @@ function createReport(req, res, next) {
 }
 
 function getCorrectOrg(req,res,next) {
+    if(!validateInputs(req.params.city)){
+        res.send(414); //Invalid inputs
+        next();
+        return;
+    }
+
     var city = mysql.escape(req.params.city);
+
 
     var query = "SELECT * FROM Orgs WHERE city = " + city + ";";
 
@@ -315,6 +383,12 @@ function getCorrectOrg(req,res,next) {
 }
 
 function getRescuers(req,res,next) {
+    if(!validateInputs(req.params.city)){
+        res.send(414); //Invalid inputs
+        next();
+        return;
+    }
+
     var city = mysql.escape(req.params.city);
     var query = "SELECT * FROM Users WHERE org_id = (SELECT id FROM Orgs WHERE city = " + city + ");";
     connection.query(query, function(err,results){
@@ -330,6 +404,13 @@ function getRescuers(req,res,next) {
 }
 
 function registerDevice(req, res, next) {
+
+   if (!validateInputs(req.body.userToken) || !validateInputs(req.body.apnToken))
+    {
+        res.send(414); //Invalid email
+        next();
+        return;
+    }
   var query = "SELECT * FROM Users WHERE token=" + mysql.escape(req.body.userToken);
   connection.query(query, function(err, results) {
     if(err)
