@@ -165,16 +165,19 @@ function updateStatus(req,res,next)
 {
   console.log("in update status!");
   var tokenCheckQuery = "SELECT * FROM Users WHERE token = " + mysql.escape(req.body.token) + ";";
+  console.log(tokenCheckQuery);
   connection.query(tokenCheckQuery, function(err1,results1){
     if(err1)
       throw err1;
     if(results1.length >= 1){
       //Change all current reports to be NOT the most recent
       var query = "UPDATE Status SET mostRecent = 0 WHERE reportId = " + mysql.escape(req.body.reportId) + ";";
+      console.log(query);
       connection.query(query, function(err, results){
       if(err)
         throw err;
         var updateQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + mysql.escape(req.body.reportId) + ", " +  mysql.escape(req.body.status) + ", 1);";
+        console.log(updateQuery);
         connection.query(updateQuery, function(err, results){
           if(err)
             throw err;
