@@ -27,6 +27,7 @@ class AnimalVC: UIViewController {
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var image: UIImageView!
     
+    @IBOutlet weak var get_directions: UIButton!
     @IBOutlet weak var type: UILabel!
     
     @IBOutlet weak var notes: UILabel!
@@ -39,14 +40,22 @@ class AnimalVC: UIViewController {
         notes.lineBreakMode = NSLineBreakMode.ByWordWrapping
         notes.preferredMaxLayoutWidth = 300
         self.navigationController?.navigationBar.translucent = true
+        
+        
+        navigationController!.navigationBar.titleTextAttributes =
+            [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
         //self.navigationController?.navigationBar.alpha = 1
         //self.navigationController?.navigationBar.barTintColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
-                    seg_select.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Selected)
+        
+        seg_select.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Selected)
         
         seg_select.layer.cornerRadius = 5.0;
         seg_select.layer.borderColor = UIColor.whiteColor().CGColor;
         seg_select.layer.borderWidth = 0;
         seg_select.layer.masksToBounds = true;
+        
+        get_directions.layer.cornerRadius = 5.0;
 
         
         print(_cellStatus)

@@ -49,6 +49,7 @@ class ReportTableController: UITableViewController {
         navigationItem.titleView = imageView
         
         
+        
         //self.navigationController?.navigationBar.translucent = false
         //self.navigationController?.setNavigationBarHidden(false, animated: true)
         //self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
@@ -60,15 +61,18 @@ class ReportTableController: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         //self.performSegueWithIdentifier("goto_login", sender: self)
+        self.navigationController?.navigationBar.translucent = true;
+        self.navigationController?.navigationBar.backgroundColor = UIColor(red: 21/255, green: 140/255, blue: 128/255, alpha: 0.3)
+        //self.navigationController?.navigationBar.alpha = 0.3;
+        if(Reachability.isConnectedToNetwork()) {
+            handleRefresh(self.refreshControl!)
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
         //self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 21/255, green: 140/255, blue: 128/255, alpha: 1)
-        self.navigationController?.navigationBar.alpha = 1;
-        if(Reachability.isConnectedToNetwork()) {
-            handleRefresh(self.refreshControl!)
-        }
+
+        
     }
 
     override func didReceiveMemoryWarning() {

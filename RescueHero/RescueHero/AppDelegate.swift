@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let defaults = NSUserDefaults.standardUserDefaults()
         let token = defaults.objectForKey("token")
+        
+        //UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        
         print(token)
         var vc: UIViewController
         if(token != nil) {
