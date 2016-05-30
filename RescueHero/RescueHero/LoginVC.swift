@@ -38,10 +38,10 @@ class LoginVC: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginVC.keyboardHidden(_:)), name: UIKeyboardDidHideNotification, object: nil)
         self.hideKeyboardWhenTappedAround()
 //        // Do any additional setup after loading the view.
-        email_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
-        email_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
-        password_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
-        password_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
+        email_txt.addTarget(self, action: #selector(UITextFieldDelegate.textFieldDidBeginEditing(_:)), forControlEvents: UIControlEvents.EditingDidBegin)
+        email_txt.addTarget(self, action: #selector(UITextFieldDelegate.textFieldDidEndEditing(_:)), forControlEvents: UIControlEvents.EditingDidEnd)
+        password_txt.addTarget(self, action: #selector(UITextFieldDelegate.textFieldDidBeginEditing(_:)), forControlEvents: UIControlEvents.EditingDidBegin)
+        password_txt.addTarget(self, action: #selector(UITextFieldDelegate.textFieldDidEndEditing(_:)), forControlEvents: UIControlEvents.EditingDidEnd)
         signin_button.layer.cornerRadius = 5;
         
         self.login_error.hidden = true
@@ -154,8 +154,8 @@ class LoginVC: UIViewController {
     
     func animateViewMoving (up:Bool, moveValue :CGFloat){
         dispatch_async(dispatch_get_main_queue()) {
-            var movementDuration:NSTimeInterval = 0.3
-            var movement:CGFloat = ( up ? -moveValue : moveValue)
+            let movementDuration:NSTimeInterval = 0.3
+            let movement:CGFloat = ( up ? -moveValue : moveValue)
             UIView.beginAnimations( "animateView", context: nil)
             UIView.setAnimationBeginsFromCurrentState(true)
             UIView.setAnimationDuration(movementDuration )

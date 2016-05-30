@@ -42,14 +42,14 @@ class SignupVC: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginVC.keyboardVisible(_:)), name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginVC.keyboardHidden(_:)), name: UIKeyboardDidHideNotification, object: nil)
         
-        email_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
-        email_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
-        orgPassword_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
-        orgPassword_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
-        password_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
-        password_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
-        passconfirm_txt.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
-        passconfirm_txt.addTarget(self, action: "textFieldDidEndEditing:", forControlEvents: UIControlEvents.EditingDidEnd)
+        email_txt.addTarget(self, action: #selector(UITextFieldDelegate.textFieldDidBeginEditing(_:)), forControlEvents: UIControlEvents.EditingDidBegin)
+        email_txt.addTarget(self, action: #selector(UITextFieldDelegate.textFieldDidEndEditing(_:)), forControlEvents: UIControlEvents.EditingDidEnd)
+        orgPassword_txt.addTarget(self, action: #selector(UITextFieldDelegate.textFieldDidBeginEditing(_:)), forControlEvents: UIControlEvents.EditingDidBegin)
+        orgPassword_txt.addTarget(self, action: #selector(UITextFieldDelegate.textFieldDidEndEditing(_:)), forControlEvents: UIControlEvents.EditingDidEnd)
+        password_txt.addTarget(self, action: #selector(UITextFieldDelegate.textFieldDidBeginEditing(_:)), forControlEvents: UIControlEvents.EditingDidBegin)
+        password_txt.addTarget(self, action: #selector(UITextFieldDelegate.textFieldDidEndEditing(_:)), forControlEvents: UIControlEvents.EditingDidEnd)
+        passconfirm_txt.addTarget(self, action: #selector(UITextFieldDelegate.textFieldDidBeginEditing(_:)), forControlEvents: UIControlEvents.EditingDidBegin)
+        passconfirm_txt.addTarget(self, action: #selector(UITextFieldDelegate.textFieldDidEndEditing(_:)), forControlEvents: UIControlEvents.EditingDidEnd)
         
         signup_button.layer.cornerRadius = 5;
         
@@ -57,7 +57,7 @@ class SignupVC: UIViewController {
 
     @IBAction func signup_tapped(sender: AnyObject) {
         //animateViewMoving(false, moveValue: 130)
-        var signup_success = false
+
         if(password_txt.text == passconfirm_txt.text){
             let params = ["orgPassword": orgPassword_txt.text, "email": email_txt.text, "password": password_txt.text]
             do {
@@ -69,7 +69,7 @@ class SignupVC: UIViewController {
                     }else{
                         print("Request succeeded")
                         print(response.data)
-                        var error: NSError?
+
                         let jsonData: NSData = response.data
                         
                         do {
@@ -109,15 +109,7 @@ class SignupVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "signup"){
-            let viewController = segue.destinationViewController as! UINavigationController
-        }
-        else if (segue.identifier == "signuptologin"){
-            let viewController = segue.destinationViewController as! LoginVC
-        }
-    }
+
     
     
     
@@ -145,8 +137,8 @@ class SignupVC: UIViewController {
     }
     
     func animateViewMoving (up:Bool, moveValue :CGFloat){
-        var movementDuration:NSTimeInterval = 0.3
-        var movement:CGFloat = ( up ? -moveValue : moveValue)
+        let movementDuration:NSTimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
         UIView.beginAnimations( "animateView", context: nil)
         UIView.setAnimationBeginsFromCurrentState(true)
         UIView.setAnimationDuration(movementDuration )
