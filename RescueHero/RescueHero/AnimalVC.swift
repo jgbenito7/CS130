@@ -62,6 +62,11 @@ class AnimalVC: UIViewController {
 
         changeStatusStyle(_cellStatus)
         
+        get_directions.layer.shadowColor = UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 0.6).CGColor
+        get_directions.layer.shadowOpacity = 1
+        get_directions.layer.shadowOffset = CGSizeZero
+        get_directions.layer.shadowRadius = 1
+        
     }
     
     @IBAction func segmentChange(sender: AnyObject) {
