@@ -13,6 +13,7 @@ var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra );
 
  var apnError = function(err){
      console.log("APN Error:", err);
+     console.log(JSON.stringify(err));
  }
 
  var options = {
