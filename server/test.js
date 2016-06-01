@@ -53,7 +53,7 @@ var ssl = {
        feedback = new apn.Feedback(feedBackOptions);
        feedback.on("feedback", function(devices) {
            devices.forEach(function(item) {
-               //TODO Do something with item.device and item.time;
+               console.log(JSON.stringify(item));
            });
        });
 
