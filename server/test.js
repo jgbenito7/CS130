@@ -13,6 +13,7 @@ var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra );
 
  var apnError = function(err){
      console.log("APN Error:", err);
+     console.log(JSON.stringify(err));
  }
 
  var options = {
@@ -52,7 +53,7 @@ var ssl = {
        feedback = new apn.Feedback(feedBackOptions);
        feedback.on("feedback", function(devices) {
            devices.forEach(function(item) {
-               //TODO Do something with item.device and item.time;
+               console.log(JSON.stringify(item));
            });
        });
 

@@ -460,7 +460,16 @@ input[type=text]:focus, textarea:focus {
     font-size: 38px; }
 
   .header-wrap {
-    width: 265px; } }
+    width: 265px; }
+
+  .inputfile + label, .location, .submit {
+    font-size: 18px; }
+
+  .padded {
+    padding: 5px; }
+
+  .form-input-small {
+    height: 50px; } }
 @media screen and (min-width: 375px) and (max-width: 568px) {
   .main-wrapper {
     width: 100%;

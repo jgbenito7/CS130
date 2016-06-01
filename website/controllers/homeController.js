@@ -166,6 +166,7 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
             two.removeClass("button-waiting");
             two.css("font-size","25px");
             $(".circle.two").html("<i class='fa fa-check' aria-hidden='true'></i>");
+            $(".circle.two").css("font-size","30px");
             $(".form-input-small.three").prop('disabled', false);
 
           }else if(step==4){
@@ -174,17 +175,20 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
             three.removeClass("button-waiting");
             three.css("font-size","25px");
             $(".circle.three").html("<i class='fa fa-check' aria-hidden='true'></i>");
+            $(".circle.three").css("font-size","30px");
           }else if(step==5){
             $(".five").addClass("button-waiting");
             four.addClass("done");
             four.removeClass("button-waiting");
-            four.css("font-size","30px");
+            //four.css("font-size","30px");
             $(".circle.four").html("<i class='fa fa-check' aria-hidden='true'></i>");
+            $(".circle.four").css("font-size","30px");
           }else if(step==6){
             five.addClass("done");
             five.removeClass("button-waiting");
-            five.css("font-size","30px");
+            //five.css("font-size","30px");
             $(".circle.five").html("<i class='fa fa-check' aria-hidden='true'></i>");
+            $(".circle.five").css("font-size","30px");
           }
         }
 
