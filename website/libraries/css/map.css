@@ -49,6 +49,7 @@
   display: none;
   position: absolute;
   top: 5px;
+  left: 0 !important;
   width: 100%;
   height: 40px; }
 
