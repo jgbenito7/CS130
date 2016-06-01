@@ -80,6 +80,23 @@ class SignupVC: UIViewController {
                                 let defaults = NSUserDefaults.standardUserDefaults()
                                 defaults.setValue(token, forKey: "token")
                                 defaults.synchronize()
+                                
+                                if((defaults.valueForKey("apn_token")) != nil){
+                                    //Save the apn token
+                                    let params = ["userToken": token, "apnToken": defaults.valueForKey("apn_token")]
+                                    let req = try HTTP.POST("https://rescuehero.org/apn", parameters: params)
+                                    req.start { response in
+                                        if let err = response.error{
+                                            print("error: \(err.localizedDescription)")
+                                            return
+                                        }else{
+                                            print(response.data)
+                                            
+                                        }
+                                    }
+                                    
+                                }
+                                
                                 //Login Succeeded, Segue to table view
                                  NSOperationQueue.mainQueue().addOperationWithBlock {
                                     self.performSegueWithIdentifier("signup", sender: self)
