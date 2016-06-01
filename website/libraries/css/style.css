@@ -412,7 +412,7 @@ input[type=text]:focus, textarea:focus {
   margin-bottom: 20px; }
 
 /* Media Queries: Small devices */
-@media screen and (min-width: 320px) and (max-width: 375px) {
+@media screen and (max-width: 375px) {
   .main-wrapper {
     width: 100%;
     padding: 20px; }

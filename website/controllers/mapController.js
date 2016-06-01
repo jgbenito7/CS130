@@ -74,8 +74,8 @@ rescueApp.controller('mapCtrl', function($scope,$http) {
 
         marker.addListener('click', function() {
           // add info at the bottom
-          var url = "url('https://www.rescuehero.org/images/" + this.image + "')";
-          $('.animal-image').css('background-image', url);
+          var url = "https://www.rescuehero.org/images/" + this.image;
+          $('.animal-image').attr('src', url);
           $('.type-content').html(this.title);
           $('.notes-content').html(this.notes);
           $('.map-panel').slideDown();

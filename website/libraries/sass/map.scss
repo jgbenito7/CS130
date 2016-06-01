@@ -14,9 +14,8 @@ $font: 'Cabin', sans-serif;
 }
 
 .animal-image{
-  width:100%;
-  height:150px;
-  background-size:cover;
+  width: 100%;
+  overflow: hidden;
   margin:auto;
   border: 1px solid white;
 }
@@ -58,7 +57,7 @@ $font: 'Cabin', sans-serif;
   cursor: hand;
 }
 
-// Remove Google Copywrite info on map
+// Removes Google Copywrite info on map
 .gm-style-cc {
   display:none;
 }
@@ -84,9 +83,10 @@ $font: 'Cabin', sans-serif;
 }
 
 .legend-entry {
+  width: 100%;
   height: 100%;
   text-align: center;
-  padding: 10px;
+  padding-top: 10px
 }
 
 .legend-text {
@@ -108,7 +108,6 @@ $font: 'Cabin', sans-serif;
 /////////////////////////////////////////
 
 @media screen
-and (min-width: 320px)
 and (max-width: 375px) {
   .legend-box {
     position: absolute;
@@ -123,7 +122,7 @@ and (max-width: 375px) {
   .legend-entry {
     height: 100%;
     text-align: center;
-    padding: 5px;
+    padding-top: 5px;
   }
   .case-image {
     display:block;
@@ -157,7 +156,7 @@ and (max-width: 568px) {
   .legend-entry {
     height: 100%;
     text-align: center;
-    padding: 7px;
+    padding-top: 7px;
   }
   .case-image {
     display:block;
