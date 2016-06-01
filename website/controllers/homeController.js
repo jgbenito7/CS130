@@ -154,6 +154,7 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
           if(step==1){
             one.addClass("button-waiting");
           }else if(step==2){
+            one.removeClass("button-waiting");
             $(".two").addClass("button-waiting");
             $(".circle.one").html("<i class='fa fa-check' aria-hidden='true'></i>");
             $(".circle.one").addClass("done");
@@ -163,7 +164,7 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
             $(".three").addClass("button-waiting");
             two.addClass("done");
             two.removeClass("button-waiting");
-            two.css("font-size","30px");
+            two.css("font-size","25px");
             $(".circle.two").html("<i class='fa fa-check' aria-hidden='true'></i>");
             $(".form-input-small.three").prop('disabled', false);
 
@@ -171,7 +172,7 @@ rescueApp.controller('homeCtrl', function($scope,$http) {
             $(".four").addClass("button-waiting");
             three.addClass("done");
             three.removeClass("button-waiting");
-            three.css("font-size","30px");
+            three.css("font-size","25px");
             $(".circle.three").html("<i class='fa fa-check' aria-hidden='true'></i>");
           }else if(step==5){
             $(".five").addClass("button-waiting");

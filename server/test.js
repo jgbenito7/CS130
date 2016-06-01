@@ -6,15 +6,32 @@ var gm = require('gm').subClass({imageMagick: true});
 var randomstring = require("randomstring");
 var apn = require('apn');
 
-
 var geocoderProvider = 'google';
 var httpAdapter = 'http';
 var extra = {};
 var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra );
 
-var options = { };
-var apnConnection = new apn.Connection(options);
+ var apnError = function(err){
+     console.log("APN Error:", err);
+ }
 
+ var options = {
+     "cert": "cert.pem",
+     "key":  "key.pem",
+     "passphrase": null,
+     "gateway": "gateway.sandbox.push.apple.com",
+     "port": 2195,
+     "enhanced": true,
+     "cacheLength": 5
+   };
+ options.errorCallback = apnError;
+
+ var feedBackOptions = {
+     "batchFeedback": true,
+     "interval": 300
+ };
+
+ var apnConnection, feedback;
 
 var connection  = mysql.createPool({
     connectionLimit : 10,
@@ -30,12 +47,51 @@ var ssl = {
     cert: fs.readFileSync('./certs/ssl.crt', 'utf8'),
 };
 
+  apnConnection = new apn.Connection(options);
+
+       feedback = new apn.Feedback(feedBackOptions);
+       feedback.on("feedback", function(devices) {
+           devices.forEach(function(item) {
+               //TODO Do something with item.device and item.time;
+           });
+       });
+
+
+function send_apn(token, message, from){
+  var myDevice, note;
+
+        myDevice = new apn.Device(token);
+        note = new apn.Notification();
+
+        note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+        note.badge = 1;
+        note.sound = "ping.aiff";
+        note.alert = message;
+        note.payload = {'messageFrom': from};
+
+        if(apnConnection) {
+            apnConnection.pushNotification(note, myDevice);
+        }
+}
+
+send_apn("efb825511b287691cfc49213f93230fca4f19342f5a19e7c777156751fa74124","whats up yo","joey");
+
 function createUser (req, res, next) {
+    if(!validateInputs(req.body.orgPassword) || !validateInputs(req.body.email) || !validateInputs(req.body.password)){
+        res.send(414); //Invalid inputs
+        next();
+        return;
+    }
+    if (!validateEmail(req.body.email))
+    {
+         res.send(415); //Invalid email
+        next();
+        return;
+    }
 
   var token = randomstring.generate(255);
   var query = "SELECT id from Orgs WHERE password = SHA2(" + mysql.escape(req.body.orgPassword)+ ", 256);";
-  //var query = "SELECT id from Orgs WHERE password = " + mysql.escape(req.body.orgPassword)+ ";";
-  
+
 
   connection.query(query, function(err,results) {
     if(results.length == 0) {
@@ -46,7 +102,7 @@ function createUser (req, res, next) {
       var org_id = results[0].id;
 
 
-      var query = "SELECT * FROM Users WHERE email = " 
+      var query = "SELECT * FROM Users WHERE email = "
           + mysql.escape(req.body.email) + ";";
       connection.query(query, function(err, results){
           if(results.length > 0) {
@@ -54,9 +110,9 @@ function createUser (req, res, next) {
             next();
             return;
           }
-          var query2 = "INSERT INTO Users (email, password, org_id, token) VALUES(" 
-            + mysql.escape(req.body.email)+ ", SHA2(" 
-            + mysql.escape(req.body.password) + ",256), " 
+          var query2 = "INSERT INTO Users (email, password, org_id, token) VALUES("
+            + mysql.escape(req.body.email)+ ", SHA2("
+            + mysql.escape(req.body.password) + ",256), "
             + mysql.escape(org_id) +", \"" + token + "\");";
           connection.query(query2, function(err, results){
           if(err)
@@ -72,10 +128,24 @@ function createUser (req, res, next) {
 
 }
 
+function validateInputs(value)
+{
+    if(value == undefined || value == null){
+        return false;
+    }
+    else return true;
+}
+
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
 
 
 function getReports (req, res, next){
-    var query = "SELECT *, Reports.id as rid, UNIX_TIMESTAMP(time) AS rtime, UNIX_TIMESTAMP(updateTime) AS utime FROM Reports Left JOIN Status ON Reports.id = Status.reportId WHERE Status.mostRecent = 1";
+    var query = "SELECT *, Reports.id as rid, UNIX_TIMESTAMP(time) AS rtime, UNIX_TIMESTAMP(updateTime) AS utime FROM Reports Left JOIN Status ON Reports.id = Status.reportId WHERE Status.mostRecent = 1 ORDER BY utime DESC";
     connection.query(query, function(err,rows) {
 	if (err) throw err;
 	var results = rows;
@@ -103,6 +173,11 @@ function getReports (req, res, next){
 
 function getStatus(req,res,next)
 {
+    if(!validateInputs(req.params.reportId)){
+        res.send(414); //Invalid inputs
+        next();
+        return;
+    }
     var query = "SELECT *, UNIX_TIMESTAMP(updateTime) AS etime FROM Status WHERE reportId = " + mysql.escape(req.params.reportId) +" ;";
     connection.query(query, function(err, results){
 	if(err)
@@ -117,25 +192,35 @@ function getStatus(req,res,next)
 
 function updateStatus(req,res,next)
 {
+    if(!validateInputs(req.body.token) || !validateInputs(req.body.reportId) || !validateInputs(req.body.status)){
+        res.send(414); //Invalid inputs
+        next();
+        return;
+    }
+
   console.log("in update status!");
-  var tokenCheckQuery = "SELECT * FROM Users WHERE token = " + mysql.escape(req.params.token) + ";";
+  var tokenCheckQuery = "SELECT * FROM Users WHERE token = " + mysql.escape(req.body.token) + ";";
+  console.log(tokenCheckQuery);
   connection.query(tokenCheckQuery, function(err1,results1){
     if(err1)
       throw err1;
     if(results1.length >= 1){
       //Change all current reports to be NOT the most recent
-      var query = "UPDATE Status SET mostRecent = 0 WHERE reportId = " + mysql.escape(req.params.reportId) + ";";
+      var query = "UPDATE Status SET mostRecent = 0 WHERE reportId = " + mysql.escape(req.body.reportId) + ";";
+      console.log(query);
       connection.query(query, function(err, results){
       if(err)
         throw err;
+        var updateQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + mysql.escape(req.body.reportId) + ", " +  mysql.escape(req.body.status) + ", 1);";
+        console.log(updateQuery);
+        connection.query(updateQuery, function(err, results){
+          if(err)
+            throw err;
+          res.send(200);
+        })
       })
 
-      var updateQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + mysql.escape(req.params.reportId) + ", " +  mysql.escape(req.params.status) + ", 1);";
-      connection.query(updateQuery, function(err, results){
-        if(err)
-          throw err;
-        res.send(200);
-      })
+
 
     } //end valid token
     else {
@@ -143,13 +228,25 @@ function updateStatus(req,res,next)
       console.log("not a valid token");
       res.send(413); //Invalid token
     }
-	
+
     }) //end tokenCheckQuery
   next();
 }
 
 
 function authorizeUser (req, res, next) {
+  if(!validateInputs(req.body.password) || !validateInputs(req.body.email)){
+        res.send(414); //Invalid inputs
+        next();
+        return;
+    }
+
+    if (!validateEmail(req.body.email))
+    {
+        res.send(415); //Invalid email
+        next();
+        return;
+    }
 
     var query = "SELECT * FROM Users WHERE password = SHA2(" + mysql.escape(req.body.password) + ", 256) AND email = " + mysql.escape(req.body.email) + ";";
     console.log(query);
@@ -159,13 +256,7 @@ function authorizeUser (req, res, next) {
 	else if (results.length < 1)
 	    res.send({"loggedIn":false});
 	else {
-    var newtoken = randomstring.generate(255);
-    var updateTokenQuery = "UPDATE Users SET token = \"" + newtoken + "\" WHERE email = " + mysql.escape(req.body.email) + ";";
-    connection.query(updateTokenQuery, function(err,reults){
-      if(err)
-        throw err;
-    })
-	  res.send({"loggedIn":true, "token":newtoken});
+	  res.send({"loggedIn":true, "token":results[0].token});
   }
 	next();
     });
@@ -173,6 +264,20 @@ function authorizeUser (req, res, next) {
 }
 
 function createReport(req, res, next) {
+    if(!validateInputs(req.body.longitude) || !validateInputs(req.body.latitude)){
+        res.send(414); //Invalid inputs
+        next();
+        return;
+    }
+    if(req.body.animal_type == null ||req.body.animal_type == undefined)
+    {
+      req.body.animal_type = "";
+    }
+    if(req.body.animal_notes == null ||req.body.animal_notes == undefined)
+    {
+      req.body.animal_notes = "";
+    }
+
     var filenames = [];
     var counter = 0;
     for(i in req.files) {
@@ -193,21 +298,25 @@ function createReport(req, res, next) {
 	.then(function(res_city) {
 
             var city = res_city[0].city;
-            
+
+
+
 			var query = "INSERT INTO Reports (type, notes, longitude, latitude, city) VALUES("+
 			       mysql.escape(req.body.animal_type)+
-			       "," + mysql.escape(req.body.animal_notes) + 
+			       "," + mysql.escape(req.body.animal_notes) +
 			       "," + mysql.escape(parseFloat(req.body.longitude)) +
 			       "," + mysql.escape(parseFloat(req.body.latitude)) +
 			       "," + mysql.escape(city) + ");"
 
-	      
+console.log(query);
+
+
 	      connection.query(query, function(err, results) {
-				   if(err){ 
+				   if(err){
 				   		console.log("error");
 				       throw err;
 				    }
-				   var insertId = results.insertId; 
+				   var insertId = results.insertId;
 				   if(filenames.length > 0) {
 				       var queryString = "INSERT INTO filename (report_id, filename) VALUES ";
 				       for(var i = 0; i < filenames.length; i++) {
@@ -219,24 +328,40 @@ function createReport(req, res, next) {
 					   }
 				       }
 
-				       connection.query(queryString, function(err, results3) {
-					   if(err){
-					       throw err;
-					   }
-					   res.send(200);
-					   next();
+               console.log(queryString);
+
+				       connection.query(queryString, function(err, results) {
+        				   if(err){
+        				       throw err;
+        				   }
+        				   res.send(200);
+        				   next();
 				       });
 				   } else {
 				       res.send(200);
 				       next();
 				   }
 
-				   var reportQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + insertId + ", \'Reported\', 1);";
+				   var reportQuery = "INSERT INTO Status (reportId, status, mostRecent) VALUES (" + insertId + ", \'Active\', 1);";
+           console.log(reportQuery);
 				   connection.query(reportQuery, function(err, results) {
 				       if(err)
 					   throw err;
-				   }) 
-			       })
+				   });
+
+           var apnQuery = "SELECT Apn.device_token FROM Apn JOIN Orgs ON Orgs.id=Apn.user_org WHERE Orgs.city=" + mysql.escape(city);
+           console.log(apnQuery);
+			       connection.query(apnQuery, function(err, results) {
+              if(err) throw err;
+              console.log(results);
+              for(i = 0; i < results.length; i++) {
+                console.log("sending " + results[i].device_token);
+                send_apn(results[i].device_token, "Animal reported", "Rescue Hero");
+              }
+              res.send(200);
+              next();
+            });
+          });
 	     })
     .catch(function(err) {
         res.send(415); //Not a valid longitude and latitude
@@ -245,7 +370,14 @@ function createReport(req, res, next) {
 }
 
 function getCorrectOrg(req,res,next) {
+    if(!validateInputs(req.params.city)){
+        res.send(414); //Invalid inputs
+        next();
+        return;
+    }
+
     var city = mysql.escape(req.params.city);
+
 
     var query = "SELECT * FROM Orgs WHERE city = " + city + ";";
 
@@ -262,8 +394,14 @@ function getCorrectOrg(req,res,next) {
 }
 
 function getRescuers(req,res,next) {
+    if(!validateInputs(req.params.city)){
+        res.send(414); //Invalid inputs
+        next();
+        return;
+    }
+
     var city = mysql.escape(req.params.city);
-    var query = "SELECT * FROM Users WHERE org_id = (SELECT id FROM Orgs WHERE city = " + city + ");";
+    var query = "SELECT * FROM Users JOIN Orgs ON Orgs.id = Users.org_id WHERE Orgs.city = " + city + ";";
     connection.query(query, function(err,results){
 	if(err)
 	    throw err;
@@ -276,6 +414,37 @@ function getRescuers(req,res,next) {
 
 }
 
+function registerDevice(req, res, next) {
+
+   if (!validateInputs(req.body.userToken) || !validateInputs(req.body.apnToken))
+    {
+        res.send(414); //Invalid email
+        next();
+        return;
+    }
+  var query = "SELECT * FROM Users WHERE token=" + mysql.escape(req.body.userToken);
+  connection.query(query, function(err, results) {
+    if(err)
+      throw err;
+    if(results.length < 1) {
+      res.send(411); //user token not found
+      next();
+    } else {
+      var apnQuery1 = "DELETE FROM Apn WHERE device_token=" + mysql.escape(req.body.apnToken)+";";
+      var apnQuery2 = "INSERT INTO Apn (device_token, user_token, user_org) VALUES (" + mysql.escape(req.body.apnToken) + ", " + mysql.escape(req.body.userToken) + ", " + mysql.escape(results[0].org_id) + ");";
+      connection.query(apnQuery1, function(err, results) {
+        if(err)
+          throw err;
+        connection.query(apnQuery2, function(err, results) {
+          if(err)
+            throw err;
+          res.send(200);
+          next();
+        });
+      });
+    }
+  });
+}
 
 function rebootServer(req, res, next) {
     const exec = require('child_process').exec;
@@ -285,6 +454,18 @@ function rebootServer(req, res, next) {
 		       }
 		      );
 }
+
+function testApn(req,res,next){
+  apn_notification = new apns.Notification();
+  apn_notification.device = new apns.Device("efb825511b287691cfc49213f93230fca4f19342f5a19e7c777156751fa74124");
+  apn_notification.alert = "Hello World !";
+
+  apn_connection.sendNotification(apn_notification);
+  res.send(200);
+  return next();
+
+}
+
 
 var server = restify.createServer(ssl);
 //var server = restify.createServer();
@@ -300,12 +481,14 @@ server.use(restify.bodyParser ({mapParams: false,
 server.get('/getCorrectOrg/:city', getCorrectOrg);
 server.get('/getRescuers/:city', getRescuers);
 server.get('/getStatus/:reportId', getStatus);
-server.put('/updateStatus/:reportId/:status/:token', updateStatus);
+server.put('/status', updateStatus);
 server.post('/users', createUser);
 server.get('/reboot/rescuehero', rebootServer);
 server.get('/reports', getReports);
 server.post('/users/authorize', authorizeUser);
+server.post('/apn', registerDevice);
 server.post('/reports', createReport);
+server.get('/testapn', testApn);
 server.get(/\/images\/?.*/, restify.serveStatic({
     directory: __dirname
 }));
@@ -313,6 +496,7 @@ server.get(/\/?.*/, restify.serveStatic({
     directory: '../website',
     default: 'index.html'
 }));
+
 
 server.listen(8001, function() {
     console.log('%s listening at %s', server.name, server.url);
@@ -324,4 +508,3 @@ http.createServer(function (req, res) {
     res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
     res.end();
 }).listen(8080);
-

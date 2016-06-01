@@ -11,6 +11,13 @@ import UIKit
 
 class ReportTableCell: UITableViewCell {
     
+    var reportID: Int!
+    var cellLat: Double!
+    var cellLong: Double!
+    
+    @IBOutlet weak var table_cell: UIView!
+    
+    
     @IBOutlet weak var cellNotes: UILabel!
     var cellImageURL: String
     required init?(coder aDecoder: NSCoder) {
@@ -23,4 +30,5 @@ class ReportTableCell: UITableViewCell {
     @IBOutlet weak var cellImage: UIImageView!
     
     @IBOutlet weak var cellType: UILabel!
+    @IBOutlet weak var cellStatus: UILabel!
 }

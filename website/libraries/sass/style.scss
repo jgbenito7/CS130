@@ -418,7 +418,7 @@ input[type=text]:focus, textarea:focus {
 
 .submit, .location{
   background:$form-color;
-  border-radius:5px;
+  border-radius:3px;
   font-size:25px;
   font-weight:800;
   padding:10px;
@@ -461,7 +461,7 @@ input[type=text]:focus, textarea:focus {
     display: block;
     cursor:pointer !important;
     text-align: center;
-    border-radius:5px;
+    border-radius:3px;
     @include transition(0.20s);
     @include box-shadow();
 }
@@ -496,6 +496,7 @@ input[type=text]:focus, textarea:focus {
 .done{
   background:$color5 !important;
   border:1px solid $color5 !important;
+  box-shadow: none;
 }
 
 .padded{
@@ -505,6 +506,11 @@ input[type=text]:focus, textarea:focus {
 .form-section{
   margin-top:40px;
   margin-bottom:40px;
+}
+
+.captcha-wrap{
+  margin:auto;
+  width:200px;
 }
 
 

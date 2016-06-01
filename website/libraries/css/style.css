@@ -323,7 +323,7 @@ input[type=text]:focus, textarea:focus {
 
 .submit, .location {
   background: rgba(100, 100, 100, 0.3);
-  border-radius: 5px;
+  border-radius: 3px;
   font-size: 25px;
   font-weight: 800;
   padding: 10px;
@@ -362,7 +362,7 @@ input[type=text]:focus, textarea:focus {
   display: block;
   cursor: pointer !important;
   text-align: center;
-  border-radius: 5px;
+  border-radius: 3px;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -ms-transition: all 0.2s ease-in-out;
@@ -394,7 +394,8 @@ input[type=text]:focus, textarea:focus {
 
 .done {
   background: #00e09e !important;
-  border: 1px solid #00e09e !important; }
+  border: 1px solid #00e09e !important;
+  box-shadow: none; }
 
 .padded {
   padding: 10px; }
@@ -402,6 +403,10 @@ input[type=text]:focus, textarea:focus {
 .form-section {
   margin-top: 40px;
   margin-bottom: 40px; }
+
+.captcha-wrap {
+  margin: auto;
+  width: 200px; }
 
 /* Footer
 ///////////////////////////////////////////////*/
