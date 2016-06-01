@@ -577,6 +577,16 @@ and (max-width: 375px) {
   .header-wrap{
     width:265px;
   }
+
+  .inputfile + label,.location,.submit{
+    font-size:20px;
+  }
+  .padded{
+    padding:5px;
+  }
+  .form-input-small{
+    height:50px;
+  }
 }
 
 @media screen
