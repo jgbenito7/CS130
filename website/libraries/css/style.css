@@ -1,41 +1,518 @@
-/*
-Error: Invalid CSS after "}": expected "}", was ""
-        on line 644 of sass/style.scss
+/* Color Pallete
+///////////////////////////////////////////////*/
+/* Global Style Definitions
+///////////////////////////////////////////////*/
+/* Mixins
+///////////////////////////////////////////////*/
+/* Main Body Styling
+///////////////////////////////////////////////*/
+.row {
+  margin-left: 0px !important;
+  margin-right: 0px !important; }
 
-639:   }
-640:   .header-wrap{
-641:     width:265px;
-642:   }
-643: }
+.col-xs-4 {
+  padding-left: 5px !important;
+  padding-right: 5px !important; }
 
-Backtrace:
-sass/style.scss:644
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1189:in `expected'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1125:in `expected'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1120:in `tok!'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:658:in `block'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:649:in `ruleset'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:675:in `block_child'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:668:in `block_contents'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:125:in `stylesheet'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:41:in `parse'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:406:in `_to_tree'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:381:in `_render_with_sourcemap'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:298:in `render_with_sourcemap'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `each'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:473:in `on_file_changed'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:331:in `block in watch'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/listener.rb:252:in `call'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/listener.rb:252:in `on_change'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/listener.rb:290:in `block in initialize_adapter'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/adapters/polling.rb:48:in `call'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/adapters/polling.rb:48:in `poll_changed_directories'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/adapter.rb:299:in `block in start_poller'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Invalid CSS after \"}\": expected \"}\", was \"\"\A         on line 644 of sass/style.scss\A \A 639:   }\A 640:   .header-wrap{\A 641:     width:265px;\A 642:   }\A 643: }"; }
+body {
+  background: #0c638c;
+  /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, #0c638c, #00e09e);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #0c638c, #00e09e);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #0c638c, #00e09e);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #0c638c, #00e09e);
+  /* Standard syntax (must be last) */
+  background-size: cover;
+  position: relative;
+  font-family: "Cabin", sans-serif;
+  height: auto; }
+
+.main-wrapper {
+  width: 500px;
+  margin: auto;
+  position: relative;
+  padding-top: 80px; }
+
+.loading {
+  padding: 10px; }
+
+.loading-text {
+  font-size: 30px;
+  color: #ffffff;
+  font-weight: 200;
+  position: absolute;
+  left: 0; }
+
+.loading-gif {
+  background: url("../../assets/loading_spinner.gif");
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  margin: auto;
+  right: 0; }
+
+.error-wrap {
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  background: #B93E16;
+  display: none;
+  border-radius: 5px; }
+
+.error-text {
+  font-size: 34px;
+  font-weight: 100;
+  color: #ffffff;
+  line-height: 1; }
+
+.error-list {
+  margin-top: 10px; }
+
+.error-list > li {
+  color: #ffffff;
+  font-size: 18px; }
+
+/* Modal Styling
+///////////////////////////////////////////////*/
+.modal-content {
+  background: #313538;
+  padding: 10px; }
+
+.modal-title {
+  font-size: 30px;
+  color: white; }
+
+.modal-body > p, .modal-body > ul > li {
+  color: white;
+  font-size: 15px;
+  font-weight: 100; }
+
+.close {
+  color: white; }
+
+/* Header/Tagline
+///////////////////////////////////////////////*/
+.header-wrap {
+  padding: 0px;
+  width: 315px;
+  margin: auto;
+  line-height: 1;
+  position: relative;
+  margin-bottom: 40px; }
+
+.header-text-bold {
+  font-size: 46px;
+  font-weight: bold;
+  color: #ffffff; }
+
+.header-text-light {
+  font-size: 15px;
+  font-weight: 100;
+  color: #dddddd; }
+
+.header-image {
+  position: absolute;
+  top: 5;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  background: url("../../assets/img/logos/rescuehero_logo.png");
+  background-size: cover; }
+
+/* Navbar
+///////////////////////////////////////////////*/
+.nav-link {
+  text-align: center;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out; }
+
+.nav-link.active, .nav-link:hover {
+  background: rgba(100, 100, 100, 0.3);
+  border-radius: 5px; }
+
+.nav-link > a {
+  color: #dddddd;
+  font-size: 18px;
+  cursor: pointer; }
+
+.nav-link > a:hover, .nav-link > a:visited {
+  cursor: pointer;
+  text-decoration: none !important; }
+
+a, a:hover, a:active, a:visited {
+  text-decoration: none !important; }
+
+/* Body Elements
+///////////////////////////////////////////////*/
+hr {
+  border-top: 2px solid rgba(100, 80, 80, 0.2);
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+.margin-tb {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+.about-image {
+  width: 110px;
+  height: 110px;
+  border: 3px solid white;
+  border-radius: 50%;
+  margin: auto;
+  background-size: cover;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out; }
+
+.about-image:hover {
+  border: 3px solid #f26d7d;
+  cursor: pointer; }
+
+.about-image.active {
+  border: 3px solid #f26d7d; }
+
+.joey {
+  background-image: url("../../assets/joey.jpg"); }
+
+.chloe {
+  background-image: url("../../assets/chloe.jpg"); }
+
+.david {
+  background-image: url("../../assets/david.jpg"); }
+
+.jake {
+  background-image: url("../../assets/jake.jpg"); }
+
+.christian {
+  background-image: url("../../assets/christian.jpg"); }
+
+.pic-wrap {
+  width: 70%;
+  margin: auto; }
+
+.header-text {
+  font-size: 40px;
+  color: white;
+  font-weight: 200;
+  text-align: center; }
+
+.mission-text {
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  margin-top: 30px; }
+
+.about-wrapper {
+  padding: 15px; }
+
+.about-circle {
+  width: 180px;
+  height: 180px;
+  background: #ffffff;
+  color: #0c638c;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 40px;
+  border-radius: 50%;
+  margin: auto;
+  padding: 20px;
+  padding-top: 25px; }
+
+.statement-text {
+  color: white;
+  font-weight: bold;
+  font-size: 100px;
+  text-align: center; }
+
+.under-header-text {
+  font-size: 12px;
+  color: #dddddd;
+  text-align: center; }
+
+.under-wrapper {
+  width: 40%;
+  margin: auto; }
+
+.darker-text {
+  color: #313538; }
+
+.bio-panel {
+  display: none;
+  padding: 20px; }
+
+.bio-text-name, .bio-text {
+  text-align: left;
+  color: white; }
+
+.bio-text-name {
+  font-size: 24px;
+  margin-top: 10px; }
+
+.bio-text {
+  font-size: 20px; }
+
+hr.white-short {
+  border-bottom: 1px solid white;
+  width: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 0px;
+  border-top: none; }
+
+/* Form Elements
+///////////////////////////////////////////////*/
+.report-form {
+  margin-top: 20px;
+  width: 100%;
+  margin: auto; }
+
+textarea:focus, input:focus {
+  outline: none; }
+
+::-webkit-input-placeholder {
+  color: #dddddd;
+  text-align: left;
+  font-size: 16px; }
+
+:-moz-placeholder {
+  color: #dddddd;
+  text-align: left;
+  font-size: 16px; }
+
+::-moz-placeholder {
+  color: #dddddd;
+  text-align: left;
+  font-size: 16px; }
+
+:-ms-input-placeholder {
+  color: #dddddd;
+  text-align: left;
+  font-size: 16px; }
+
+input[type=text]:focus, textarea:focus {
+  box-shadow: 0 0 5px white;
+  border: 2px solid white;
+  color: white; }
+
+.form-input-small, .form-input-large {
+  height: 34px;
+  width: 100%;
+  border-radius: 3px;
+  border: none;
+  border-top: none;
+  -webkit-box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.18);
+  -moz-box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.18);
+  box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.18);
+  outline: 0;
+  padding: 20px;
+  background: rgba(100, 100, 100, 0.3);
+  color: white; }
+
+.form-input-small {
+  height: 65px; }
+
+.form-input-large {
+  height: 200px;
+  line-height: 30px; }
+
+.submit, .location {
+  background: rgba(100, 100, 100, 0.3);
+  border-radius: 3px;
+  font-size: 25px;
+  font-weight: 800;
+  padding: 10px;
+  color: white;
+  border: none;
+  width: 100%;
+  text-align: center;
+  cursor: pointer !important; }
+
+.warning-wrap {
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  margin: auto; }
+
+.warning-text {
+  font-size: 20px;
+  font-weight: 100;
+  color: #ffffff;
+  text-align: center; }
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1; }
+
+.inputfile + label {
+  font-size: 25px;
+  font-weight: 800;
+  padding: 10px;
+  color: white;
+  background-color: rgba(100, 100, 100, 0.3);
+  display: block;
+  cursor: pointer !important;
+  text-align: center;
+  border-radius: 3px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.75); }
+
+.fileupload2, .fileupload3, .fileupload4 {
+  margin-top: 25px;
+  display: none; }
+
+.button-waiting {
+  box-shadow: 0 0 5px #00e09e !important;
+  border: 2px solid #00e09e !important; }
+
+.circle {
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  background: rgba(100, 100, 100, 0.3);
+  color: white;
+  padding: 5px;
+  font-size: 20px;
+  font-weight: 800;
+  border-radius: 50%;
+  border: 1px solid white;
+  text-align: center; }
+
+.done {
+  background: #00e09e !important;
+  border: 1px solid #00e09e !important;
+  box-shadow: none; }
+
+.padded {
+  padding: 10px; }
+
+.form-section {
+  margin-top: 40px;
+  margin-bottom: 40px; }
+
+.captcha-wrap {
+  margin: auto;
+  width: 200px; }
+
+/* Footer
+///////////////////////////////////////////////*/
+.footer-wrap {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  margin-bottom: 20px; }
+
+/* Media Queries: Small devices */
+@media screen and (max-width: 375px) {
+  .main-wrapper {
+    width: 100%;
+    padding: 20px; }
+
+  .nav-link > a {
+    color: #dddddd;
+    font-size: 12px;
+    cursor: pointer; }
+
+  .about-circle {
+    width: 130px;
+    height: 130px;
+    font-size: 25px; }
+
+  .under-header-text {
+    font-size: 10px; }
+
+  .statement-text {
+    font-size: 80px; }
+
+  .about-image {
+    width: 80px;
+    height: 80px; }
+
+  .bio-text-name {
+    text-align: center; }
+
+  .white-short {
+    margin-left: auto !important;
+    margin-right: auto; }
+
+  .bio-text {
+    text-align: center; }
+
+  .header-image {
+    width: 45px;
+    height: 45px; }
+
+  .header-text-bold {
+    font-size: 38px; }
+
+  .header-wrap {
+    width: 265px; }
+
+  .inputfile + label, .location, .submit {
+    font-size: 18px; }
+
+  .padded {
+    padding: 5px; }
+
+  .form-input-small {
+    height: 50px; } }
+@media screen and (min-width: 375px) and (max-width: 568px) {
+  .main-wrapper {
+    width: 100%;
+    padding: 20px; }
+
+  .nav-link > a {
+    color: #dddddd;
+    font-size: 14px;
+    cursor: pointer; }
+
+  .about-circle {
+    width: 130px;
+    height: 130px;
+    font-size: 25px; }
+
+  .under-header-text {
+    font-size: 10px; }
+
+  .statement-text {
+    font-size: 80px; }
+
+  .about-image {
+    width: 80px;
+    height: 80px; }
+
+  .bio-text-name {
+    text-align: center; }
+
+  .white-short {
+    margin-left: auto !important;
+    margin-right: auto; }
+
+  .bio-text {
+    text-align: center; }
+
+  .header-image {
+    width: 45px;
+    height: 45px; }
+
+  .header-text-bold {
+    font-size: 38px; }
+
+  .header-wrap {
+    width: 265px; } }
+
+/*# sourceMappingURL=style.css.map */
