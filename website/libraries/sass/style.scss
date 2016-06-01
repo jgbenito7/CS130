@@ -530,9 +530,7 @@ input[type=text]:focus, textarea:focus {
 /* Media Queries: Small devices */
 /////////////////////////////////////////////////
 
-@media screen
-and (min-width: 320px)
-and (max-width: 375px) {
+@media screen and (max-width: 375px) {
   .main-wrapper{
     width:100%;
     padding:20px;
@@ -579,7 +577,7 @@ and (max-width: 375px) {
   }
 
   .inputfile + label,.location,.submit{
-    font-size:20px;
+    font-size:18px;
   }
   .padded{
     padding:5px;
