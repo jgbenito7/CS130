@@ -530,7 +530,12 @@ input[type=text]:focus, textarea:focus {
 /* Media Queries: Small devices */
 /////////////////////////////////////////////////
 
+<<<<<<< HEAD
+@media screen
+and (max-width: 375px) {
+=======
 @media screen and (max-width: 375px) {
+>>>>>>> 6b6eacbea5dda96b8baa9795af0f4eb2a289dd97
   .main-wrapper{
     width:100%;
     padding:20px;
