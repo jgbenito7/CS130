@@ -1,7 +1,7 @@
 rescueApp.controller('mapCtrl', function($scope,$http) {
 
   $http.get('https://www.rescuehero.org/reports').success(function(data) {
-    function initialize( callback ) {
+    function initialize() {
       var myLatLng = new google.maps.LatLng( 34.0635, -118.4455 );
       var mapInfo = {
         center:myLatLng,
@@ -13,6 +13,9 @@ rescueApp.controller('mapCtrl', function($scope,$http) {
       var map = new google.maps.Map( document.getElementById("googleMap"), mapInfo );
       map.set('styles', getMapStyles());
       map.controls[google.maps.ControlPosition.TOP].push( document.getElementById('legend-wrapper') );
+      google.maps.event.addListenerOnce(map, 'idle', function() {
+          $('#legend-wrapper').show();
+      });
 
       var youMarker;
       var youPosition;
@@ -48,17 +51,17 @@ rescueApp.controller('mapCtrl', function($scope,$http) {
         };
 
         switch ( data[i].status ) {
-          case "Reported":
+          case "Active":
           iconImage.url += "rescuehero_logo_mini.png";
           break;
           case "Rescued":
           iconImage.url += "rescuehero_logo_radioactive_green_mini.png";
           break;
-          case "OntheWay":
+          case "OnTheWay":
           iconImage.url += "rescuehero_logo_pukegold_mini.png";
           break;
           default:
-          iconImage.url += "rescuehero_logo_pukegold_mini.png";
+          iconImage.url += "rescuehero_logo_mini.png";
         }
 
         marker = new google.maps.Marker({
@@ -84,7 +87,7 @@ rescueApp.controller('mapCtrl', function($scope,$http) {
           }, 1000);
 
           switch ( this.status ) {
-            case "Reported":
+            case "Active":
             $('.status').css('background-color', '#d73c0a');
             $('.status-content').html( "Active" );
             break;
@@ -92,23 +95,19 @@ rescueApp.controller('mapCtrl', function($scope,$http) {
             $('.status').css('background-color', '#00c934');
             $('.status-content').html( this.status );
             break;
-            case "OntheWay":
+            case "OnTheWay":
             $('.status').css('background-color', '#c0aa1a');
             $('.status-content').html( "Pending" );
             break;
             default:
-            $('.status').css('background-color', '#d73c0a');
+            $('.status').css('background-color', '#ffffff');
             $('.status-content').html( this.status );
           }
         });
       }
-
-      callback();
     }
 
-    initialize(function() {
-      $('#legend-wrapper').show();
-    });
+    initialize();
   });
 
   // Map and Animal Image resizing and initialization
