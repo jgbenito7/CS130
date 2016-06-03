@@ -42,12 +42,13 @@ class ReportTableController: UITableViewController {
         //self.navigationController?.navigationBar.barTintColor = UIColor(red: 21, green: 40, blue: 129, alpha: 1)
         //self.navigationController?.navigationBar.translucent = false
         //self.tableView.backgroundView = UIImageView(image: UIImage(named: "gradient-bg"))
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 50))
+        let imageView = UIImageView(frame: CGRect(x: -20, y: 0, width: 120, height: 50))
         imageView.contentMode = .ScaleAspectFit
         let image = UIImage(named: "RescueHeroLogo")
         imageView.image = image
-        navigationItem.titleView = imageView
         
+        navigationItem.titleView = imageView
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.clearColor()
         
         
         //self.navigationController?.navigationBar.translucent = false
