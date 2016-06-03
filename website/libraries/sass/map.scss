@@ -6,18 +6,14 @@ $font: 'Cabin', sans-serif;
 .map-panel {
   display:none;
   padding: 0px;
-  margin-top:20px;
 }
 
-.col-xs-5{
+.col-xs-10, .col-xs-8, .col-xs-1 {
   padding:0px;
 }
 
 .animal-image{
   width: 100%;
-  overflow: hidden;
-  margin:auto;
-  border: 1px solid white;
 }
 
 .status {
@@ -31,10 +27,16 @@ $font: 'Cabin', sans-serif;
   color: white;
 }
 
+.white-long {
+  border-bottom: 2px solid white;
+  border-top: none;
+  opacity: .4;
+}
+
 .animal-text{
   font-size:20px;
   font-weight:bold;
-  color: #0c638c;
+  color: white;
   text-align: left;
 }
 
@@ -44,10 +46,14 @@ $font: 'Cabin', sans-serif;
   color:white;
 }
 
+.notes-content {
+  display: block;
+}
+
 .exit {
   position:absolute;
-  top:5;
-  right:0;
+  top:5px;
+  right:5px;
 
   width:16px;
   height:16px;
@@ -130,14 +136,24 @@ and (max-width: 375px) {
     width: 14px;
     height: 14px;
   }
-    .legend-text {
-      color: white;
-      font: $font;
-      font-size: 9px;
-      font-weight: bold;
-      margin: auto;
-      vertical-align: middle;
-    }
+  .legend-text {
+    color: white;
+    font: $font;
+    font-size: 9px;
+    font-weight: bold;
+    margin: auto;
+    vertical-align: middle;
+  }
+  .exit {
+    width: 12px;
+    height: 12px;
+  }
+  .animal-text{
+    font-size:16px;
+  }
+  .type-content, .notes-content{
+    font-size:14px;
+  }
 }
 
 @media screen
@@ -164,12 +180,22 @@ and (max-width: 568px) {
     width: 16px;
     height: 16px;
   }
-    .legend-text {
-      color: white;
-      font: $font;
-      font-size: 10px;
-      font-weight: bold;
-      margin: auto;
-      vertical-align: middle;
-    }
+  .legend-text {
+    color: white;
+    font: $font;
+    font-size: 10px;
+    font-weight: bold;
+    margin: auto;
+    vertical-align: middle;
+  }
+  .exit {
+    width: 14px;
+    height: 14px;
+  }
+  .animal-text{
+    font-size:18px;
+  }
+  .type-content, .notes-content{
+    font-size:16px;
+  }
 }

@@ -1,12 +1,16 @@
 .map-panel {
   display: none;
-  padding: 0px; }
+  padding: 0px;
+  margin-top: 20px; }
 
-.col-xs-10, .col-xs-8, .col-xs-1 {
+.col-xs-5 {
   padding: 0px; }
 
 .animal-image {
-  width: 100%; }
+  width: 100%;
+  overflow: hidden;
+  margin: auto;
+  border: 1px solid white; }
 
 .status {
   position: absolute;
@@ -17,15 +21,10 @@
   padding: 5px;
   color: white; }
 
-.white-long {
-  border-bottom: 2px solid white;
-  border-top: none;
-  opacity: .4; }
-
 .animal-text {
   font-size: 20px;
   font-weight: bold;
-  color: white;
+  color: #0c638c;
   text-align: left; }
 
 .type-content, .notes-content {
@@ -33,13 +32,10 @@
   font-weight: normal;
   color: white; }
 
-.notes-content {
-  display: block; }
-
 .exit {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 5;
+  right: 0;
   width: 16px;
   height: 16px;
   background: url("../../assets/exit.png");
@@ -110,17 +106,7 @@
     font-size: 9px;
     font-weight: bold;
     margin: auto;
-    vertical-align: middle; }
-
-  .exit {
-    width: 12px;
-    height: 12px; }
-
-  .animal-text {
-    font-size: 16px; }
-
-  .type-content, .notes-content {
-    font-size: 14px; } }
+    vertical-align: middle; } }
 @media screen and (min-width: 375px) and (max-width: 568px) {
   .legend-box {
     position: absolute;
@@ -147,16 +133,6 @@
     font-size: 10px;
     font-weight: bold;
     margin: auto;
-    vertical-align: middle; }
-
-  .exit {
-    width: 14px;
-    height: 14px; }
-
-  .animal-text {
-    font-size: 18px; }
-
-  .type-content, .notes-content {
-    font-size: 16px; } }
+    vertical-align: middle; } }
 
 /*# sourceMappingURL=map.css.map */
