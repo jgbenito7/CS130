@@ -1,6 +1,7 @@
 rescueApp.controller('mapCtrl', function($scope,$http) {
 
   $http.get('https://www.rescuehero.org/reports').success(function(data) {
+    console.log(data);
     function initialize() {
       var myLatLng = new google.maps.LatLng( 34.0635, -118.4455 );
       var mapInfo = {
@@ -86,22 +87,20 @@ rescueApp.controller('mapCtrl', function($scope,$http) {
             scrollTop: $(".map-panel").offset().top
           }, 1000);
 
+          $('.status-content').html( this.status );
+
           switch ( this.status ) {
             case "Active":
             $('.status').css('background-color', '#d73c0a');
-            $('.status-content').html( "Active" );
             break;
             case "Rescued":
             $('.status').css('background-color', '#00c934');
-            $('.status-content').html( this.status );
             break;
             case "OnTheWay":
             $('.status').css('background-color', '#c0aa1a');
-            $('.status-content').html( "Pending" );
             break;
             default:
             $('.status').css('background-color', '#ffffff');
-            $('.status-content').html( this.status );
           }
         });
       }
